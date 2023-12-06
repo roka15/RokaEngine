@@ -1,0 +1,3 @@
+pch.h
+stdafx.h
+targetver.h

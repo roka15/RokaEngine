@@ -26,3 +26,15 @@ extern "C"
 	DLL_DECLSPEC IManager* GetMGenericInst();
 	DLL_DECLSPEC IManager* GetMTestClassInst();
 }
+//
+//class MyClass;
+//template <typename T>
+//class Singleton
+//{
+//public:
+//	static T& Instance();
+//};
+//
+//template DLL_DECLSPEC MyClass& Singleton<MyClass>::Instance();
+//
+//
