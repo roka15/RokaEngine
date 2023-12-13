@@ -13,15 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="소스.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
+    <Filter Include="Test">
+      <UniqueIdentifier>{3e4ff5cd-d187-4500-99b3-08b75526397b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SingletonMain.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="소스.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PriorityQueueMain.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="DllLoadTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="LruQueueMain.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="MapMain.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryPoolMain.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

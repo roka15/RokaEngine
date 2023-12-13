@@ -1,36 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Common">
+      <UniqueIdentifier>{a1afcd29-14da-46e3-b47e-035b5f8c1618}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Pool">
+      <UniqueIdentifier>{90824748-81cc-4eb8-990c-2296ce0f9cf4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Pool\MemoryPool">
+      <UniqueIdentifier>{2b8c9103-e785-4606-b682-6da66e1386fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pool\ObjectPool">
+      <UniqueIdentifier>{485ea6d9-1f67-437a-bb0d-e6ed9f2342a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructure">
+      <UniqueIdentifier>{2fb7133a-2a14-4259-922a-3c9f908360d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructure\LRUQueue">
+      <UniqueIdentifier>{217ecae3-aa93-46ab-ab83-28620f5bc0bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructure\Map">
+      <UniqueIdentifier>{63d3de69-22ba-43e6-a0ca-62b2b6e2a013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructure\PriorityQueue">
+      <UniqueIdentifier>{78a6c0a3-d127-4079-91c0-0cc5c6de9257}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Design Pattern">
+      <UniqueIdentifier>{65529c84-693e-40f0-90a4-651987307486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Design Pattern\Singleton">
+      <UniqueIdentifier>{b1489c55-f8aa-4b4a-acd7-cf5b214e685b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LRU_Queue.h">
+      <Filter>DataStructure\LRUQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryPool.h">
+      <Filter>Pool\MemoryPool</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPoolManager.h">
+      <Filter>Pool\ObjectPool</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPool.h">
+      <Filter>Pool\ObjectPool</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityQueue.h">
+      <Filter>DataStructure\PriorityQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="RBT.h">
+      <Filter>DataStructure\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTon.h">
+      <Filter>Design Pattern\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonInclude.h">
+      <Filter>Common</Filter>
+    </ClInclude>
     <ClInclude Include="framework.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="RKSTL.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="MemoryPool.cpp">
+      <Filter>Pool\MemoryPool</Filter>
     </ClCompile>
-    <ClCompile Include="RKSTL.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="ObjectPool.cpp">
+      <Filter>Pool\ObjectPool</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectPoolManager.cpp">
+      <Filter>Pool\ObjectPool</Filter>
+    </ClCompile>
+    <ClCompile Include="RBT.cpp">
+      <Filter>DataStructure\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleTon.cpp">
+      <Filter>Design Pattern\Singleton</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
