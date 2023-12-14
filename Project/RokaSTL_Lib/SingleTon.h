@@ -3,23 +3,34 @@
 
 namespace rokaStl
 {
+	typedef void (*EXIT_FUNC)(void);
 	template <typename T>
 	class Singleton
 	{
 	public:
 		static T* GetInstance()
 		{
-			if (instance == nullptr)
-				instance = std::unique_ptr<T>(new T());
-
-			return instance.get();
+			if (minstance == nullptr)
+			{
+				minstance =new T();
+				atexit((EXIT_FUNC)(&Singleton<T>::Destroy));
+			}
+			return minstance;
+		}
+		static void Destroy()
+		{
+			if (minstance != nullptr)
+			{
+				delete	minstance;
+				minstance = nullptr;
+			}
 		}
 	private:
-		static std::unique_ptr<T> instance;
+		static T* minstance;
 	};
 
 	template<typename T>
-	std::unique_ptr<T> Singleton<T>::instance = nullptr;
+	T* Singleton<T>::minstance = nullptr;
 }
 
 
