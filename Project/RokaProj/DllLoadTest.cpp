@@ -1,9 +1,10 @@
+#include "pch.h"
 #include <TestCopy/interface.h>
 #include "define.h"
 #include <Windows.h>
 #include <crtdbg.h>
 
-#pragma comment(lib,"RokaSTL\\RokaSTL_Lib.lib")
+//#pragma comment(lib,"RokaSTL\\RokaSTL_Lib.lib")
 
 
 

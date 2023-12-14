@@ -1,7 +1,14 @@
 #pragma once
 
+namespace rokaStl
+{
+	template<typename T>
+	class Singleton;
+}
 
 #define MemoryLeakCheck _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#define SINGLETON(type) private: type();~type();friend class rokaStl::Singleton<type>;
+
 
 struct IntGreater
 {
