@@ -162,6 +162,7 @@ call RokaSTLCopy.bat</Command>
   <ItemGroup>
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="interface.h" />
     <ClInclude Include="LRU_Queue.h" />
     <ClInclude Include="MemoryPool.h" />
     <ClInclude Include="ObjectPool.h" />

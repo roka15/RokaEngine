@@ -53,5 +53,8 @@
     <ClCompile Include="pch.cpp">
       <Filter>헤더 파일</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectpoolMain.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

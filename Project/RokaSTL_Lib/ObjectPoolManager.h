@@ -1,12 +1,13 @@
 #pragma once
 #include "CommonInclude.h"
+#include "interface.h"
 #include "ObjectPool.h"
 #include "SingleTon.h"
 
 namespace rokaStl
 {
 	template <typename Pool,typename Origin>
-	class ObjectPoolManager : public Singleton<Pool>
+	class ObjectPoolManager : public Singleton<Pool>,public IRkStlBase
 	{
 	public:
 		ObjectPool<Origin>* GetPool(std::wstring key)
@@ -30,38 +31,39 @@ namespace rokaStl
 		}
 	
 	protected:
-		ObjectPoolManager() {}
+		virtual void Initialize() = 0;
+		virtual void Release() = 0;
+		
+
+		ObjectPoolManager() { mPoolSize = 100; }
 		virtual ~ObjectPoolManager() 
 		{
 			mPools.clear();
 		}
-		virtual void Initialize()
-		{
-			mPoolSize = 100;
-		}
-		virtual void Release()
-		{
-			mPools.clear();
-		}
-		bool AddPool(std::wstring key, std::shared_ptr<Origin> origin,size_t pool_size)
+	
+		template <typename ObjType>
+		bool AddPool(std::wstring key, std::shared_ptr<ObjType> origin, size_t pool_size)
 		{
 			if (mPools.find(key) != mPools.end())
 				return false;
-			mPools.insert(std::make_pair(key, std::unique_ptr<ObjectPool<Origin>>(new ObjectPool<Origin>())));
-			mPools[key]->Initialize(origin, pool_size);
-
+			ObjectPool<ObjType>* objType_pool = new ObjectPool<ObjType>();
+			objType_pool->Initialize(origin, pool_size);
+			ObjectPool<Origin>* originType_pool = reinterpret_cast<ObjectPool<Origin>*>(objType_pool);
+			mPools.insert(std::make_pair(key, std::unique_ptr<ObjectPool<Origin>>(originType_pool)));
 			return true;
 		}
-		bool AddPool(std::wstring key, std::shared_ptr<Origin> origin)
+		template <typename ObjType>
+		bool AddPool(std::wstring key, std::shared_ptr<ObjType> origin)
 		{
 			if (mPools.find(key) != mPools.end())
 				return false;
-			mPools.insert(std::make_pair(key, std::unique_ptr<ObjectPool<Origin>>(new ObjectPool<Origin>())));
-			mPools[key]->Initialize(origin, mPoolSize);
-
+			ObjectPool<ObjType>* objType_pool = new ObjectPool<ObjType>();
+			objType_pool->Initialize(origin, mPoolSize);
+			ObjectPool<Origin>* originType_pool = reinterpret_cast<ObjectPool<Origin>*>(objType_pool);
+			mPools.insert(std::make_pair(key, std::unique_ptr<ObjectPool<Origin>>(originType_pool)));
 			return true;
 		}
-	private:
+	protected:
 		size_t mPoolSize;
 		std::map<std::wstring, std::unique_ptr<ObjectPool<Origin>>> mPools;
 	};
