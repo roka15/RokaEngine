@@ -8,14 +8,10 @@ namespace rokaStl
 	class Singleton
 	{
 	public:
-		static T* GetInstance()
+		static void Create()
 		{
 			if (minstance == nullptr)
-			{
-				minstance =new T();
-				atexit((EXIT_FUNC)(&Singleton<T>::Destroy));
-			}
-			return minstance;
+				minstance = new T();
 		}
 		static void Destroy()
 		{
@@ -24,6 +20,10 @@ namespace rokaStl
 				delete	minstance;
 				minstance = nullptr;
 			}
+		}
+		static T* GetInstance()
+		{
+			return minstance;
 		}
 	private:
 		static T* minstance;

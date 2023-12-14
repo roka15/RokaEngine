@@ -18,8 +18,10 @@ TestA::~TestA()
 
 int main()
 {
+	MemoryLeakCheck
 	//Singleton Test
+	TestA::Create();
 	TestA* instance = TestA::GetInstance();
 	TestA* instance2 = TestA::GetInstance();
-
+	TestA::Destroy();
 }
