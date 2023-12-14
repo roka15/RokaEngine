@@ -2,7 +2,7 @@
 #include "CommonInclude.h"
 namespace rokaStl
 {
-#define MEMORY_BYTE 32768 //32KB
+#define MEMORY_BYTE 8*2*4//32768 //32KB
 	template <typename Key, typename Value>
 	class RBT;
 
@@ -26,7 +26,6 @@ namespace rokaStl
 			std::vector<PBYTE> memorys;
 		};
 
-		static void Test() { std::cout << "Test" << std::endl; }
 		static void Initialize();
 		static void Release();
 
@@ -35,7 +34,6 @@ namespace rokaStl
 		static void operator delete(void* _memory, std::size_t _size);
 		static int AssignSize(std::size_t _size);
 	public:
-
 		using memorypool_t = RBT<size_t, MemoryPool::memory_pool_info*>;
 	private:
 		static memorypool_t m_memory_pools;

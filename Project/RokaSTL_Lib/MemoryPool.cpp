@@ -140,8 +140,10 @@ int MemoryPool::AssignSize(std::size_t _size)
 		return static_cast<int>(EMemErrType::POOLSIZEOVER);
 	}
 	int befor = 0;
-	for (int i = 8; i <= MEMORY_BYTE / 2; i *= 2)
+	for (int i = 8; ; i *= 2)
 	{
+		if (i > MEMORY_BYTE / 2)
+			break;
 		if (_size > befor && _size <= i)
 		{
 			return i;
