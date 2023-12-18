@@ -24,7 +24,7 @@ int main()
 	MemoryLeakCheck
 	//Singleton Test
 	TestA::Create();
-	TestA* instance = GetInstance(TestA);
-	TestA* instance2 = GetInstance(TestA);
+	TestA* instance = GetInst(TestA);
+	TestA* instance2 = GetInst(TestA);
 	TestA::Destroy();
 }

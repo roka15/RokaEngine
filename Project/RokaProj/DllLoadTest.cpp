@@ -28,10 +28,10 @@ int main()
 	M_GenericCreate(EGenericManagerType::TYPE1);
 	ManagerGetInst_PFUNC M_GenericInst = (ManagerGetInst_PFUNC)GetProcAddress(testDll, "GetManagerInstance");
 
-	IManager* testptr = M_GenericInst(EGenericManagerType::TYPE1);
+	rokaStl::IManager* testptr = M_GenericInst(EGenericManagerType::TYPE1);
 	testptr->Initialize();
 
-	IManager* ptr = M_GenericInst(EGenericManagerType::TYPE2);
+	rokaStl::IManager* ptr = M_GenericInst(EGenericManagerType::TYPE2);
 	ptr->Initialize();
 	
 	testptr->Release();
@@ -39,5 +39,5 @@ int main()
 	
 	ManagerLife_PFUNC M_GenericDestroy = (ManagerLife_PFUNC)GetProcAddress(testDll, "DestroyManager");
 	M_GenericDestroy(EGenericManagerType::TYPE1);
-	//FreeLibrary(testDll);
+	FreeLibrary(testDll);
 }

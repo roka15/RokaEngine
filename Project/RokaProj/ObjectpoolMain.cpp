@@ -126,7 +126,8 @@ int main()
 	//[1] create
 	MonsterPoolManager::Create();
 	PlayerPoolManager::Create();
-
+	MCreate(MonsterPoolManager)
+	MCreate(PlayerPoolManager)
 	//[2] init
 	MonsterPoolManager* instance1 = GetInstance(MonsterPoolManager)
 	instance1->Initialize();
@@ -152,6 +153,7 @@ int main()
 
 	//[1] destroy
 	MonsterPoolManager::Destroy();
-	PlayerPoolManager::Destroy();
+	MDestroy(PlayerPoolManager)
+	//PlayerPoolManager::Destroy();
 	return 0;
 }

@@ -7,17 +7,14 @@
 #ifndef PCH_H
 #define PCH_H
 
+// 여기에 미리 컴파일하려는 헤더 추가
+#include "framework.h"
+#include <iostream>
+
+
 #ifdef CREATEDLL_EXPORTS
 #define DLL_DECLSPEC __declspec(dllexport)
 #else
 #define DLL_DECLSPEC __declspec(dllimport)
 #endif // CREATEDLL_EXPORTS
-
-// 여기에 미리 컴파일하려는 헤더 추가
-#include "framework.h"
-#pragma comment(lib,"RokaSTL\\RokaSTL_Lib.lib")
-#pragma comment(lib,"..\\..\\External\\Dll\\Debug\\Engine\\Engine.lib")
-#include <RokaSTL/define.h>
-#include <RokaSTL/interface.h>
-
 #endif //PCH_H

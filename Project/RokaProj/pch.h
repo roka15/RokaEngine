@@ -5,7 +5,8 @@
 // MyStl Library
 #pragma comment(lib,"RokaSTL\\RokaSTL_Lib.lib")
 
-
+#include <RokaSTL/define.h>
+#include <crtdbg.h>
 
 //// Script Library
 //#ifdef _DEBUG
