@@ -7,7 +7,7 @@
 namespace rokaStl
 {
 	template <typename Pool,typename Origin>
-	class ObjectPoolManager : public Singleton<Pool>,public IRkStlBase
+	class ObjectPoolManager : public Singleton<Pool>,public IManager
 	{
 	public:
 		ObjectPool<Origin>* GetPool(std::wstring key)
