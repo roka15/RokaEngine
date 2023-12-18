@@ -4,15 +4,16 @@
 // 그러나 여기에 나열된 파일은 빌드 간 업데이트되는 경우 모두 다시 컴파일됩니다.
 // 여기에 자주 업데이트할 파일을 추가하지 마세요. 그러면 성능이 저하됩니다.
 
+
+
+#ifndef PCH_H
+#define PCH_H
+
 #ifdef CREATEDLL_EXPORTS
 #define DLL_DECLSPEC __declspec(dllexport)
 #else
 #define DLL_DECLSPEC __declspec(dllimport)
 #endif // CREATEDLL_EXPORTS
-
-
-#ifndef PCH_H
-#define PCH_H
 
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"

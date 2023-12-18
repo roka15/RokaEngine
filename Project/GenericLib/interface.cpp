@@ -38,17 +38,13 @@ DLL_DECLSPEC IManager* GetManagerInstance(EGenericManagerType type)
 	switch (type)
 	{
 	case EGenericManagerType::TYPE1:
-		return GetMGenericInst();
+		return GetInst(GenericManager);
 		break;
 	case EGenericManagerType::TYPE2:
 		return GetMTestClassInst();
 		break;
 	}
 	return nullptr;
-}
-IManager* GetMGenericInst()
-{
-	return GetInstance(GenericManager);
 }
 
 IManager* GetMTestClassInst()
