@@ -1,6 +1,7 @@
 #include "pch.h"
 #include <RokaSTL/RBT.h>
-#include "define.h"
+#include <RokaSTL/define.h>
+#include "operators.h"
 
 int main()
 {   

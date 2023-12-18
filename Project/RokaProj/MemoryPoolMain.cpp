@@ -1,7 +1,7 @@
 #include "pch.h"
 #include <RokaSTL/MemoryPool.h>
-#include "define.h"
-
+#include <RokaSTL/define.h>
+#include "operators.h"
 
 class AClass : public rokaStl::MemoryPool
 {

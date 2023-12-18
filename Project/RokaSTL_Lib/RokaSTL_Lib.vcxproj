@@ -161,6 +161,7 @@ call RokaSTLCopy.bat</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CommonInclude.h" />
+    <ClInclude Include="define.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="interface.h" />
     <ClInclude Include="LRU_Queue.h" />

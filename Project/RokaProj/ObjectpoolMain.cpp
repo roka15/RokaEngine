@@ -1,5 +1,6 @@
 #include <RokaSTL/ObjectPoolManager.h>
-#include "define.h"
+#include <RokaSTL/define.h>
+#include "operators.h"
 class GameObject
 {
 public:

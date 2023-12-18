@@ -1,6 +1,7 @@
 #include "pch.h"
 #include <RokaSTL/PriorityQueue.h>
-#include "define.h"
+#include <RokaSTL/define.h>
+#include "operators.h"
 
 int main()
 {

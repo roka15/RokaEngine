@@ -1,6 +1,7 @@
 #include "pch.h"
 #include <RokaSTL/LRU_Queue.h>
-#include "define.h"
+#include <RokaSTL/define.h>
+#include "operators.h"
 
 class AClass
 {
