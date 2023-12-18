@@ -9,12 +9,12 @@ TestClass::~TestClass()
 {
 }
 
-void TestClass::Print()
+void TestClass::Initialize()
 {
-	printf("%s", mstr);
+	printf("%s\n", mstr);
 }
 
-void TestClass::Destroy()
+void TestClass::Release()
 {
 	delete testInst;
 }

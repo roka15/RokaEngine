@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "GenericManager.h"
 
-GenericManager* GenericManager::minstance = nullptr;
 GenericManager::GenericManager()
 {
 
@@ -10,21 +9,11 @@ GenericManager::~GenericManager()
 {
 
 }
-GenericManager* GenericManager::GetInst()
+void GenericManager::Initialize()
 {
-	if (minstance == nullptr)
-		minstance = new GenericManager();
-
-	return minstance;
+	printf("%s\n", "Hello");
+}
+void GenericManager::Release()
+{
 }
 
-void GenericManager::Print()
-{
-	printf("%s", "Hello");
-}
-
-
-void GenericManager::Destroy()
-{
-	delete minstance;
-}

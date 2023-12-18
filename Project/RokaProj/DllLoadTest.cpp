@@ -1,12 +1,11 @@
 #include "pch.h"
-//#include <TestCopy/interface.h>
-#include "..//GenericLib//GenericManager.h"
+#include <TestCopy/interface.h>
+//#include "..//GenericLib//GenericManager.h"
 #include <RokaSTL/define.h>
 #include "operators.h"
 #include <Windows.h>
 #include <crtdbg.h>
 
-//#pragma comment(lib,"RokaSTL\\RokaSTL_Lib.lib")
 
 
 
@@ -17,24 +16,28 @@ int main()
 	MemoryLeakCheck
 
 	//Dll Test
-	HMODULE testDll = LoadLibrary(L"..\\..\\External\\Dll\\GenericLib\\Debug\\GenericLib.dll");
+	HMODULE testDll = LoadLibrary(L"..\\..\\External\\Dll\\Debug\\GenericLib\\GenericLib.dll");
 	if (testDll == NULL)
 		int a = 0;
-
+	
 	//using InstanceFunc = MyClass & (*)();
 	//InstanceFunc getInstance = (InstanceFunc)GetProcAddress(testDll, "Instance");
 	//MyClass& MyInstance = Singleton<MyClass>::Instance();
-
-	MTestClass_PFUNC testfunc = (MTestClass_PFUNC)GetProcAddress(testDll, "GetMTestClassInst");
-	IManager* testptr = testfunc();
-	testptr->Print();
-	MGeneric_PFUNC func = (MGeneric_PFUNC)GetProcAddress(testDll, "GetMGenericInst");
-	IManager* ptr = func();
-	ptr->Print();
 	
-	testptr->Destroy();
-	ptr->Destroy();
+	ManagerLife_PFUNC M_GenericCreate = (ManagerLife_PFUNC)GetProcAddress(testDll, "CreateManager");
+	M_GenericCreate(EGenericManagerType::TYPE1);
+	ManagerGetInst_PFUNC M_GenericInst = (ManagerGetInst_PFUNC)GetProcAddress(testDll, "GetManagerInstance");
 
+	IManager* testptr = M_GenericInst(EGenericManagerType::TYPE1);
+	testptr->Initialize();
 
+	IManager* ptr = M_GenericInst(EGenericManagerType::TYPE2);
+	ptr->Initialize();
+	
+	testptr->Release();
+	ptr->Release();
+	
+	ManagerLife_PFUNC M_GenericDestroy = (ManagerLife_PFUNC)GetProcAddress(testDll, "DestroyManager");
+	M_GenericDestroy(EGenericManagerType::TYPE1);
 	//FreeLibrary(testDll);
 }

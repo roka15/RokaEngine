@@ -12,20 +12,31 @@ class TestClass;
 class IManager
 {
 public:
-	virtual DLL_DECLSPEC void Print() = 0;
-	virtual DLL_DECLSPEC void Destroy() = 0;
+	virtual DLL_DECLSPEC void Initialize() = 0;
+	virtual DLL_DECLSPEC void Release() = 0;
 };
 
-typedef  IManager* (*MGeneric_PFUNC)();
-typedef  IManager* (*MTestClass_PFUNC)();
+enum class DLL_DECLSPEC EGenericManagerType
+{
+	TYPE1,
+	TYPE2,
+	END
+};
+typedef void (*ManagerLife_PFUNC)(EGenericManagerType);
+typedef  IManager* (*ManagerGetInst_PFUNC)(EGenericManagerType);
 
 extern IManager* testInst;
 
+
 extern "C"
 {
-	DLL_DECLSPEC IManager* GetMGenericInst();
-	DLL_DECLSPEC IManager* GetMTestClassInst();
+	DLL_DECLSPEC void CreateManager(EGenericManagerType type);
+	DLL_DECLSPEC void DestroyManager(EGenericManagerType type);
+	DLL_DECLSPEC IManager* GetManagerInstance(EGenericManagerType type);
 }
+
+IManager* GetMGenericInst();
+IManager* GetMTestClassInst();
 //
 //class MyClass;
 //template <typename T>

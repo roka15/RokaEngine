@@ -1,23 +1,15 @@
 #pragma once
 #include "interface.h"
-
-#ifdef CREATEDLL_EXPORTS
-#define DLL_DECLSPEC __declspec(dllexport)
-#else
-#define DLL_DECLSPEC __declspec(dllimport)
-#endif // CREATEDLL_EXPORTS
-
-#define SINGLETON(ctype)private: ctype();~ctype();\
-private: static ctype* minstance;\
-public:  static ctype* GetInst();
+#include <RokaSTL/SingleTon.h>
+#include <RokaSTL/define.h>
 
 
-class DLL_DECLSPEC GenericManager : public IManager
+class GenericManager : public IManager,public rokaStl::Singleton<GenericManager>
 {
 	SINGLETON(GenericManager)
 public:
-	virtual void Print()override;
-	virtual void Destroy()override;
+	virtual void Initialize()override;
+	virtual void Release()override;
 private:
 
 };

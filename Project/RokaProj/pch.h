@@ -3,11 +3,8 @@
 
 
 // MyStl Library
-#ifdef _DEBUG
-#pragma comment(lib,"RokaSTL\\Debug\\RokaSTL_Lib.lib")
-#else
-#pragma comment(lib, "RokaSTL\\Release\\RokaSTL_Lib.lib")
-#endif
+#pragma comment(lib,"RokaSTL\\RokaSTL_Lib.lib")
+
 
 
 //// Script Library

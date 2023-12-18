@@ -18,6 +18,14 @@
 #include "framework.h"
 #include "TestClass.h"
 #include "GenericManager.h"
+
+
+#pragma comment(lib,"RokaSTL\\RokaSTL_Lib.lib")
+
+
+#include <RokaSTL/define.h>
+
+
 #endif //PCH_H
 
 
