@@ -1,16 +1,23 @@
 #include "pch.h"
 #include "CScript.h"
 
-DLL_DECLSPEC CScript::CScript()
+CScript::CScript(unsigned int _type)
+	:CComponent(EComponentType::SCRIPT),
+	 m_ScriptType(_type),
+	 m_ScriptParams{}
+{
+}
+CScript::CScript(const CScript& _ref)
+	:CComponent(_ref),
+	m_ScriptType(_ref.m_ScriptType),
+	m_ScriptParams(_ref.m_ScriptParams)
+{
+}
+CScript::~CScript()
 {
 
 }
-DLL_DECLSPEC CScript::~CScript()
+void CScript::Print()
 {
-
-}
-
-DLL_DECLSPEC void CScript::Print()
-{
-	 std::cout << "Engine.dll Test" << std::endl; 
+	 std::cout << "CScript Print" << std::endl; 
 }
