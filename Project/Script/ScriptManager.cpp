@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "ScriptManager.h"
-//#include "CTestScript.h"
+#include "CTestScript.h"
 ScriptManager::ScriptManager()
 {
 }
@@ -18,9 +18,15 @@ void ScriptManager::GetScriptsInfo(wchar_t** _vec)
 }
 CScript* ScriptManager::GetScript(unsigned int _ScriptType)
 {
-    std::cout << "Script.dll Test" << std::endl;
+    std::cout << " new Script Test" << std::endl;
+    EScriptType eType = (EScriptType)_ScriptType;
+    switch (eType)
+    {
+    case EScriptType::TEST:
+        return new CTestScript(_ScriptType);
+        break;
+    }
     return nullptr;
-   // return new CTestScript();
 }
 
 CScript* ScriptManager::GetScript(const wchar_t* _ScriptName)
@@ -33,17 +39,17 @@ const wchar_t* ScriptManager::GetScriptName(CScript* _pScript)
     return nullptr;
 }
 
-DLL_DECLSPEC void ScriptManagerCreate()
+SCRIPTDLL_DECLSPEC void ScriptManagerCreate()
 {
     return MCreate(ScriptManager);
 }
 
-DLL_DECLSPEC void ScriptManagerDestory()
+SCRIPTDLL_DECLSPEC void ScriptManagerDestory()
 {
     return MDestroy(ScriptManager);
 }
 
-DLL_DECLSPEC ScriptManager* GetScriptManager()
+SCRIPTDLL_DECLSPEC ScriptManager* GetScriptManager()
 {
     return GetInst(ScriptManager);
 }

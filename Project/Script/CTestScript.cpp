@@ -6,10 +6,18 @@
 //	CScript::Print();
 //}
 
-CTestScript::CTestScript()//:CScript()
+CTestScript::CTestScript(unsigned int _type)
+	:CScript(_type)
 {
 }
 
 CTestScript::~CTestScript()
 {
 }
+
+void CTestScript::Print()
+{
+	std::cout << "CTestScript Print" << std::endl;
+	CScript::Print();
+}
+

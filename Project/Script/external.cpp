@@ -2,17 +2,17 @@
 #include "external.h"
 #include "ScriptManager.h"
 
-DLL_DECLSPEC void CreateManager()
+SCRIPTDLL_DECLSPEC void CreateManager()
 {
     return MCreate(ScriptManager);
 }
 
-DLL_DECLSPEC void DestroyManager()
+SCRIPTDLL_DECLSPEC void DestroyManager()
 {
     return MDestroy(ScriptManager);
 }
 
-DLL_DECLSPEC IManager* GetManagerInstance()
+SCRIPTDLL_DECLSPEC IManager* GetManagerInstance()
 {
     return GetInst(ScriptManager);
 }

@@ -2,13 +2,20 @@
 #include "pch.h"
 #include <RokaSTL/SingleTon.h>
 class CScript;
-enum class DLL_DECLSPEC EScriptType
+
+#ifdef SCRIPTDLL_EXPORTS
+#define SCRIPTDLL_DECLSPEC __declspec(dllexport)
+#else
+#define SCRIPTDLL_DECLSPEC __declspec(dllimport)
+#endif // CREATEDLL_EXPORTS
+
+enum class SCRIPTDLL_DECLSPEC EScriptType
 {
 	NONE,
 	TEST,
 	END,
 };
-class DLL_DECLSPEC ScriptManager:public rokaStl::IScriptManager,public rokaStl::Singleton<ScriptManager>
+class SCRIPTDLL_DECLSPEC ScriptManager:public rokaStl::IScriptManager,public rokaStl::Singleton<ScriptManager>
 {
 	SINGLETON(ScriptManager)
 public:
@@ -22,7 +29,7 @@ public:
 
 extern "C"
 {
-	DLL_DECLSPEC void ScriptManagerCreate();
-	DLL_DECLSPEC void ScriptManagerDestory();
-	DLL_DECLSPEC ScriptManager* GetScriptManager();
+	SCRIPTDLL_DECLSPEC void ScriptManagerCreate();
+	SCRIPTDLL_DECLSPEC void ScriptManagerDestory();
+	SCRIPTDLL_DECLSPEC ScriptManager* GetScriptManager();
 }
