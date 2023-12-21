@@ -26,7 +26,7 @@
 #include <Engine/define.h>
 
 //roka stl.lib
-#include <RokaSTL/define.h>
+#include <RokaSTL/CommonInclude.h>
 #include <RokaSTL/interface.h>
 
 #include <vector>

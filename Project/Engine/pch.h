@@ -11,8 +11,7 @@
 #include "framework.h"
 #include <iostream>
 #pragma comment(lib,"RokaSTL\\RokaSTL_Lib.lib")
-#include <RokaSTL/define.h>
-#include <RokaSTL/interface.h>
+#include <RokaSTL/CommonInclude.h>
 
 #include "define.h"
 

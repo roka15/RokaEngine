@@ -19,6 +19,12 @@
     <Filter Include="02.Component\2.Collider3D">
       <UniqueIdentifier>{8083cfec-0b19-46c7-a0f1-1abb1c9e3799}</UniqueIdentifier>
     </Filter>
+    <Filter Include="07.ScriptReLoad">
+      <UniqueIdentifier>{ef596980-7336-4d2c-9cab-75f192f59d46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{5c9ffb7e-8328-46f1-a803-654c20434e00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -51,6 +57,12 @@
     <ClInclude Include="components.h">
       <Filter>00.Header</Filter>
     </ClInclude>
+    <ClInclude Include="ScriptReLoad.h">
+      <Filter>07.ScriptReLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="RKEngine.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component.cpp">
@@ -73,6 +85,12 @@
     </ClCompile>
     <ClCompile Include="Collider3D.cpp">
       <Filter>02.Component\2.Collider3D</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptReLoad.cpp">
+      <Filter>07.ScriptReLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="RKEngine.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

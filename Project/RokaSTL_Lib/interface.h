@@ -1,5 +1,4 @@
 #pragma once
-#include "pch.h"
 
 class CScript;
 namespace rokaStl
@@ -8,6 +7,7 @@ namespace rokaStl
 	{
 	public:
 		virtual void Initialize() = 0;
+		virtual void Loop() = 0;
 		virtual void Release() = 0;
 	};
 

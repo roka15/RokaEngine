@@ -80,11 +80,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)External\Dll\Debug\Engine\</OutDir>
     <LibraryPath>$(SolutionDir)External\Lib\Debug\;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)External\Include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)External\Include\;$(SolutionDir)External\Include\openssl\Debug\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)External\Dll\Release\Engine\</OutDir>
+    <IncludePath>$(SolutionDir)External\Include\openssl\Release\;$(SolutionDir)External\Include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)External\Lib\Release\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -164,6 +166,8 @@ call EngineCopy.bat</Command>
     <ClInclude Include="components.h" />
     <ClInclude Include="CScript.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="RKEngine.h" />
+    <ClInclude Include="ScriptReLoad.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="Entity.h" />
@@ -175,6 +179,8 @@ call EngineCopy.bat</Command>
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CScript.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="RKEngine.cpp" />
+    <ClCompile Include="ScriptReLoad.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="pch.cpp">

@@ -1,4 +1,5 @@
-#include "CommonInclude.h"
+#include <iostream>
+#include <vector>
 using namespace std;
 
 namespace rokaStl

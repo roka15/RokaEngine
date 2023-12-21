@@ -21,7 +21,7 @@ namespace rokaStl
 				minstance = nullptr;
 			}
 		}
-		static T* GetInstance()
+		static T*const& GetInstance()
 		{
 			return minstance;
 		}

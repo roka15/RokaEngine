@@ -9,11 +9,14 @@ int main()
 		//Dll Test
 	HMODULE EngineDll = LoadLibrary(L"..\\..\\External\\Dll\\Debug\\Engine\\Engine.dll");
 	HMODULE ScriptDll = LoadLibrary(L"..\\..\\External\\Dll\\Debug\\Script\\Script.dll");
-
+	if (EngineDll == NULL)
+	{
+		return 0;
+	}
 	if (ScriptDll == NULL)
 	{
 		HRESULT result = GetLastError();
-		int a = 0;
+		return 0;
 	}
 
 
@@ -41,4 +44,6 @@ int main()
 	delete copyScript;
 	M_ScriptLife_PFUNC MScriptDestroy = (M_ScriptLife_PFUNC)GetProcAddress(ScriptDll, "DestroyManager");
 	MScriptDestroy();
+	FreeLibrary(EngineDll);
+	FreeLibrary(ScriptDll);
 }

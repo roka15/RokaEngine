@@ -18,9 +18,8 @@ enum class SCRIPTDLL_DECLSPEC EScriptType
 class SCRIPTDLL_DECLSPEC ScriptManager:public rokaStl::IScriptManager,public rokaStl::Singleton<ScriptManager>
 {
 	SINGLETON(ScriptManager)
+	MANAGER
 public:
-	virtual void Initialize()override;
-	virtual void Release()override;
 	virtual void GetScriptsInfo(wchar_t** _vec)override;
 	virtual CScript* GetScript(unsigned int _ScriptType)override;
 	virtual CScript* GetScript(const wchar_t* _ScriptName)override;

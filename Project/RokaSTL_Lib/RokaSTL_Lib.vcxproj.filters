@@ -31,6 +31,12 @@
     <Filter Include="Design Pattern\Singleton">
       <UniqueIdentifier>{b1489c55-f8aa-4b4a-acd7-cf5b214e685b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{45ea7af9-b3fc-425a-bac8-5ad95a51d789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Loader">
+      <UniqueIdentifier>{a0d351fa-f67d-44f8-9184-31fa442fe1cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LRU_Queue.h">
@@ -69,6 +75,12 @@
     <ClInclude Include="define.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="SimpleMath.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="DllLoader.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MemoryPool.cpp">
@@ -89,5 +101,13 @@
     <ClCompile Include="pch.cpp">
       <Filter>Common</Filter>
     </ClCompile>
+    <ClCompile Include="DllLoader.cpp">
+      <Filter>Loader</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleMath.inl">
+      <Filter>Math</Filter>
+    </None>
   </ItemGroup>
 </Project>

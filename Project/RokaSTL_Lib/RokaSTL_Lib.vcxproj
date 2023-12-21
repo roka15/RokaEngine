@@ -82,10 +82,15 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)External\Lib\Debug\RokaSTL\</OutDir>
+    <IncludePath>$(SolutionDir)External\Include\;$(SolutionDir)External\Include\openssl\Debug\;$(IncludePath)</IncludePath>
+    <LibraryWPath>$(LibraryWPath)</LibraryWPath>
+    <LibraryPath>$(SolutionDir)External\Lib\Debug\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)External\Lib\Release\RokaSTL\</OutDir>
+    <IncludePath>$(SolutionDir)External\Include\;$(SolutionDir)External\Include\openssl\Release\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)External\Lib\Release\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -162,6 +167,7 @@ call RokaSTLCopy.bat</Command>
   <ItemGroup>
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="define.h" />
+    <ClInclude Include="DllLoader.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="interface.h" />
     <ClInclude Include="LRU_Queue.h" />
@@ -171,9 +177,11 @@ call RokaSTLCopy.bat</Command>
     <ClInclude Include="pch.h" />
     <ClInclude Include="PriorityQueue.h" />
     <ClInclude Include="RBT.h" />
+    <ClInclude Include="SimpleMath.h" />
     <ClInclude Include="SingleTon.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DllLoader.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="ObjectPool.cpp" />
     <ClCompile Include="ObjectPoolManager.cpp" />
@@ -185,6 +193,9 @@ call RokaSTLCopy.bat</Command>
     </ClCompile>
     <ClCompile Include="RBT.cpp" />
     <ClCompile Include="SingleTon.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleMath.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

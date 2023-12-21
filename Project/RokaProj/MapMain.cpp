@@ -118,5 +118,6 @@ int main()
 	int value3 = map3["ram"];
 	map3.clear();
 
+	bool flag = "Hell" < "Helb";
 	
 }

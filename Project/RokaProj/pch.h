@@ -5,8 +5,13 @@
 // MyStl Library
 #pragma comment(lib,"RokaSTL\\RokaSTL_Lib.lib")
 
-#include <RokaSTL/define.h>
+#include <RokaSTL/CommonInclude.h>
+#include <Engine/define.h>
+#include <Engine/RKEngine.h>
 #include <crtdbg.h>
+#include "define.h"
+
+
 
 
 //// Script Library
