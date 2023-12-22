@@ -14,6 +14,10 @@ string sha256(const string str)
     }
     return ss.str();
 }
+size_t GetHash()
+{
+
+}
 struct tFileTimeStemp
 {
 
@@ -21,15 +25,7 @@ struct tFileTimeStemp
 vector<std::string> FileNames;
 rokaStl::RBT<unsigned char*, char*> ScriptTimeStemps;
 char* testchar;
-char* str2pchar(string& str)
-{
-    size_t len = str.size();
-    char* temp = new char[len];
-    memset(temp, '\0', len + 1);
-    str.copy(temp, len + 1);
 
-    return temp;
-}
 int main()
 {
     {

@@ -7,7 +7,8 @@ namespace RKEngine
 		:m_bFocus(true),
 		m_bBeforFocus(true),
 		m_hWnds{},
-		m_v2WinSize{}
+		m_v2WinSize{},
+		m_DllLoader(nullptr)
 	{
 		UINT eType = TYPETOINT(EHwndType::END);
 		m_hWnds.resize(eType);
@@ -19,6 +20,7 @@ namespace RKEngine
 	void CRKEngine::Initialize()
 	{
 		WindowSizeMonitor();
+		LoadDll();
 	}
 	void CRKEngine::Loop()
 	{
@@ -27,17 +29,18 @@ namespace RKEngine
 	}
 	void CRKEngine::Release()
 	{
+		FreeDll();
+		m_DllLoader = nullptr;
 	}
-	void CRKEngine::LoadDll(PCR_DllLoad _pcr_dllload)
+	void CRKEngine::LoadDll()
 	{
-		LM_DLL->LoadDll(EDllType::SCRIPT);
 		//_pcr_dllload->LoadDll(EDllType::RENDER);
-		_pcr_dllload->LoadDll(EDllType::SCRIPT);
+		m_DllLoader->LoadDll(EDllType::SCRIPT);
 	}
-	void CRKEngine::FreeDll(PCR_DllLoad _pcr_dllload)
+	void CRKEngine::FreeDll()
 	{
 		//_pcr_dllload->FreeDll(EDllType::RENDER);
-		_pcr_dllload->FreeDll(EDllType::SCRIPT);
+		m_DllLoader->FreeDll(EDllType::SCRIPT);
 	}
 	void CRKEngine::ScriptMonitor()
 	{

@@ -48,6 +48,7 @@ typedef Vector4 Vec4;
 #include <openssl/sha.h>
 
 #include "define.h"
+#include "func.h"
 #include "operators.h"
 #include "LRU_Queue.h"
 #include "RBT.h"

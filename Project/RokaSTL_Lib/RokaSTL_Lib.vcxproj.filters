@@ -37,6 +37,15 @@
     <Filter Include="Loader">
       <UniqueIdentifier>{a0d351fa-f67d-44f8-9184-31fa442fe1cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{1fec81c1-3588-4aca-a3cf-9452961504e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\ObjectPool">
+      <UniqueIdentifier>{906746b2-0960-493e-9a6b-4e87c30989f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\File">
+      <UniqueIdentifier>{82483c55-71f1-44a5-8a23-4a5b937cc996}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LRU_Queue.h">
@@ -44,9 +53,6 @@
     </ClInclude>
     <ClInclude Include="MemoryPool.h">
       <Filter>Pool\MemoryPool</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectPoolManager.h">
-      <Filter>Pool\ObjectPool</Filter>
     </ClInclude>
     <ClInclude Include="ObjectPool.h">
       <Filter>Pool\ObjectPool</Filter>
@@ -84,15 +90,21 @@
     <ClInclude Include="operators.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="func.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPoolManager.h">
+      <Filter>Manager\ObjectPool</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManager.h">
+      <Filter>Manager\File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MemoryPool.cpp">
       <Filter>Pool\MemoryPool</Filter>
     </ClCompile>
     <ClCompile Include="ObjectPool.cpp">
-      <Filter>Pool\ObjectPool</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectPoolManager.cpp">
       <Filter>Pool\ObjectPool</Filter>
     </ClCompile>
     <ClCompile Include="RBT.cpp">
@@ -106,6 +118,15 @@
     </ClCompile>
     <ClCompile Include="DllLoader.cpp">
       <Filter>Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="func.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectPoolManager.cpp">
+      <Filter>Manager\ObjectPool</Filter>
+    </ClCompile>
+    <ClCompile Include="FileManager.cpp">
+      <Filter>Manager\File</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

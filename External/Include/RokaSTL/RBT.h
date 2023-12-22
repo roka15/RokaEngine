@@ -211,7 +211,7 @@ namespace rokaStl
 
 	};
 
-	template <typename Key, typename Value,typename _Gr = greater<Key>, typename _Le = less<Key>>
+	template <typename Key, typename Value, typename _Eq = equal_to<Key>,typename _Gr = greater<Key>, typename _Le = less<Key>>
 	class RBT
 	{
 	private:
@@ -222,6 +222,7 @@ namespace rokaStl
 		static std::shared_ptr< Node<Key, Value>> nil;
 		//static Node<T>* extranode;
 
+		_Eq cmp_equal;
 		_Gr cmp_greater;
 		_Le cmp_less;
 	private:
@@ -240,7 +241,7 @@ namespace rokaStl
 				return false;
 			}
 
-			if (ptr->key == _key)
+			if (cmp_equal(ptr->key , _key))
 			{
 				serchnode = _root;
 				return true;
@@ -1041,8 +1042,8 @@ namespace rokaStl
 			nilnode = nullptr;
 		}
 	};
-	template<typename Key, typename Value, typename _Gr, typename _Le>
-	Node<Key, Value>* RBT<Key, Value,_Gr, _Le>::nilnode = new Node<Key, Value>(NodeType::Black);
+	template<typename Key, typename Value,typename _Eq, typename _Gr, typename _Le>
+	Node<Key, Value>* RBT<Key, Value,_Eq,_Gr, _Le>::nilnode = new Node<Key, Value>(NodeType::Black);
 
 	//template<typename T>
 	//Node<T>* RBT<T>::extranode = new Node<T>(NodeType::Black);

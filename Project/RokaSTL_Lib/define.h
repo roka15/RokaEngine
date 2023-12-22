@@ -20,6 +20,9 @@
 
 #define LM_DLL rokaStl::CDllLoader::GetInstance()
 
+
+#define MAXPATH 255
+
 enum class EDllType
 {
 	ENGINE,

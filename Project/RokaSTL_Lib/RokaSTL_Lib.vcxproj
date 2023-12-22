@@ -168,7 +168,9 @@ call RokaSTLCopy.bat</Command>
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="DllLoader.h" />
+    <ClInclude Include="FileManager.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="func.h" />
     <ClInclude Include="interface.h" />
     <ClInclude Include="LRU_Queue.h" />
     <ClInclude Include="MemoryPool.h" />
@@ -183,6 +185,8 @@ call RokaSTLCopy.bat</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllLoader.cpp" />
+    <ClCompile Include="FileManager.cpp" />
+    <ClCompile Include="func.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="ObjectPool.cpp" />
     <ClCompile Include="ObjectPoolManager.cpp" />

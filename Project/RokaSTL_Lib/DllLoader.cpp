@@ -36,6 +36,8 @@ namespace rokaStl
         {
             FreeDll((EDllType)i);
         }
+
+        m_Dlls.clear();
     }
     bool CDllLoader::LoadDll(EDllType _etype)
     {

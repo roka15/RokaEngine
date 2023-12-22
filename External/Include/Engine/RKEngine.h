@@ -19,10 +19,12 @@ namespace RKEngine
 		bool m_bBeforFocus;
 		std::vector<HWND> m_hWnds;
 		Vec2 m_v2WinSize;
+		rokaStl::CDllLoader* m_DllLoader;
 	public:
 		virtual void SetHWND(HWND _hWnd, EHwndType _eType) { m_hWnds[TYPETOINT(_eType)] = _hWnd; }
-		virtual void LoadDll(PCR_DllLoad _pcr_dllload);
-		virtual void FreeDll(PCR_DllLoad _pcr_dllload);
+		virtual void SetLMDll(PCR_DllLoad _pcr_dllload) { m_DllLoader = _pcr_dllload; }
+		virtual void LoadDll();
+		virtual void FreeDll();
 	private:
 		void ScriptMonitor();
 		void WindowMonitor();

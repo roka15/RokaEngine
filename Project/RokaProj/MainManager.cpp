@@ -17,8 +17,8 @@ MainManager::MainManager()
 
 	engine_create();
 	m_Engine = reinterpret_cast<RKEngine::CRKEngine*const>(engine_inst());
+	m_Engine->SetLMDll(LM_DLL);
 	m_Engine->Initialize();
-	m_Engine->LoadDll(LM_DLL);
 }
 MainManager::~MainManager()
 {
@@ -29,10 +29,12 @@ MainManager::~MainManager()
 	}
 
 	m_Engine->Release();
-	m_Engine->LoadDll(LM_DLL);
+	
 	ENGINE_LIFE_FUNC engine_destroy = (ENGINE_LIFE_FUNC)GetProcAddress(engine_dll, "DestroyEngine");
+	engine_destroy();
 	m_Engine = nullptr;
 	LM_DLL->FreeDll(EDllType::ENGINE);
+	
 	LM_DLL->Release();
 	LM_DLL->Destroy();
 }

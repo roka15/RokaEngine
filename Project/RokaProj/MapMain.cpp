@@ -92,7 +92,7 @@ int main()
 	
 	//Key = const char* Test
 	//사전식 비교.
-	rokaStl::RBT<const char*,int,PCharGreater,PCharLess> map3;
+	rokaStl::RBT<const char*,int,PCharEqual,PCharGreater,PCharLess> map3;
 	map3.insert(std::make_pair("aa",1));
 	map3.insert(std::make_pair("abc", 2));
 	map3.insert(std::make_pair("ac",3));
