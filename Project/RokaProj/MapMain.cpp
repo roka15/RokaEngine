@@ -1,7 +1,6 @@
 #include "pch.h"
 #include <RokaSTL/RBT.h>
 #include <RokaSTL/define.h>
-#include "operators.h"
 
 int main()
 {   
@@ -92,32 +91,26 @@ int main()
 
 	
 	//Key = const char* Test
-	//문자열 ascii 값 비교해서 지정함.
-	rokaStl::RBT<const char*,int> map3;
-	map3.insert(std::make_pair("Hell",1));
-	map3.insert(std::make_pair("Bye", 2));
-	map3.insert(std::make_pair("My",3));
-	map3.insert(std::make_pair("Name",4));
-	map3.insert(std::make_pair("is",5));
-	map3.insert(std::make_pair("ye",6));
-	map3.insert(std::make_pair("ram", 7));
-	map3.insert(std::make_pair("Ah", 7));
-	map3.insert(std::make_pair("Eye", 7));
+	//사전식 비교.
+	rokaStl::RBT<const char*,int,PCharGreater,PCharLess> map3;
+	map3.insert(std::make_pair("aa",1));
+	map3.insert(std::make_pair("abc", 2));
+	map3.insert(std::make_pair("ac",3));
+	map3.insert(std::make_pair("ad",4));
+	map3.insert(std::make_pair("ae",5));
+	map3.insert(std::make_pair("abe",6));
+	map3.insert(std::make_pair("ag", 7));
+	map3.insert(std::make_pair("ahas", 7));
+	map3.insert(std::make_pair("ai", 10));
 
 
-	map3.erase("Name");
-	map3.erase("Hell");
-	map3.erase("Ah");
-	map3.erase("ye");
+	
 
 	for (rokaStl::Iterator<const char*, int>::MapIterator itr = map3.begin(); itr != map3.end(); itr++)
 	{
 		std::cout << "Key:" << itr.GetKey() << " Data:" << itr.GetData() << std::endl;
 	}
 	rokaStl::Iterator<const char*, int>::MapIterator itr3 = map3.find("He");
-	int value3 = map3["ram"];
+	int value = map3["ai"];
 	map3.clear();
-
-	bool flag = "Hell" < "Helb";
-	
 }

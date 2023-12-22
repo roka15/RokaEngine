@@ -81,6 +81,9 @@
     <ClInclude Include="DllLoader.h">
       <Filter>Loader</Filter>
     </ClInclude>
+    <ClInclude Include="operators.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MemoryPool.cpp">

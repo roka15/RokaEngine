@@ -3,7 +3,7 @@
 namespace rokaStl
 {
 #define MEMORY_BYTE 8*2*4//32768 //32KB
-	template <typename Key, typename Value>
+	template <typename Key, typename Value, typename _Gr, typename _Le>
 	class RBT;
 
 	typedef char* PBYTE;

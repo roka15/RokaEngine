@@ -211,7 +211,7 @@ namespace rokaStl
 
 	};
 
-	template <typename Key, typename Value>
+	template <typename Key, typename Value,typename _Gr = greater<Key>, typename _Le = less<Key>>
 	class RBT
 	{
 	private:
@@ -221,6 +221,9 @@ namespace rokaStl
 		static Node<Key, Value>* nilnode;
 		static std::shared_ptr< Node<Key, Value>> nil;
 		//static Node<T>* extranode;
+
+		_Gr cmp_greater;
+		_Le cmp_less;
 	private:
 #pragma region red_black_tree func
 	private:
@@ -242,11 +245,11 @@ namespace rokaStl
 				serchnode = _root;
 				return true;
 			}
-			else if (ptr->key > _key)
+			else if (cmp_greater(ptr->key, _key))
 			{
 				return serch_node(&((*_root)->left), _key, serchnode);
 			}
-			else if (ptr->key < _key)
+			else if (cmp_less(ptr->key, _key))
 			{
 				return serch_node(&((*_root)->right), _key, serchnode);
 			}
@@ -781,12 +784,12 @@ namespace rokaStl
 			{
 				*_root = _node;
 			}
-			else if (ptr->key > _node->key)
+			else if (cmp_greater(ptr->key, _node->key))
 			{
 				_node->parent = (*_root);
 				push_node(&((*_root)->left), _node);
 			}
-			else if (ptr->key < _node->key)
+			else if (cmp_less(ptr->key, _node->key))
 			{
 				_node->parent = (*_root);
 				push_node(&((*_root)->right), _node);
@@ -1038,8 +1041,8 @@ namespace rokaStl
 			nilnode = nullptr;
 		}
 	};
-	template<typename Key, typename Value>
-	Node<Key, Value>* RBT<Key, Value>::nilnode = new Node<Key, Value>(NodeType::Black);
+	template<typename Key, typename Value, typename _Gr, typename _Le>
+	Node<Key, Value>* RBT<Key, Value,_Gr, _Le>::nilnode = new Node<Key, Value>(NodeType::Black);
 
 	//template<typename T>
 	//Node<T>* RBT<T>::extranode = new Node<T>(NodeType::Black);
