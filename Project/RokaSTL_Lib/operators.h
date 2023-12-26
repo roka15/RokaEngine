@@ -43,6 +43,13 @@ struct PCharEqual
 		return strcmp(data1, data2) == 0;
 	}
 };
+struct PTCharEqual
+{
+	bool operator()(const TCHAR* data1, const TCHAR* data2)
+	{
+		return _tcscmp(data1, data2) == 0;
+	}
+};
 struct PCharGreater
 {
 	bool operator()(const char* data1, const char* data2)
@@ -101,6 +108,63 @@ struct PCharLess
 	}
 };
 
+struct PTCharGreater
+{
+	bool operator()(const TCHAR* data1, const TCHAR* data2)
+	{
+		size_t len1 = _tcslen(data1);
+		size_t len2 = _tcslen(data2);
+		if (len1 != len2)
+		{
+			if (len1 < len2)
+				return true;
+			else if (len1 > len2)
+				return false;
+		}
+
+
+		size_t len = len1;
+		for (int i = 0; i < len; ++i)
+		{
+			if (data1[i] == data2[i])
+				continue;
+			else
+			{
+				return data1[i] > data2[i];
+			}
+		}
+
+		return false;
+	}
+};
+struct PTCharLess
+{
+	bool operator()(const TCHAR* data1, const TCHAR* data2)
+	{
+		size_t len1 = _tcslen(data1);
+		size_t len2 = _tcslen(data2);
+		if (len1 != len2)
+		{
+			if (len1 > len2)
+				return true;
+			else if (len1 < len2)
+				return false;
+		}
+
+		size_t len = len1;
+		for (int i = 0; i < len; ++i)
+		{
+			if (data1[i] == data2[i])
+				continue;
+			else
+			{
+				return data1[i] < data2[i];
+			}
+		}
+
+		return false;
+	}
+};
 template<typename Y>
 struct TimePairGreater
 {

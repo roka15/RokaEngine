@@ -57,8 +57,12 @@ namespace rokaStl
 			if (is_innerDelete == true)
 			{
 				bool constFlag = std::is_const_v<Value>;
-				bool same = std::is_same<typename std::remove_const<Value>::type,
-					typename std::remove_const<const char>::type>::value;
+				bool same = (std::is_same<typename std::remove_const<Value>::type,
+					typename std::remove_const<const wchar_t>::type>::value)
+					|| (std::is_same<typename std::remove_const<Value>::type,
+						typename std::remove_const<const char>::type>::value);
+
+
 				if (constFlag && same)
 				{
 					data = nullptr;
@@ -103,8 +107,12 @@ namespace rokaStl
 				//2.char*
 				//3.normal*
 				bool constFlag = std::is_const_v<Key>;
-				bool same = std::is_same<typename std::remove_const<Key>::type,
-					typename std::remove_const<const char>::type>::value;
+				bool same = (std::is_same<typename std::remove_const<Key>::type,
+					typename std::remove_const<const wchar_t>::type>::value)
+					|| (std::is_same<typename std::remove_const<Key>::type,
+						typename std::remove_const<const char>::type>::value);
+
+
 				if (constFlag && same)
 				{
 					key = nullptr;
@@ -150,8 +158,12 @@ namespace rokaStl
 				//2.char*
 				//3.normal*
 				bool constFlag = std::is_const_v<Key>;
-				bool same = std::is_same<typename std::remove_const<Key>::type,
-					typename std::remove_const<const char>::type>::value;
+				bool same = (std::is_same<typename std::remove_const<Key>::type,
+					typename std::remove_const<const wchar_t>::type>::value)
+					|| (std::is_same<typename std::remove_const<Key>::type,
+						typename std::remove_const<const char>::type>::value);
+
+
 				if (constFlag && same)
 				{
 					key = nullptr;
@@ -164,8 +176,12 @@ namespace rokaStl
 					delete key;
 				
 				constFlag = std::is_const_v<Value>;
-				same = std::is_same<typename std::remove_const<Value>::type,
-					typename std::remove_const<const char>::type>::value;
+				same = (std::is_same<typename std::remove_const<Value>::type,
+					typename std::remove_const<const wchar_t>::type>::value)
+					|| (std::is_same<typename std::remove_const<Value>::type,
+						typename std::remove_const<const char>::type>::value);
+
+
 				if (constFlag && same)
 				{
 					data = nullptr;
