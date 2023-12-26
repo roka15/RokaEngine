@@ -7,7 +7,9 @@ int main()
 	MemoryLeakCheck
 	//map test
 	// *주의사항*
-	// key값이 문자열인 경우 사전적으로 비교하기 때문에 사전적 정의가 높은쪽이 오른쪽 노드에 위치한다.
+	// 1. key값이 문자열인 경우 사전적으로 비교하기 때문에 사전적 정의가 높은쪽이 오른쪽 노드에 위치한다.
+    // 2. key 또는 value 에 const char을 넣는 경우 동적할당을 해서는 안된다. 
+	//	  key = "Hello" (O) key = new char[100] (X)
 	
 	//Default Test (Key = int)
 	//////////////////////////////////////////////////////////////
@@ -20,6 +22,9 @@ int main()
 	// [6] erase -test 예제 통과 https://www.youtube.com/watch?v=6drLl777k-E
 	// [7] memory leak 방지 release 처리.
 	// [8] inner clear = map 내부에서 node 정리할때 value를 같이 정리해주길 바랄때 쓰는 옵션.
+	// [9]  key* , value*
+	// [10] key  , value*
+	// [11] key* , value
 	//////////////////////////////////////////////////////////////
 	
 	//[0]
@@ -113,4 +118,55 @@ int main()
 	rokaStl::Iterator<const char*, int>::MapIterator itr3 = map3.find("He");
 	int value = map3["ai"];
 	map3.clear();
+
+
+	//[9]
+	rokaStl::RBT<int*, char*> ptrTest1;
+	ptrTest1.innerClear();
+	ptrTest1.insert(std::make_pair(new int(1), new char[100]()));
+	ptrTest1.clear();
+
+
+	rokaStl::RBT<char*, int*> ptrTest2;
+	ptrTest2.innerClear();
+	ptrTest2.insert(std::make_pair(new char[100](), new int(1)));
+	ptrTest2.clear();
+
+	
+	rokaStl::RBT<const char*, char*> ptrTest3;
+	ptrTest3.innerClear();
+	ptrTest3.insert(std::make_pair("Hello", new char[100]()));
+	ptrTest3.clear();
+
+	//[10]
+	rokaStl::RBT<int, int*> ptrTest4;
+	ptrTest4.innerClear();
+	ptrTest4.insert(std::make_pair(1, new int(1)));
+	ptrTest4.clear();
+
+	rokaStl::RBT<int, char*> ptrTest5;
+	ptrTest5.innerClear();
+	ptrTest5.insert(std::make_pair(1, new char[100]()));
+	ptrTest5.clear();
+
+	rokaStl::RBT<int, const char*> ptrTest6;
+	ptrTest6.innerClear();
+	ptrTest6.insert(std::make_pair(1, "Hello"));
+	ptrTest6.clear();
+
+	//[11]
+	rokaStl::RBT<int*, int> ptrTest7;
+	ptrTest7.innerClear();
+	ptrTest7.insert(std::make_pair(new int(1), 1));
+	ptrTest7.clear();
+
+	rokaStl::RBT<char*, int> ptrTest8;
+	ptrTest8.innerClear();
+	ptrTest8.insert(std::make_pair(new char[100](), 1));
+	ptrTest8.clear();
+
+	rokaStl::RBT<const char*, int> ptrTest9;
+	ptrTest9.innerClear();
+	ptrTest9.insert(std::make_pair("Hello", 1));
+	ptrTest9.clear();
 }

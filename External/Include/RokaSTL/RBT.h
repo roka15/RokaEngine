@@ -37,35 +37,6 @@ namespace rokaStl
 		bool is_extra;
 		bool is_innerDelete;
 	};
-	template <typename Key>
-	class Node<Key, const char*>
-	{
-	public:
-		Node() :parent(nullptr), left(nullptr), right(nullptr), type(NodeType::None), data(nullptr), is_extra(false), key(), is_innerDelete(false)
-		{
-
-		}
-		Node(NodeType _type) :parent(nullptr), left(nullptr), right(nullptr), type(_type), data(nullptr), is_extra(false), key(), is_innerDelete(false)
-		{
-
-		}
-		Node(Key _key, const char* _data, Node<Key, const char*>* nilnode, NodeType _type, bool _innerDelete) :parent(nullptr), left(nilnode), right(nilnode), data(_data), type(_type), is_extra(false), key(_key), is_innerDelete(_innerDelete)
-		{
-		}
-		~Node()
-		{
-			if (is_innerDelete == true)
-				data = nullptr;
-		}
-		Node* parent;
-		Node* left;
-		Node* right;
-		Key key;
-		const char* data;
-		NodeType type;
-		bool is_extra;
-		bool is_innerDelete;
-	};
 	template <typename Key, typename Value>
 	class Node<Key, Value*>
 	{
@@ -84,7 +55,21 @@ namespace rokaStl
 		~Node()
 		{
 			if (is_innerDelete == true)
-				delete data;
+			{
+				bool constFlag = std::is_const_v<Value>;
+				bool same = std::is_same<typename std::remove_const<Value>::type,
+					typename std::remove_const<const char>::type>::value;
+				if (constFlag && same)
+				{
+					data = nullptr;
+				}
+				else if (same)
+				{
+					delete[] data;
+				}
+				else
+					delete data;
+			}
 		}
 		Node* parent;
 		Node* left;
@@ -95,6 +80,114 @@ namespace rokaStl
 		bool is_extra;
 		bool is_innerDelete;
 	};
+	template <typename Key, typename Value>
+	class Node<Key*, Value>
+	{
+	public:
+		Node() :parent(nullptr), left(nullptr), right(nullptr), type(NodeType::None), data(), is_extra(false), key(nullptr), is_innerDelete(false)
+		{
+
+		}
+		Node(NodeType _type) :parent(nullptr), left(nullptr), right(nullptr), type(_type), data(), is_extra(false), key(nullptr), is_innerDelete(false)
+		{
+
+		}
+		Node(Key* _key, Value _data, Node<Key*, Value>* nilnode, NodeType _type, bool _innerDelete) :parent(nullptr), left(nilnode), right(nilnode), data(_data), type(_type), is_extra(false), key(_key), is_innerDelete(_innerDelete)
+		{
+		}
+		~Node()
+		{
+			if (is_innerDelete == true)
+			{
+				//1.const char* 
+				//2.char*
+				//3.normal*
+				bool constFlag = std::is_const_v<Key>;
+				bool same = std::is_same<typename std::remove_const<Key>::type,
+					typename std::remove_const<const char>::type>::value;
+				if (constFlag && same)
+				{
+					key = nullptr;
+				}
+				else if (same)
+				{
+					delete[] key;
+				}
+				else
+					delete key;
+			}
+		}
+		Node* parent;
+		Node* left;
+		Node* right;
+		Key* key;
+		Value data;
+		NodeType type;
+		bool is_extra;
+		bool is_innerDelete;
+	};
+
+	template <typename Key, typename Value>
+	class Node<Key*, Value*>
+	{
+	public:
+		Node() :parent(nullptr), left(nullptr), right(nullptr), type(NodeType::None), data(nullptr), is_extra(false), key(nullptr), is_innerDelete(false)
+		{
+
+		}
+		Node(NodeType _type) :parent(nullptr), left(nullptr), right(nullptr), type(_type), data(nullptr), is_extra(false), key(nullptr), is_innerDelete(false)
+		{
+
+		}
+		Node(Key* _key, Value* _data, Node<Key*, Value*>* nilnode, NodeType _type, bool _innerDelete) :parent(nullptr), left(nilnode), right(nilnode), data(_data), type(_type), is_extra(false), key(_key), is_innerDelete(_innerDelete)
+		{
+		}
+		~Node()
+		{
+			if (is_innerDelete == true)
+			{
+				//1.const char* 
+				//2.char*
+				//3.normal*
+				bool constFlag = std::is_const_v<Key>;
+				bool same = std::is_same<typename std::remove_const<Key>::type,
+					typename std::remove_const<const char>::type>::value;
+				if (constFlag && same)
+				{
+					key = nullptr;
+				}
+				else if (same)
+				{
+					delete[] key;
+				}
+				else
+					delete key;
+				
+				constFlag = std::is_const_v<Value>;
+				same = std::is_same<typename std::remove_const<Value>::type,
+					typename std::remove_const<const char>::type>::value;
+				if (constFlag && same)
+				{
+					data = nullptr;
+				}
+				else if (same)
+				{
+					delete[] data;
+				}
+				else
+					delete data;
+			}
+		}
+		Node* parent;
+		Node* left;
+		Node* right;
+		Key* key;
+		Value* data;
+		NodeType type;
+		bool is_extra;
+		bool is_innerDelete;
+	};
+
 	template<typename Key, typename Value>
 	class Iterator
 	{
