@@ -110,6 +110,8 @@ namespace rokaStl
 			{
 				if (ptr == nullptr)
 					return;
+				if (ptr->left == nullptr && ptr->right == nullptr)
+					return;
 				if (node_array.size() == 0)
 				{
 					std::queue<Node<Key, Value>*> nodequeue;
@@ -218,8 +220,7 @@ namespace rokaStl
 		Node<Key, Value>* root;
 		int count;
 		bool is_InnerDelete;
-		static Node<Key, Value>* nilnode;
-		static std::shared_ptr< Node<Key, Value>> nil;
+		Node<Key, Value>* nilnode;
 		//static Node<T>* extranode;
 
 		_Eq cmp_equal;
@@ -949,9 +950,10 @@ namespace rokaStl
 
 #pragma endregion
 	public:
-		RBT() :root(nilnode), count(0), is_InnerDelete(false)
+		RBT() : count(0), is_InnerDelete(false)
 		{
-
+			nilnode = new Node<Key, Value>(NodeType::Black);
+			root = nilnode;
 		}
 		~RBT()
 		{
@@ -1025,6 +1027,10 @@ namespace rokaStl
 
 		typename Iterator<Key, Value>::MapIterator begin() const
 		{
+			//root == nilnode
+			if(root->left == nullptr && root->right == nullptr) 
+				return Iterator<Key, Value>::MapIterator(nullptr);
+
 			return Iterator<Key, Value>::MapIterator(root);
 		}
 		typename Iterator<Key, Value>::MapIterator end() const
@@ -1042,9 +1048,6 @@ namespace rokaStl
 			nilnode = nullptr;
 		}
 	};
-	template<typename Key, typename Value,typename _Eq, typename _Gr, typename _Le>
-	Node<Key, Value>* RBT<Key, Value,_Eq,_Gr, _Le>::nilnode = new Node<Key, Value>(NodeType::Black);
-
 	//template<typename T>
 	//Node<T>* RBT<T>::extranode = new Node<T>(NodeType::Black);
 }
