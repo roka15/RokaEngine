@@ -19,6 +19,10 @@
 
 
 #define LM_DLL rokaStl::CDllLoader::GetInstance()
+#define M_FILE rokaStl::FileManager::GetInstance()
+
+#define MAXPATH 255
+#define MAXEXTEN 50
 
 enum class EDllType
 {

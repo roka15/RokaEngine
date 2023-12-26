@@ -19,6 +19,8 @@ class SCRIPTDLL_DECLSPEC ScriptManager:public rokaStl::IScriptManager,public rok
 {
 	SINGLETON(ScriptManager)
 	MANAGER
+private:
+
 public:
 	virtual void GetScriptsInfo(wchar_t** _vec)override;
 	virtual CScript* GetScript(unsigned int _ScriptType)override;
