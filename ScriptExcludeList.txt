@@ -1,0 +1,6 @@
+pch
+stdafx
+targetver
+external
+framework
+ScriptManager
