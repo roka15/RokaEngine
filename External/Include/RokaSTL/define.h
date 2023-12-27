@@ -23,6 +23,12 @@
 
 #define MAXPATH 255
 #define MAXEXTEN 50
+#define MAXTXT 260
+#ifdef UNICODE
+#define STR_LENGTH_MULTIPLIER 2
+#else
+#define STR_LENGTH_MULTIPLIER 1
+#endif
 
 enum class EDllType
 {
@@ -31,4 +37,12 @@ enum class EDllType
 	RENDER,
 	SERVER,
 	END,
+};
+
+enum class EFilePathType
+{
+	SOLUTION,
+	INCLUDE,
+	PROJECT,
+	RESOURCE,
 };

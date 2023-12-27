@@ -23,10 +23,118 @@ namespace rokaStl
 	}
 	FileManager::~FileManager()
 	{
-
 	}
 
 
+
+	FILEDATA* FileManager::ReadFile(EFilePathType _ePath, const TCHAR* _tcPath)
+	{
+		FILEDATA* result = nullptr; 
+		
+		TString Path = CatPath(_ePath, _tcPath);
+#pragma region read file
+		std::vector<TCHAR> vecWords;
+		std::vector<TCHAR*> vecStrs;
+		INPUT_FILE_STREAM readFile;
+
+		TCHAR word;
+		readFile.open(Path);
+		if (readFile.is_open())
+		{
+			result = new FILEDATA();
+			while (readFile.eof() == false)
+			{
+				word = readFile.get();
+				if (word == '\n')
+				{
+					size_t wordLen = vecWords.size()+1;
+					TCHAR* tempPtr = new TCHAR[wordLen]();
+					memcpy(tempPtr,vecWords.data(), wordLen * STR_LENGTH_MULTIPLIER);
+					tempPtr[wordLen - 1] = '\0';
+					vecStrs.push_back(tempPtr);
+					vecWords.clear();
+					continue;
+				}
+				vecWords.push_back(word);
+			}
+
+			UINT iCol = vecStrs.size();
+			result->m_col = iCol;
+			UINT iRow = 0;
+			result->m_lineData = new TCHAR * [iCol];
+			for (int i = 0; i < iCol; ++i)
+			{
+				result->m_lineData[i] = vecStrs[i];
+			}
+#pragma endregion
+
+			readFile.close();
+		}
+
+		return result;
+	}
+
+	FILEDATA* FileManager::ReadHeaderFileNameList(EFilePathType _ePath, const TCHAR* _tcPath)
+	{
+		FILEDATA* result = new FILEDATA();
+		const TCHAR* FirstPath = GetPath(_ePath);
+		const TCHAR* SecondPath = _tcPath;
+		TCHAR Path[MAXPATH]={};
+		_tcscpy(Path, FirstPath);
+		_tcscat(Path, SecondPath);
+
+		std::vector<TCHAR*> vecFile;
+		for (const auto& entry : directory_iterator(Path))
+		{
+			if (is_regular_file(entry.path()))
+			{
+				TCHAR entryPath[MAXPATH]{};
+
+#ifdef UNICODE
+				_tcscpy(entryPath, entry.path().wstring().c_str());
+#else
+				_tcscpy(entryPath, entry.path().string().c_str());
+#endif
+				const TCHAR* tcExtension = M_FILE->GetFileExtension(entryPath);
+				if (_tcscmp(tcExtension, TEXT(".h")) == 0)
+				{
+					TCHAR* tcFileName = new TCHAR[MAXPATH]();
+					ZeroMemory(tcFileName, MAXPATH);
+					_tcscpy(tcFileName, M_FILE->GetFileName(entryPath));
+					
+					vecFile.push_back(tcFileName);
+				}
+			}
+		}
+		
+		const UINT iCol = vecFile.size();
+		result->m_col = iCol;
+		result->m_lineData = new TCHAR*[iCol];
+		for (int i = 0; i < iCol; ++i)
+		{
+			result->m_lineData[i] = vecFile[i];
+		}
+
+		return result;
+	}
+
+	bool FileManager::WriteFile(EFilePathType _ePath, const TCHAR* _tcPath, STRSTREAM& _sstream)
+	{
+
+		OUTPUT_FILE_STREAM writeFile;
+		TString Path = CatPath(_ePath, _tcPath);
+		writeFile.open(Path);
+		TString str;
+		
+		while (_sstream.good())
+		{
+			getline(_sstream, str, TEXT('\n'));
+			str.append(TEXT("\n"));
+			writeFile.write(str.c_str(),str.size());
+		}
+		writeFile.close();
+		return false;
+	}
 
 	const TCHAR* FileManager::GetResourcePath()
 	{
@@ -45,19 +153,19 @@ namespace rokaStl
 
 	const TCHAR* FileManager::GetSolutionPath()
 	{
-		return nullptr;
+		return m_SolutionPath;
 	}
 
 	const TCHAR* FileManager::GetFileName(const TCHAR* _path)
 	{
-		ZeroMemory(m_TimeStemp, MAXPATH);
+		ZeroMemory(m_FileName, MAXPATH);
 		_tsplitpath_s(_path,NULL,0,NULL,0,m_FileName,MAXPATH,NULL,0);
 		return m_FileName;
 	}
 
 	const TCHAR* FileManager::GetFileExtension(const TCHAR* _path)
 	{
-		ZeroMemory(m_TimeStemp, MAXPATH);
+		ZeroMemory(m_FileExtension, MAXPATH);
 		_tsplitpath_s(_path, NULL, 0, NULL, 0, nullptr, 0, m_FileExtension,MAXEXTEN);
 		return m_FileExtension;
 	}
@@ -69,6 +177,25 @@ namespace rokaStl
 		std::time_t last_timestemp_t = decltype(last_update)::clock::to_time_t(last_update);
 		_tasctime_s(m_TimeStemp, std::localtime(&last_timestemp_t));
 		return m_TimeStemp;
+	}
+
+	const TCHAR* FileManager::GetPath(EFilePathType _ePath)
+	{
+		switch (_ePath)
+		{
+		case EFilePathType::SOLUTION:
+			return m_SolutionPath;
+			break;
+		case EFilePathType::PROJECT:
+			return m_ProjectPath;
+			break;
+		case EFilePathType::INCLUDE:
+			return m_IncludePath;
+			break;
+		case EFilePathType::RESOURCE:
+			return m_ResourcePath;
+			break;
+		}
 	}
 
 	void FileManager::SetSolutionPath()
@@ -103,7 +230,7 @@ namespace rokaStl
 		}
 	}
 
-	void FileManager::SetPath(TCHAR* _save,const TCHAR* _path)
+	void FileManager::SetPath(TCHAR* _Outsave,const TCHAR* _path)
 	{
 		size_t solutionLen = _tcslen(m_SolutionPath);
 		TCHAR tempPath[MAXPATH];
@@ -111,6 +238,32 @@ namespace rokaStl
 
 		_tcscpy(tempPath, m_SolutionPath);
 		_tcscat(tempPath, _path);
-		_tcscpy(_save, tempPath);
+		_tcscpy(_Outsave, tempPath);
+	}
+	TString FileManager::CatPath(EFilePathType _ePath, const TCHAR* _path)
+	{
+		const TCHAR* FirstPath = GetPath(_ePath);
+		const TCHAR* SecondPath = _path;
+		TCHAR Path[MAXPATH] = {};
+		_tcscpy(Path, FirstPath);
+		_tcscat(Path, SecondPath);
+
+		TString result(Path);
+		return result;
+	}
+	void FileManager::FreeFileDetail(FILEDATA*& _file)
+	{
+		if (_file->m_lineData != nullptr)
+		{
+			for (int i = 0; i < _file->m_col; ++i)
+			{
+				delete[] _file->m_lineData[i];
+				_file->m_lineData[i] = nullptr;
+			}
+			delete[] (_file->m_lineData);
+			_file->m_lineData = nullptr;
+		}
+		delete _file;
+		_file = nullptr;
 	}
 }
