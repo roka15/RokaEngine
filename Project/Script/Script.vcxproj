@@ -139,7 +139,9 @@
     </Link>
     <PreBuildEvent>
       <Command>cd $(SolutionDir)
-call ScriptCopy.bat</Command>
+call ScriptCopy.bat
+cd $(SolutionDir)OutputFile\Debug\
+call ScriptReader.exe</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -166,7 +168,6 @@ call ScriptCopy.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CSecondScript.h" />
     <ClInclude Include="CTestScript.h" />
     <ClInclude Include="external.h" />
     <ClInclude Include="framework.h" />
@@ -174,7 +175,6 @@ call ScriptCopy.bat</Command>
     <ClInclude Include="ScriptManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CSecondScript.cpp" />
     <ClCompile Include="CTestScript.cpp" />
     <ClCompile Include="external.cpp" />
     <ClCompile Include="pch.cpp">

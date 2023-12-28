@@ -48,6 +48,8 @@ namespace rokaStl
 				if (word == '\n')
 				{
 					size_t wordLen = vecWords.size()+1;
+					if (wordLen == 1)
+						continue;
 					TCHAR* tempPtr = new TCHAR[wordLen]();
 					memcpy(tempPtr,vecWords.data(), wordLen * STR_LENGTH_MULTIPLIER);
 					tempPtr[wordLen - 1] = '\0';
@@ -134,6 +136,22 @@ namespace rokaStl
 		}
 		writeFile.close();
 		return false;
+	}
+
+	void FileManager::FreeFileDetail(FILEDATA*& _file)
+	{
+		if (_file->m_lineData != nullptr)
+		{
+			for (int i = 0; i < _file->m_col; ++i)
+			{
+				delete[] _file->m_lineData[i];
+				_file->m_lineData[i] = nullptr;
+			}
+			delete[](_file->m_lineData);
+			_file->m_lineData = nullptr;
+		}
+		delete _file;
+		_file = nullptr;
 	}
 
 	const TCHAR* FileManager::GetResourcePath()
@@ -251,19 +269,5 @@ namespace rokaStl
 		TString result(Path);
 		return result;
 	}
-	void FileManager::FreeFileDetail(FILEDATA*& _file)
-	{
-		if (_file->m_lineData != nullptr)
-		{
-			for (int i = 0; i < _file->m_col; ++i)
-			{
-				delete[] _file->m_lineData[i];
-				_file->m_lineData[i] = nullptr;
-			}
-			delete[] (_file->m_lineData);
-			_file->m_lineData = nullptr;
-		}
-		delete _file;
-		_file = nullptr;
-	}
+
 }

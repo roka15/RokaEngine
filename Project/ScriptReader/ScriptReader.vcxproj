@@ -80,6 +80,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)External\Include\RokaSTL\;$(SolutionDir)External\Include\openssl\Debug\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)External\Lib\Debug\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)OutputFile\Debug\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

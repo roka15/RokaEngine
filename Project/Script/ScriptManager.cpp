@@ -16,43 +16,48 @@ void ScriptManager::Loop()
 void ScriptManager::Release()
 {
 }
-void ScriptManager::GetScriptsInfo(wchar_t** _vec)
+void ScriptManager::GetScriptsInfo(std::vector<const TCHAR*>& _vec)
 {
+		_vec.push_back(TEXT("CTestScript"));
 }
 CScript* ScriptManager::GetScript(unsigned int _ScriptType)
 {
-    std::cout << " new Script Test" << std::endl;
-    EScriptType eType = (EScriptType)_ScriptType;
-    switch (eType)
-    {
-    case EScriptType::TEST:
-        return new CTestScript(_ScriptType);
-        break;
-    }
-    return nullptr;
+		EScriptType eType = (EScriptType)_ScriptType;
+		switch(eType)
+		{
+		case EScriptType::CTestScript:
+			return new CTestScript(TYPETOINT(EScriptType::CTestScript));
+			break;
+		}
+		return nullptr;
 }
-
-CScript* ScriptManager::GetScript(const wchar_t* _ScriptName)
+CScript* ScriptManager::GetScript(const TCHAR* _ScriptName)
 {
-    return nullptr;
+		if(_tcscmp(_ScriptName , TEXT("CTestScript")) == 0)
+			return new CTestScript(TYPETOINT(EScriptType::CTestScript));
+		return nullptr;
 }
-
 const wchar_t* ScriptManager::GetScriptName(CScript* _pScript)
 {
-    return nullptr;
+		EScriptType eType =  (EScriptType)_pScript->GetScriptType();
+		switch (eType)
+		{
+		case EScriptType::CTestScript:
+			return TEXT("CTestScript");
+			break;
+		}
+		return nullptr;
 }
-
 SCRIPTDLL_DECLSPEC void ScriptManagerCreate()
 {
-    return MCreate(ScriptManager);
+		return MCreate(ScriptManager);
 }
-
 SCRIPTDLL_DECLSPEC void ScriptManagerDestory()
 {
-    return MDestroy(ScriptManager);
+		return MDestroy(ScriptManager);
 }
-
 SCRIPTDLL_DECLSPEC ScriptManager* GetScriptManager()
 {
-    return GetInst(ScriptManager);
+		 return GetInst(ScriptManager);
 }
+

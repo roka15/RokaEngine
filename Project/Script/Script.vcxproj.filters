@@ -33,9 +33,6 @@
     <ClInclude Include="CTestScript.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CSecondScript.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -48,9 +45,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CTestScript.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CSecondScript.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
