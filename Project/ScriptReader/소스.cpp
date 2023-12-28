@@ -45,6 +45,7 @@ int main()
 			vecScriptFileNameList.push_back(FileNameList->m_lineData[i]);
 	}
 
+	const size_t ScriptTypeCnt = vecScriptFileNameList.size();
 	bool bWriteFlag = false;
 	if (SaveScriptTxtList == nullptr)
 	{
@@ -52,10 +53,26 @@ int main()
 	}
 	else
 	{
-		//excludelist를 제외하고,
 		//save script txt list 와 script file name list 를 비교한다.
 		//다른 점이 있다면 script manager와 scriptlist.txt 를 수정한다.
-		bool bSameFlag = false;
+		bool bSameFlag = true;
+		size_t save_size = SaveScriptTxtList->m_col;
+		size_t file_size = vecScriptFileNameList.size();
+
+		if (save_size == file_size)
+		{
+			for (int i = 0; i < ScriptTypeCnt; ++i)
+			{
+				if (_tcscmp(SaveScriptTxtList->m_lineData[i], vecScriptFileNameList[i]) != 0)
+				{
+					bSameFlag = false;
+					break;
+				}
+			}
+		}
+		else
+			bSameFlag = false;
+		
 		//bSameFlag = CheckSame()
 
 		if (bSameFlag == false)
@@ -67,6 +84,11 @@ int main()
 
 	if(bWriteFlag == false)
 	{
+		M_FILE->FreeFileDetail(ExcludeList);
+		M_FILE->FreeFileDetail(FileNameList);
+		M_FILE->FreeFileDetail(SaveScriptTxtList);
+
+		RKFileManager::Destroy();
 		return 0;
 	}
 
@@ -76,7 +98,7 @@ int main()
 	stringstream strStream;
 #endif
 
-	size_t ScriptTypeCnt = vecScriptFileNameList.size();
+	
 #pragma region Write ScriptList.txt
 	for (int i = 0; i < ScriptTypeCnt; ++i)
 	{
@@ -117,9 +139,9 @@ int main()
 	strStream << TEXT("		MANAGER\n");
 	strStream << TEXT("private:\n");
 	strStream << TEXT("public:\n");
-	strStream << TEXT("		virtual void GetScriptsInfo(wchar_t** _vec)override;\n");
+	strStream << TEXT("		virtual void GetScriptsInfo(std::vector<const TCHAR*>& _vec)override;\n");
 	strStream << TEXT("		virtual CScript* GetScript(unsigned int _ScriptType)override;\n");
-	strStream << TEXT("		virtual CScript* GetScript(const wchar_t* _ScriptName)override;\n");
+	strStream << TEXT("		virtual CScript* GetScript(const TCHAR* _ScriptName)override;\n");
 	strStream << TEXT("		virtual const wchar_t* GetScriptName(CScript* _pScript)override;\n");
 	strStream << TEXT("};\n");
 	strStream << TEXT("extern \"C\"\n");
@@ -129,12 +151,96 @@ int main()
 	strStream << TEXT("		SCRIPTDLL_DECLSPEC ScriptManager* GetScriptManager();\n");
 	strStream << TEXT("}\n");
 
-	M_FILE->WriteFile(EFilePathType::SOLUTION, TEXT("\\ScriptManager.h"), strStream);
+	M_FILE->WriteFile(EFilePathType::PROJECT, TEXT("\\Script\\ScriptManager.h"), strStream);
 #pragma endregion 
-
+	// strStream << TEXT("\n");
 #pragma region Script Manager Cpp
-	strStream.str(TEXT(""));
+	strStream.clear();
+	strStream << TEXT("#include \"pch.h\"\n");
+	strStream << TEXT("#include \"ScriptManager.h\"\n");
+	for (int i = 0; i < ScriptTypeCnt; ++i)
+	{
+		strStream << TEXT("#include \"") << vecScriptFileNameList[i] << TEXT(".h\"\n");
+	}
+	strStream << TEXT("ScriptManager::ScriptManager()\n");
+	strStream << TEXT("{\n");
+	strStream << TEXT("}\n");
+	strStream << TEXT("ScriptManager::~ScriptManager()\n");
+	strStream << TEXT("{\n");
+	strStream << TEXT("}\n");
+	strStream << TEXT("void  ScriptManager::Initialize()\n");
+	strStream << TEXT("{\n");
+	strStream << TEXT("}\n");
+	strStream << TEXT("void ScriptManager::Loop()\n");
+	strStream << TEXT("{\n");
+	strStream << TEXT("}\n");
+	strStream << TEXT("void ScriptManager::Release()\n");
+	strStream << TEXT("{\n");
+	strStream << TEXT("}\n");
+	strStream << TEXT("void ScriptManager::GetScriptsInfo(std::vector<const TCHAR*>& _vec)\n");
+	strStream << TEXT("{\n");
+	for (int i = 0; i < ScriptTypeCnt; ++i)
+	{
+		strStream << TEXT("		_vec.push_back(TEXT(\"") << vecScriptFileNameList[i] << TEXT("\"));\n");
+	}
+	strStream << TEXT("}\n");
+	strStream << TEXT("CScript* ScriptManager::GetScript(unsigned int _ScriptType)\n");
+	strStream << TEXT("{\n");
+	strStream << TEXT("		EScriptType eType = (EScriptType)_ScriptType;\n");
+	strStream << TEXT("		switch(eType)\n");
+	strStream << TEXT("		{\n");
+	for (int i = 0; i < ScriptTypeCnt; ++i)
+	{
+		strStream << TEXT("		case EScriptType::") << vecScriptFileNameList[i] << TEXT(":\n");
+		strStream << TEXT("			return new ")<<vecScriptFileNameList[i]<<TEXT("(TYPETOINT(EScriptType::") << vecScriptFileNameList[i] << TEXT("));\n");
+		strStream << TEXT("			break;\n");
+	}
+	strStream << TEXT("		}\n");
+	strStream << TEXT("		return nullptr;\n");
+	strStream << TEXT("}\n");
 
+	strStream << TEXT("CScript* ScriptManager::GetScript(const TCHAR* _ScriptName)\n");
+	strStream << TEXT("{\n");
+	for (int i = 0; i < ScriptTypeCnt; ++i)
+	{
+		strStream << TEXT("		if(_tcscmp(_ScriptName , TEXT(\"") << vecScriptFileNameList[i] <<TEXT("\")) == 0)\n");
+		strStream << TEXT("			return new ") << vecScriptFileNameList[i] << TEXT("(TYPETOINT(EScriptType::") << vecScriptFileNameList[i] << TEXT("));\n");
+	}
+
+	strStream << TEXT("		return nullptr;\n");
+	strStream << TEXT("}\n");
+
+	strStream << TEXT("const wchar_t* ScriptManager::GetScriptName(CScript* _pScript)\n");
+	strStream << TEXT("{\n");
+	strStream << TEXT("		EScriptType eType =  (EScriptType)_pScript->GetScriptType();\n");
+	strStream << TEXT("		switch (eType)\n");
+	strStream << TEXT("		{\n");
+	for (int i = 0; i < ScriptTypeCnt; ++i)
+	{
+		strStream << TEXT("		case EScriptType::") << vecScriptFileNameList[i] << TEXT(":\n");
+		strStream << TEXT("			return TEXT(\"") << vecScriptFileNameList[i] << TEXT("\");\n");
+		strStream << TEXT("			break;\n");
+	}
+	strStream << TEXT("		}\n");
+	strStream << TEXT("		return nullptr;\n");
+	strStream << TEXT("}\n");
+
+
+	strStream << TEXT("SCRIPTDLL_DECLSPEC void ScriptManagerCreate()\n");
+	strStream << TEXT("{\n");
+	strStream << TEXT("		return MCreate(ScriptManager);\n");
+	strStream << TEXT("}\n");
+	strStream << TEXT("SCRIPTDLL_DECLSPEC void ScriptManagerDestory()\n");
+	strStream << TEXT("{\n");
+	strStream << TEXT("		return MDestroy(ScriptManager);\n");
+	strStream << TEXT("}\n");
+	strStream << TEXT("SCRIPTDLL_DECLSPEC ScriptManager* GetScriptManager()\n");
+	strStream << TEXT("{\n");
+	strStream << TEXT("		 return GetInst(ScriptManager);\n");
+	strStream << TEXT("}\n");
+
+
+	M_FILE->WriteFile(EFilePathType::PROJECT, TEXT("\\Script\\ScriptManager.cpp"), strStream);
 #pragma endregion
 	
 
