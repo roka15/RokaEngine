@@ -1,10 +1,24 @@
 #pragma once
 #include <RokaSTL/SingleTon.h>
-class ScriptReLoad : public rokaStl::Singleton<ScriptReLoad>
+#include <RokaSTL/FileManager.h>
+
+namespace RKEngine
 {
-public:
+	class CRKEngine;
+	typedef rokaStl::FileTimeStempMap FileTimeStempMap;
+	class CScriptReLoad 
+	{
+		CScriptReLoad(CRKEngine* _engine);
+		~CScriptReLoad();
+		friend class CRKEngine;
+	public:
+		bool TimeStempMonitor();
+	private:
+		CRKEngine* m_Engine;
+		FileTimeStempMap mScriptMap;
+		TCHAR mScriptPath[MAXPATH];
+		std::vector<const TCHAR*> mvecExtensions;
+	};
 
-private:
-
-};
+}
 

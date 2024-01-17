@@ -3,6 +3,7 @@
 RKEngine::CRKEngine* MainManager::m_Engine = nullptr;
 MainManager::MainManager()
 {
+	M_FILE->Create();
 	LM_DLL->Create();
 	LM_DLL->Initialize();
 	LM_DLL->LoadDll(EDllType::ENGINE);
@@ -18,6 +19,7 @@ MainManager::MainManager()
 	engine_create();
 	m_Engine = reinterpret_cast<RKEngine::CRKEngine*const>(engine_inst());
 	m_Engine->SetLMDll(LM_DLL);
+	m_Engine->SetFileManager(M_FILE);
 	m_Engine->Initialize();
 }
 MainManager::~MainManager()
@@ -37,4 +39,5 @@ MainManager::~MainManager()
 	
 	LM_DLL->Release();
 	LM_DLL->Destroy();
+	M_FILE->Destroy();
 }

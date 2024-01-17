@@ -2,6 +2,8 @@
 
 namespace rokaStl
 {
+	typedef RBT<const TCHAR*, TCHAR*, PTCharEqual, PTCharGreater, PTCharLess> FileTimeStempMap;
+
 	class FileData
 	{
 	public:
@@ -61,6 +63,7 @@ namespace rokaStl
 		const TCHAR* GetTimeStemp(const TCHAR* _path);
 		const TCHAR* GetPath(EFilePathType _ePath);
 		
+		void ReadFileTimeStemp(FileTimeStempMap& _map,const TCHAR* _path,std::vector<const TCHAR*> _extensions);
 	private:
 		void SetSolutionPath();
 		void SetPath(TCHAR* _Outsave,const TCHAR* _path);

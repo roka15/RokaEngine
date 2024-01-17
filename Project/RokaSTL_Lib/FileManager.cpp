@@ -183,7 +183,7 @@ namespace rokaStl
 
 	const TCHAR* FileManager::GetFileExtension(const TCHAR* _path)
 	{
-		ZeroMemory(m_FileExtension, MAXPATH);
+		ZeroMemory(m_FileExtension, MAXEXTEN);
 		_tsplitpath_s(_path, NULL, 0, NULL, 0, nullptr, 0, m_FileExtension,MAXEXTEN);
 		return m_FileExtension;
 	}
@@ -215,6 +215,40 @@ namespace rokaStl
 			break;
 		}
 	}
+
+    void FileManager::ReadFileTimeStemp(FileTimeStempMap& _map, const TCHAR* _path,std::vector<const TCHAR*> _extensions)
+    {
+		for (const auto& entry : directory_iterator(_path))
+		{
+			if (is_regular_file(entry.path()))
+			{
+				TCHAR entryPath[MAXPATH]{};
+
+#ifdef UNICODE
+				_tcscpy(entryPath, entry.path().wstring().c_str());
+#else
+				_tcscpy(entryPath, entry.path().string().c_str());
+#endif
+				const TCHAR* sExtension = GetFileExtension(entryPath);
+				size_t size = _extensions.size();
+				for (int i = 0; i < size; ++i)
+				{
+					if (_tcscmp(sExtension, _extensions[i]) == 0)
+					{
+						TCHAR* sFileName = new TCHAR[MAXPATH]();
+						ZeroMemory(sFileName, MAXPATH);
+						_tcscpy(sFileName, GetFileName(entryPath));
+						_tcscat(sFileName, sExtension);
+
+						TCHAR* sTimeStemp = new TCHAR[MAXPATH]();
+						_tcscpy(sTimeStemp, GetTimeStemp(entryPath));
+
+						_map.insert(std::make_pair((TCHAR*)sFileName, (TCHAR*)sTimeStemp));
+					}
+				}
+			}
+		}
+    }
 
 	void FileManager::SetSolutionPath()
 	{

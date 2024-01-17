@@ -10,3 +10,11 @@ str.copy(temp, len);
 
 return temp;
 }
+
+void AssignmentTCHAR(TCHAR*& _origin, const TCHAR* _change)
+{
+	size_t len = _tcslen(_origin);
+	memset(_origin, 0, len);
+
+	_tcscpy(_origin, _change);
+}

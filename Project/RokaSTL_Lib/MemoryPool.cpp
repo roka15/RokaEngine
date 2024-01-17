@@ -82,7 +82,7 @@ void MemoryPool::Release()
 
 void* MemoryPool::operator new(std::size_t _size)
 {
-	int size = AssignSize(_size);
+	size_t size = AssignSize(_size);
 	if (size == (int)EMemErrType::POOLSIZEOVER)
 	{
 		return malloc(_size); // 단일 메모리 할당.

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "RKEngine.h"
+#include "ScriptReLoad.h"
 
 namespace RKEngine
 {
@@ -8,7 +9,8 @@ namespace RKEngine
 		m_bBeforFocus(true),
 		m_hWnds{},
 		m_v2WinSize{},
-		m_DllLoader(nullptr)
+		m_DllLoader(nullptr),
+		m_M_File(nullptr)
 	{
 		UINT eType = TYPETOINT(EHwndType::END);
 		m_hWnds.resize(eType);
@@ -21,6 +23,7 @@ namespace RKEngine
 	{
 		WindowSizeMonitor();
 		LoadDll();
+		m_M_ScriptReLoad = new CScriptReLoad(this);
 	}
 	void CRKEngine::Loop()
 	{
@@ -29,6 +32,9 @@ namespace RKEngine
 	}
 	void CRKEngine::Release()
 	{
+		delete m_M_ScriptReLoad;
+		m_M_ScriptReLoad = nullptr;
+
 		FreeDll();
 		m_DllLoader = nullptr;
 	}
@@ -53,8 +59,13 @@ namespace RKEngine
 			//감시
 			int a = 0;
 			//imgui 연동시 loading 창 띄우기
-
-
+			bool bChangeScript = m_M_ScriptReLoad->TimeStempMonitor();
+			if (bChangeScript)
+			{
+				int a = 0;
+			}
+			else
+				int a = 0;
 			// 1. Script 변경점 있는지 확인
 			//  1-1. 변경점 있으면 loading 시작.
 			//  1-2. 변경점 없으면 loading 즉시 완료.

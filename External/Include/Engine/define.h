@@ -6,8 +6,6 @@
 #define DLL_DECLSPEC __declspec(dllimport)
 #endif
 
-
-
 enum class DLL_DECLSPEC EComponentType
 {
 	//update

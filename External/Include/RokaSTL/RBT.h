@@ -56,18 +56,12 @@ namespace rokaStl
 		{
 			if (is_innerDelete == true)
 			{
-				bool constFlag = std::is_const_v<Value>;
 				bool same = (std::is_same<typename std::remove_const<Value>::type,
 					typename std::remove_const<const wchar_t>::type>::value)
 					|| (std::is_same<typename std::remove_const<Value>::type,
 						typename std::remove_const<const char>::type>::value);
 
-
-				if (constFlag && same)
-				{
-					data = nullptr;
-				}
-				else if (same)
+				if (same)
 				{
 					delete[] data;
 				}
@@ -103,21 +97,13 @@ namespace rokaStl
 		{
 			if (is_innerDelete == true)
 			{
-				//1.const char* 
-				//2.char*
-				//3.normal*
-				bool constFlag = std::is_const_v<Key>;
+				//1.const char*  char*
+				//2.normal*
 				bool same = (std::is_same<typename std::remove_const<Key>::type,
 					typename std::remove_const<const wchar_t>::type>::value)
 					|| (std::is_same<typename std::remove_const<Key>::type,
 						typename std::remove_const<const char>::type>::value);
-
-
-				if (constFlag && same)
-				{
-					key = nullptr;
-				}
-				else if (same)
+				if (same)
 				{
 					delete[] key;
 				}
@@ -154,39 +140,28 @@ namespace rokaStl
 		{
 			if (is_innerDelete == true)
 			{
-				//1.const char* 
-				//2.char*
-				//3.normal*
-				bool constFlag = std::is_const_v<Key>;
+				//1.const char*  char*
+				//2.normal*
 				bool same = (std::is_same<typename std::remove_const<Key>::type,
 					typename std::remove_const<const wchar_t>::type>::value)
 					|| (std::is_same<typename std::remove_const<Key>::type,
 						typename std::remove_const<const char>::type>::value);
 
 
-				if (constFlag && same)
-				{
-					key = nullptr;
-				}
-				else if (same)
+			    if (same)
 				{
 					delete[] key;
 				}
 				else
 					delete key;
 				
-				constFlag = std::is_const_v<Value>;
 				same = (std::is_same<typename std::remove_const<Value>::type,
 					typename std::remove_const<const wchar_t>::type>::value)
 					|| (std::is_same<typename std::remove_const<Value>::type,
 						typename std::remove_const<const char>::type>::value);
 
 
-				if (constFlag && same)
-				{
-					data = nullptr;
-				}
-				else if (same)
+				if (same)
 				{
 					delete[] data;
 				}
@@ -1100,7 +1075,7 @@ namespace rokaStl
 			}
 			return false;
 		}
-		typename Iterator<Key, Value>::MapIterator find(Key _key)
+		typename Iterator<Key, Value>::MapIterator find(const Key& _key)
 		{
 			Node<Key, Value>* node = nullptr;
 			bool flag = find_node(_key, node);
