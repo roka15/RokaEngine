@@ -7,8 +7,8 @@ int main()
 {
 	MemoryLeakCheck
 		//Dll Test
-	HMODULE EngineDll = LoadLibrary(L"..\\..\\External\\Dll\\Debug\\Engine\\Engine.dll");
-	HMODULE ScriptDll = LoadLibrary(L"..\\..\\External\\Dll\\Debug\\Script\\Script.dll");
+	HMODULE EngineDll = LoadLibrary(L"..\\..\\External\\Dll\\Engine\\Debug\\Engine.dll");
+	HMODULE ScriptDll = LoadLibrary(L"..\\..\\External\\Dll\\Script\\Debug\\Script.dll");
 	if (EngineDll == NULL)
 	{
 		return 0;
@@ -28,7 +28,7 @@ int main()
 
 	ScriptManager* MScript = dynamic_cast<ScriptManager*>(inst);
 	MScript->Initialize();
-	CScript* script = MScript->GetScript(TYPETOINT(EScriptType::TEST));
+	CScript* script = MScript->GetScript(TYPETOINT(EScriptType::CTestScript));
 	script->Print();
 	script->Start();
 	script->Update();
@@ -44,6 +44,18 @@ int main()
 	delete copyScript;
 	M_ScriptLife_PFUNC MScriptDestroy = (M_ScriptLife_PFUNC)GetProcAddress(ScriptDll, "DestroyManager");
 	MScriptDestroy();
-	FreeLibrary(EngineDll);
+	
+	
 	FreeLibrary(ScriptDll);
+	TCHAR path[255] = {};
+	GetCurrentDirectory(255, path);
+	Sleep(2);
+	int result = system("rmdir /s /q D:\\3DRKEngine\\External\\Dll\\Script\\Debug");
+	result = system("cd /D D:\\3DRKEngine\\Project\\Script\\build && cmake .. && cmake --build ./");
+	if (result != 0)
+		int a = 0;
+
+	FreeLibrary(EngineDll);
+	
+
 }

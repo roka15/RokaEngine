@@ -16,7 +16,7 @@ string sha256(const string str)
 }
 size_t GetHash()
 {
-
+	return 0;
 }
 struct tFileTimeStemp
 {

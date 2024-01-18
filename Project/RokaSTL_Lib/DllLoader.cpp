@@ -18,11 +18,11 @@ namespace rokaStl
     void CDllLoader::Initialize()
     {
 #ifdef _DEBUG
-        SetDllPath(EDllType::ENGINE, L"..\\..\\External\\Dll\\Debug\\Engine\\Engine.dll");
-        SetDllPath(EDllType::SCRIPT, L"..\\..\\External\\Dll\\Debug\\Script\\Script.dll");
+        SetDllPath(EDllType::ENGINE, L"..\\..\\External\\Dll\\Engine\\Debug\\Engine.dll");
+        SetDllPath(EDllType::SCRIPT, L"..\\..\\External\\Dll\\Script\\Debug\\Script.dll");
 #else
-        SetDllPath(EDllType::ENGINE, L"..\\..\\External\\Dll\\Release\\Engine\\Engine.dll");
-        SetDllPath(EDllType::SCRIPT, L"..\\..\\External\\Dll\\Release\\Script\\Script.dll");
+        SetDllPath(EDllType::ENGINE, L"..\\..\\External\\Dll\\Engine\\Release\\Engine.dll");
+        SetDllPath(EDllType::SCRIPT, L"..\\..\\External\\Dll\\Script\\Release\\Script.dll");
 #endif
     }
     void CDllLoader::Loop()

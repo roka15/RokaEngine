@@ -17,7 +17,6 @@ namespace RKEngine
 	}
 	CRKEngine::~CRKEngine()
 	{
-
 	}
 	void CRKEngine::Initialize()
 	{
@@ -62,10 +61,12 @@ namespace RKEngine
 			bool bChangeScript = m_M_ScriptReLoad->TimeStempMonitor();
 			if (bChangeScript)
 			{
-				int a = 0;
+				m_M_ScriptReLoad->ScriptsCompile();
 			}
 			else
-				int a = 0;
+			{
+				m_M_ScriptReLoad->ScriptsCompile();
+			}
 			// 1. Script 변경점 있는지 확인
 			//  1-1. 변경점 있으면 loading 시작.
 			//  1-2. 변경점 없으면 loading 즉시 완료.

@@ -8,8 +8,11 @@ int main()
 	//map test
 	// *주의사항*
 	// 1. key값이 문자열인 경우 사전적으로 비교하기 때문에 사전적 정의가 높은쪽이 오른쪽 노드에 위치한다.
-    // 2. key 또는 value 에 const char을 넣는 경우 동적할당을 해서는 안된다. 
-	//	  key = "Hello" (O) key = new char[100] (X)
+    // 2. 만약 innserClear 옵션 ON 라면 
+	//    key 또는 value 에 const char*을 넣는 경우 동적할당을 한 경우로 통일한다. 
+	//	  key = "Hello" (X) key = new char[100] (O)
+	// 3. 만약 innserClear 옵션 OFF 라면 2번의 경우는 정 반대이다.
+    //    key = "Hello" (O) key = new char[100] (X)
 	
 	//Default Test (Key = int)
 	//////////////////////////////////////////////////////////////
@@ -135,7 +138,7 @@ int main()
 	
 	rokaStl::RBT<const char*, char*> ptrTest3;
 	ptrTest3.innerClear();
-	ptrTest3.insert(std::make_pair("Hello", new char[100]()));
+	ptrTest3.insert(std::make_pair(new char[100](), new char[100]()));
 	ptrTest3.clear();
 
 	//[10]
@@ -151,7 +154,7 @@ int main()
 
 	rokaStl::RBT<int, const char*> ptrTest6;
 	ptrTest6.innerClear();
-	ptrTest6.insert(std::make_pair(1, "Hello"));
+	ptrTest6.insert(std::make_pair(1, new char[100]()));
 	ptrTest6.clear();
 
 	//[11]
@@ -167,6 +170,6 @@ int main()
 
 	rokaStl::RBT<const char*, int> ptrTest9;
 	ptrTest9.innerClear();
-	ptrTest9.insert(std::make_pair("Hello", 1));
+	ptrTest9.insert(std::make_pair(new char[100](), 1));
 	ptrTest9.clear();
 }

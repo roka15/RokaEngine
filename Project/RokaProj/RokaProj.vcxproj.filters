@@ -110,6 +110,9 @@
     <ClCompile Include="FileTimeStempMapMain.cpp">
       <Filter>00.ConsoleTest</Filter>
     </ClCompile>
+    <ClCompile Include="CMakeMain.cpp">
+      <Filter>00.ConsoleTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="RokaProj.ico">

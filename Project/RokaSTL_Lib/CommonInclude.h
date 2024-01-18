@@ -45,8 +45,10 @@ typedef Vector2 Vec2;
 typedef Vector3 Vec3;
 typedef Vector4 Vec4;
 
-#pragma comment(lib,"openssl\\lib\\libcrypto.lib")
+#ifdef _NOT_CMAKE_BUILD
 #pragma comment(lib,"openssl\\lib\\libssl.lib")
+#pragma comment(lib,"openssl\\lib\\libcrypto.lib")
+#endif
 
 #include <openssl/sha.h>
 

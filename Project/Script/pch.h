@@ -20,8 +20,18 @@
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"
 #include <iostream>
-#pragma comment(lib,"Engine\\Engine.lib")
+
+#ifdef _NOT_CMAKE_BUILD
+
+#ifdef _DEBUG
+#pragma comment(lib,"Engine\\Debug\\Engine.lib")
+#else
+#pragma comment(lib,"Engine\\Release\\Engine.lib")
+#endif
+
 #pragma comment(lib,"RokaSTL\\RokaSTL_Lib.lib")
+#endif
+
 //engine.dll
 #include <Engine/define.h>
 

@@ -15,11 +15,12 @@ namespace RKEngine
 		mvecExtensions.push_back(TEXT(".cpp"));
 		mvecExtensions.push_back(TEXT(".h"));
 
+		mScriptMap.innerClear();
 		m_Engine->M_File->ReadFileTimeStemp(mScriptMap, mScriptPath, mvecExtensions);
 	}
 	CScriptReLoad::~CScriptReLoad()
 	{
-
+		mScriptMap.clear();
 	}
 	bool CScriptReLoad::TimeStempMonitor()
 	{
@@ -55,5 +56,13 @@ namespace RKEngine
 
 		ReTimeStemp.clear();
 		return false;
+	}
+	void CScriptReLoad::ScriptsCompile()
+	{
+		TCHAR path[255] = {};
+		GetCurrentDirectory(255, path);
+		int result = system("cd /D D:\\3DRKEngine\\Project\\Script\\build && cmake .. && cmake --build ./ && pause");
+		if (result != 0)
+			int a = 0;
 	}
 }

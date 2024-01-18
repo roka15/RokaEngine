@@ -13,6 +13,7 @@ namespace RKEngine
 		friend class CRKEngine;
 	public:
 		bool TimeStempMonitor();
+		void ScriptsCompile();
 	private:
 		CRKEngine* m_Engine;
 		FileTimeStempMap mScriptMap;
