@@ -92,7 +92,7 @@
     <ClCompile Include="ObjectpoolMain.cpp">
       <Filter>00.ConsoleTest</Filter>
     </ClCompile>
-    <ClCompile Include="ScriptManagerMain.cpp">
+    <ClCompile Include="ScriptManager_DllTestMain.cpp">
       <Filter>00.ConsoleTest</Filter>
     </ClCompile>
     <ClCompile Include="WindowTest.cpp">

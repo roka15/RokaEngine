@@ -19,8 +19,6 @@
 
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"
-#include <iostream>
-
 #ifdef _NOT_CMAKE_BUILD
 
 #ifdef _DEBUG
@@ -28,17 +26,15 @@
 #else
 #pragma comment(lib,"Engine\\Release\\Engine.lib")
 #endif
-
 #pragma comment(lib,"RokaSTL\\RokaSTL_Lib.lib")
 #endif
 
 //engine.dll
 #include <Engine/define.h>
+//renderer.dll
+#include <Renderer/RendererInclude.h>
 
 //roka stl.lib
 #include <RokaSTL/CommonInclude.h>
 #include <RokaSTL/interface.h>
-
-#include <vector>
-
 #endif //PCH_H

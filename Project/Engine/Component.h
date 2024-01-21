@@ -34,7 +34,6 @@ public:
 	const EComponentType& GetType() { return m_ComType; }
 	CGameObject* GetOwner() { return m_Owner; }
 	GetOwnerComponentFunc(Transform);
-
 	friend class CGameObject;
 };
 

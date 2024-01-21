@@ -8,6 +8,7 @@
 #include <RokaSTL/CommonInclude.h>
 #include <Engine/define.h>
 #include <Engine/RKEngine.h>
+#include <Renderer/external.h>
 #include <crtdbg.h>
 #include "define.h"
 

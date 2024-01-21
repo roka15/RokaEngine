@@ -7,7 +7,33 @@
 #ifndef PCH_H
 #define PCH_H
 
+#ifdef RENDERER_EXPORTS
+#define SCRIPTDLL_DECLSPEC __declspec(dllexport)
+#else
+#define SCRIPTDLL_DECLSPEC __declspec(dllimport)
+#endif
+
+
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"
 
+#pragma comment(lib,"RokaSTL\\RokaSTL_Lib.lib")
+#include <RokaSTL/CommonInclude.h>
+
+
+#include <wrl.h>
+using namespace Microsoft::WRL;
+
+#include <d3d11.h>					// DirectX11
+#include <d3dcompiler.h>			// Shader 컴파일
+#include <DirectXMath.h>			// DX Math
+#include <DirectXPackedVector.h>	
+
+using namespace DirectX;
+using namespace DirectX::PackedVector;
+
+#pragma comment(lib, "d3d11")
+#pragma comment(lib, "d3dcompiler")
+
+#include <Engine/define.h>
 #endif //PCH_H

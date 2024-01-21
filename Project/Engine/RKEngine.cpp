@@ -2,15 +2,16 @@
 #include "RKEngine.h"
 #include "ScriptReLoad.h"
 
+
 namespace RKEngine
 {
 	CRKEngine::CRKEngine()
 		:m_bFocus(true),
 		m_bBeforFocus(true),
 		m_hWnds{},
-		m_v2WinSize{},
 		m_DllLoader(nullptr),
-		m_M_File(nullptr)
+		m_M_File(nullptr),
+		mRendererData(new Renderer::t_RendererData())
 	{
 		UINT eType = TYPETOINT(EHwndType::END);
 		m_hWnds.resize(eType);
@@ -37,14 +38,32 @@ namespace RKEngine
 		FreeDll();
 		m_DllLoader = nullptr;
 	}
+	const Vec2& CRKEngine::GetResolution()
+	{ 
+		return mRendererData->Resolution; 
+	}
+	Renderer::t_RendererData CRKEngine::GetRenderData()
+	{
+		return *mRendererData;
+	}
 	void CRKEngine::LoadDll()
 	{
-		//_pcr_dllload->LoadDll(EDllType::RENDER);
 		m_DllLoader->LoadDll(EDllType::SCRIPT);
+		HMODULE scriptModule = m_DllLoader->GetDLL(EDllType::SCRIPT);
+		
+		M_ScriptLife_PFUNC scriptCreate = (M_ScriptLife_PFUNC)GetProcAddress(scriptModule, "CreateManager");
+		scriptCreate();
+		M_ScriptGetInst_PFUNC scriptInst = (M_ScriptGetInst_PFUNC)GetProcAddress(scriptModule, "GetManagerInstance");
+		mScriptMgr = (Script::ScriptManager*)scriptInst();
 	}
 	void CRKEngine::FreeDll()
 	{
-		//_pcr_dllload->FreeDll(EDllType::RENDER);
+		HMODULE scriptModule = m_DllLoader->GetDLL(EDllType::SCRIPT);
+		HMODULE renderModule = m_DllLoader->GetDLL(EDllType::RENDER);
+		M_ScriptLife_PFUNC scriptDestroy = (M_ScriptLife_PFUNC)GetProcAddress(scriptModule, "DestroyManager");
+		
+		scriptDestroy();
+	
 		m_DllLoader->FreeDll(EDllType::SCRIPT);
 	}
 	void CRKEngine::ScriptMonitor()
@@ -80,15 +99,15 @@ namespace RKEngine
 	}
 	bool CRKEngine::WindowSizeMonitor()
 	{
-		float beforeWidth = m_v2WinSize.x;
-		float beforeHeight = m_v2WinSize.y;
+		float beforeWidth = mRendererData->Resolution.x;
+		float beforeHeight = mRendererData->Resolution.y;
 		RECT clientRect = {};
 		UINT eType = TYPETOINT(EHwndType::MAIN);
 		GetClientRect(m_hWnds[eType], &clientRect);
-		m_v2WinSize.x = clientRect.right - clientRect.left;
-		m_v2WinSize.y = clientRect.bottom - clientRect.top;
+		mRendererData->Resolution.x = clientRect.right - clientRect.left;
+		mRendererData->Resolution.y = clientRect.bottom - clientRect.top;
 
-		if (beforeWidth == m_v2WinSize.x && beforeHeight == m_v2WinSize.y)
+		if (beforeWidth == mRendererData->Resolution.x && beforeHeight == mRendererData->Resolution.y)
 			return false;
 
 		return true;

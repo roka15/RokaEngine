@@ -28,5 +28,6 @@ public:
     virtual void SetData(int _data) { a = _data; }
 private:
     int a;
+	std::vector<int> vec;
 };
 

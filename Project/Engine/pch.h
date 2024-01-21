@@ -8,12 +8,27 @@
 #define PCH_H
 // 여기에 미리 컴파일하려는 헤더 추가
 
+
+#ifdef ENGINE_EXPORTS
+#define SCRIPTDLL_DECLSPEC __declspec(dllexport)
+#else
+#define SCRIPTDLL_DECLSPEC __declspec(dllimport)
+
+#endif // CREATEDLL_EXPORTS
 #include "framework.h"
-#include <iostream>
+#ifdef _DEBUG
+#pragma comment(lib,"Renderer\\Debug\\Renderer.lib")
+#else
+#pragma comment(lib,"Renderer\\Release\\Renderer.lib")
+#endif
+
 #pragma comment(lib,"RokaSTL\\RokaSTL_Lib.lib")
 #include <RokaSTL/CommonInclude.h>
 
 #include "define.h"
 
-#include <vector>
+#include <Renderer/external.h>
+#include <Script/external.h>
+
+
 #endif //PCH_H

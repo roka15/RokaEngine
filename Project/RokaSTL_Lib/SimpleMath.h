@@ -7,11 +7,12 @@
 // http://go.microsoft.com/fwlink/?LinkId=248929
 // http://go.microsoft.com/fwlink/?LinkID=615561
 //-------------------------------------------------------------------------------------
-
+//
+//#pragma once
+//#if !defined(__d3d11_h__) && !defined(__d3d11_x_h__) && !defined(__d3d12_h__) && !defined(__d3d12_x_h__)
+//#error include d3d11.h or d3d12.h before including SimpleMath.h
+//#endif
 #pragma once
-#if !defined(__d3d11_h__) && !defined(__d3d11_x_h__) && !defined(__d3d12_h__) && !defined(__d3d12_x_h__)
-#error include d3d11.h or d3d12.h before including SimpleMath.h
-#endif
 
 #if !defined(_XBOX_ONE) || !defined(_TITLE)
 #include <dxgi1_2.h>

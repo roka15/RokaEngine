@@ -208,7 +208,7 @@ Project_IS_TOP_LEVEL:STATIC=ON
 Project_SOURCE_DIR:STATIC=D:/3DRKEngine/Project/Script
 
 //Dependencies for the target
-Script_LIB_DEPENDS:STATIC=general;D:/3DRKEngine/External/Dll/Engine/Debug/Engine.lib;general;D:/3DRKEngine/External/Lib/Debug/RokaSTL/RokaSTL_Lib.lib;
+Script_LIB_DEPENDS:STATIC=general;D:/3DRKEngine/External/Dll/Engine/Debug/Engine.lib;
 
 //Path to a library.
 StlLib:FILEPATH=D:/3DRKEngine/External/Lib/Debug/RokaSTL/RokaSTL_Lib.lib

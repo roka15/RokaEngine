@@ -4,15 +4,15 @@
 
 SCRIPTDLL_DECLSPEC void CreateManager()
 {
-    return MCreate(ScriptManager);
+    return MCreate(Script::ScriptManager);
 }
 
 SCRIPTDLL_DECLSPEC void DestroyManager()
 {
-    return MDestroy(ScriptManager);
+    return MDestroy(Script::ScriptManager);
 }
 
 SCRIPTDLL_DECLSPEC IManager* GetManagerInstance()
 {
-    return GetInst(ScriptManager);
+    return GetInst(Script::ScriptManager);
 }

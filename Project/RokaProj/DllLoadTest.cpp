@@ -2,7 +2,6 @@
 #include <TestCopy/interface.h>
 //#include "..//GenericLib//GenericManager.h"
 #include <RokaSTL/define.h>
-#include "operators.h"
 #include <Windows.h>
 #include <crtdbg.h>
 
