@@ -9,6 +9,5 @@ namespace Renderer
 	}
 	CInnerDevice::~CInnerDevice()
 	{
-
 	}
 }

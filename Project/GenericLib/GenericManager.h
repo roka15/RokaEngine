@@ -7,9 +7,7 @@
 class GenericManager : public IManager,public rokaStl::Singleton<GenericManager>
 {
 	SINGLETON(GenericManager)
-public:
-	virtual void Initialize()override;
-	virtual void Release()override;
+	MANAGER
 private:
 
 };

@@ -21,10 +21,10 @@ namespace RKEngine
 	class CScriptReLoad;
 	typedef rokaStl::CDllLoader*const& PCR_DllLoad;
 	typedef rokaStl::FileManager* const& PCR_FileManager;
-	class DLL_DECLSPEC CRKEngine :public rokaStl::IManager, public rokaStl::Singleton<CRKEngine>
+	class DLL_DECLSPEC CRKEngine :public rokaStl::IManagerLoop, public rokaStl::Singleton<CRKEngine>
 	{
 		SINGLETON(CRKEngine)
-			MANAGER
+		MANAGERLOOP
 	private:
 		bool m_bFocus;
 		bool m_bBeforFocus;
@@ -41,7 +41,7 @@ namespace RKEngine
 		//    Renderer Data     //
 		//////////////////////////
 		Renderer::CDxDevice* mDevice;
-		Renderer::t_RendererData*const mRendererData;
+		Renderer::t_RendererData*const mtRendererData;
 	public:
 		virtual void SetHWND(HWND _hWnd, EHwndType _eType) { m_hWnds[TYPETOINT(_eType)] = _hWnd; }
 		virtual void SetLMDll(PCR_DllLoad _pcr_dllload) { m_DllLoader = _pcr_dllload; }

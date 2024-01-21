@@ -2,7 +2,7 @@
 #include "MainManager.h"
 #include <Renderer/external.h>
 #include <Renderer/CDxDevice.h>
-RKEngine::CRKEngine* MainManager::m_Engine = nullptr;
+
 MainManager::MainManager()
 {
 	M_FILE->Create();
@@ -23,16 +23,7 @@ MainManager::MainManager()
 	m_Engine = reinterpret_cast<RKEngine::CRKEngine*const>(engine_inst());
 	m_Engine->SetLMDll(LM_DLL);
 	m_Engine->SetFileManager(M_FILE);
-	m_Engine->Initialize();
-
-	HMODULE& render_dll = LM_DLL->GetDLL(EDllType::RENDER);
-	RENDERER_LIFE_FUNC renderCreate = (RENDERER_LIFE_FUNC)GetProcAddress(render_dll, "CreateDXDevice");
-	renderCreate();
-	RENDERER_INST_FUNC renderInst = (RENDERER_INST_FUNC)GetProcAddress(render_dll, "GetDXDevice");
-	Renderer::CDxDevice* Device = (Renderer::CDxDevice*)renderInst();
-
-	//Device->InitDevice(m_Engine);
-	m_Engine->SetRenderDevice(Device);
+	
 }
 MainManager::~MainManager()
 {
@@ -59,3 +50,21 @@ MainManager::~MainManager()
 	LM_DLL->Destroy();
 	M_FILE->Destroy();
 }
+void MainManager::Initialize(HWND _hwnd)
+{
+	m_Engine->SetHWND(_hwnd,EHwndType::MAIN);
+	m_Engine->Initialize();
+
+	HMODULE& render_dll = LM_DLL->GetDLL(EDllType::RENDER);
+	RENDERER_LIFE_FUNC renderCreate = (RENDERER_LIFE_FUNC)GetProcAddress(render_dll, "CreateDXDevice");
+	renderCreate();
+	RENDERER_INST_FUNC renderInst = (RENDERER_INST_FUNC)GetProcAddress(render_dll, "GetDXDevice");
+	Renderer::CDxDevice* Device = (Renderer::CDxDevice*)renderInst();
+
+	Device->InitDevice(m_Engine);
+	m_Engine->SetRenderDevice(Device);
+}
+void MainManager::Release()
+{
+}
+

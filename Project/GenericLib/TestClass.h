@@ -3,11 +3,10 @@
 
 class TestClass : public IManager
 {
+	MANAGER
 public:
 	TestClass();
 	 ~TestClass();
-	virtual void Initialize()override;
-	virtual void Release()override;
 private:
 	const char mstr[50];
 };

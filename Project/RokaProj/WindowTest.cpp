@@ -15,7 +15,8 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름�
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
-BOOL                InitInstance(HINSTANCE, int);
+BOOL                Initialize(HINSTANCE, int);
+void				Release();
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
@@ -24,7 +25,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
-    MemoryLeakCheck
+	MemoryLeakCheck
+	//MemoryLeakNumber(246)
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
@@ -36,10 +38,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MyRegisterClass(hInstance);
 
 
-    MainManager::Create();
+  
 
     // 애플리케이션 초기화를 수행합니다:
-    if (!InitInstance (hInstance, nCmdShow))
+    if (!Initialize(hInstance, nCmdShow))
     {
         return FALSE;
     }
@@ -63,8 +65,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             M_ENGINE->Loop();
         }
     }
-
-    MainManager::Destroy();
+	Release();
+   
     return (int) msg.wParam;
 }
 
@@ -106,15 +108,16 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //        이 함수를 통해 인스턴스 핸들을 전역 변수에 저장하고
 //        주 프로그램 창을 만든 다음 표시합니다.
 //
-BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
+BOOL Initialize(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
   
-   
-   M_ENGINE->SetHWND(hWnd,EHwndType::MAIN);
+   MainManager::Create();
+   M_MAIN->Initialize(hWnd);
+
    if (!hWnd)
    {
       return FALSE;
@@ -125,7 +128,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    return TRUE;
 }
-
+void Release()
+{
+	M_MAIN->Release();
+	MainManager::Destroy();
+}
 //
 //  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
 //

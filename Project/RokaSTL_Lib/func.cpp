@@ -18,3 +18,13 @@ void AssignmentTCHAR(TCHAR*& _origin, const TCHAR* _change)
 
 	_tcscpy(_origin, _change);
 }
+
+TCHAR* AddTCHAR(const TCHAR* _origin, const TCHAR* _addstr)
+{
+	TCHAR* result = new TCHAR[MAX_PATH];
+	ZeroMemory(result, MAX_PATH);
+
+	AssignmentTCHAR(result, _origin);
+	_tcscat(result, _addstr);
+	return result;
+}

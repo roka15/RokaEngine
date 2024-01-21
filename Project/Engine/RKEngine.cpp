@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "RKEngine.h"
 #include "ScriptReLoad.h"
+#include <Renderer/CDxDevice.h>
 
 
 namespace RKEngine
@@ -11,7 +12,7 @@ namespace RKEngine
 		m_hWnds{},
 		m_DllLoader(nullptr),
 		m_M_File(nullptr),
-		mRendererData(new Renderer::t_RendererData())
+		mtRendererData(new Renderer::t_RendererData())
 	{
 		UINT eType = TYPETOINT(EHwndType::END);
 		m_hWnds.resize(eType);
@@ -29,10 +30,12 @@ namespace RKEngine
 	{
 		WindowMonitor();
 		ScriptMonitor();
+		mDevice->Render();
 	}
 	void CRKEngine::Release()
 	{
 		delete m_M_ScriptReLoad;
+		delete mtRendererData;
 		m_M_ScriptReLoad = nullptr;
 
 		FreeDll();
@@ -40,11 +43,11 @@ namespace RKEngine
 	}
 	const Vec2& CRKEngine::GetResolution()
 	{ 
-		return mRendererData->Resolution; 
+		return mtRendererData->Resolution;
 	}
 	Renderer::t_RendererData CRKEngine::GetRenderData()
 	{
-		return *mRendererData;
+		return *mtRendererData;
 	}
 	void CRKEngine::LoadDll()
 	{
@@ -59,7 +62,6 @@ namespace RKEngine
 	void CRKEngine::FreeDll()
 	{
 		HMODULE scriptModule = m_DllLoader->GetDLL(EDllType::SCRIPT);
-		HMODULE renderModule = m_DllLoader->GetDLL(EDllType::RENDER);
 		M_ScriptLife_PFUNC scriptDestroy = (M_ScriptLife_PFUNC)GetProcAddress(scriptModule, "DestroyManager");
 		
 		scriptDestroy();
@@ -99,15 +101,15 @@ namespace RKEngine
 	}
 	bool CRKEngine::WindowSizeMonitor()
 	{
-		float beforeWidth = mRendererData->Resolution.x;
-		float beforeHeight = mRendererData->Resolution.y;
+		float beforeWidth = mtRendererData->Resolution.x;
+		float beforeHeight = mtRendererData->Resolution.y;
 		RECT clientRect = {};
 		UINT eType = TYPETOINT(EHwndType::MAIN);
 		GetClientRect(m_hWnds[eType], &clientRect);
-		mRendererData->Resolution.x = clientRect.right - clientRect.left;
-		mRendererData->Resolution.y = clientRect.bottom - clientRect.top;
+		mtRendererData->Resolution.x = clientRect.right - clientRect.left;
+		mtRendererData->Resolution.y = clientRect.bottom - clientRect.top;
 
-		if (beforeWidth == mRendererData->Resolution.x && beforeHeight == mRendererData->Resolution.y)
+		if (beforeWidth == mtRendererData->Resolution.x && beforeHeight == mtRendererData->Resolution.y)
 			return false;
 
 		return true;

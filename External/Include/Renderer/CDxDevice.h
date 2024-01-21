@@ -19,11 +19,10 @@ namespace Renderer
 		SINGLETON(CDxDevice)
 	public:
 		virtual HRESULT InitDevice(PEngine _engine);
+		void Render();
 	private:
 		HRESULT CreateSwapChain(HWND _hwnd, Vec2 _resolution);
-		HRESULT CreateRenderTargetView(Vec2 _resolution);
-
-		void Render();
+		HRESULT CreateRenderTargetView(Vec2 _resolution);	
 	private:
 		PEngine mEngine;
 		CInnerDevice*const mDevice;

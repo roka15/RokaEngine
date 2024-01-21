@@ -45,6 +45,8 @@ namespace rokaStl
 		TCHAR m_ProjectPath[MAXPATH];
 		TCHAR m_SolutionPath[MAXPATH];
 		TCHAR m_FileName[MAXPATH];
+		TCHAR m_ShaderCodePath[MAXPATH];
+
 		TCHAR m_FileExtension[MAXEXTEN];
 		TCHAR m_TimeStemp[MAXPATH];
 	public:
@@ -59,6 +61,7 @@ namespace rokaStl
 		const TCHAR* GetProjectPath();
 		const TCHAR* GetSolutionPath();
 		const TCHAR* GetFileName(const TCHAR* _path);
+		const TCHAR* GetShaderCodePath();
 		const TCHAR* GetFileExtension(const TCHAR* _path);
 		const TCHAR* GetTimeStemp(const TCHAR* _path);
 		const TCHAR* GetPath(EFilePathType _ePath);

@@ -3,7 +3,8 @@
 
 #define MemoryLeakCheck _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #define SINGLETON(type) private: type();virtual ~type();friend class rokaStl::Singleton<type>;
-#define MANAGER public: virtual void Initialize()override; virtual void Loop()override;virtual void Release()override;
+#define MANAGER public: virtual void Initialize()override;virtual void Release()override;
+#define MANAGERLOOP MANAGER void Loop()override;
 #define MCreate(type) type::Create();
 #define MDestroy(type) type::Destroy();
 #define GetInst(type) type::GetInstance();

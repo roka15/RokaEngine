@@ -15,11 +15,13 @@ namespace rokaStl
 		ZeroMemory(m_ResourcePath, MAXPATH);
 		ZeroMemory(m_IncludePath, MAXPATH);
 		ZeroMemory(m_SolutionPath, MAXPATH);
+		ZeroMemory(m_ShaderCodePath, MAXPATH);
 
 		SetSolutionPath();
 		SetPath(m_ProjectPath, TEXT("\\Project"));
 		SetPath(m_IncludePath, TEXT("\\OutputFile\\Content"));
 		SetPath(m_ResourcePath, TEXT("\\External\\Include"));
+		SetPath(m_ShaderCodePath, TEXT("\\Project\\Renderer"));
 	}
 	FileManager::~FileManager()
 	{
@@ -180,6 +182,11 @@ namespace rokaStl
 		_tsplitpath_s(_path,NULL,0,NULL,0,m_FileName,MAXPATH,NULL,0);
 		return m_FileName;
 	}
+
+    const TCHAR* FileManager::GetShaderCodePath()
+    {
+        return m_ShaderCodePath;
+    }
 
 	const TCHAR* FileManager::GetFileExtension(const TCHAR* _path)
 	{

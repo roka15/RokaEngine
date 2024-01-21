@@ -12,9 +12,6 @@ namespace Script
 	void  ScriptManager::Initialize()
 	{
 	}
-	void ScriptManager::Loop()
-	{
-	}
 	void ScriptManager::Release()
 	{
 	}

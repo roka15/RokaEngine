@@ -27,10 +27,6 @@ namespace rokaStl
 		SetDllPath(EDllType::RENDER, L"..\\..\\External\\Dll\\Renderer\\Release\\Renderer.dll");
 #endif
     }
-    void CDllLoader::Loop()
-    {
-
-    }
     void CDllLoader::Release()
     {
         UINT max = TYPETOINT(EDllType::END);
