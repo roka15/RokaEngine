@@ -7,20 +7,23 @@
 #endif // CREATEDLL_EXPORTS
 
 #include <Renderer/struct.h>
+#include "define.h"
 
 namespace Renderer 
 {
-	class DLL_DECLSPEC CDxDevice;
+	class DLL_DECLSPEC CDevice;
 }
-typedef void (*RENDERER_LIFE_FUNC)(void);
-typedef Renderer::CDxDevice* const& (*RENDERER_INST_FUNC)(void);
+
+typedef void (*RENDERER_CREATE_FUNC)(Renderer::EDeviceType _type);
+typedef void (*RENDERER_DESTROY_FUNC)(void);
+typedef Renderer::CDevice* const& (*RENDERER_INST_FUNC)(void);
 
 
 extern "C"
 {
-	DLL_DECLSPEC void CreateDXDevice();
-	DLL_DECLSPEC Renderer::CDxDevice*const& GetDXDevice();
-	DLL_DECLSPEC void DestroyDXDevice();
+	DLL_DECLSPEC void CreateDevice(Renderer::EDeviceType _type);
+	DLL_DECLSPEC Renderer::CDevice*const& GetDevice();
+	DLL_DECLSPEC void DestroyDevice();
 }
 
 

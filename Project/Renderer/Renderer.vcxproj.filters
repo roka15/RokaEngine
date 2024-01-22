@@ -30,12 +30,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CDxDevice.h">
-      <Filter>02.Device\Export</Filter>
-    </ClInclude>
-    <ClInclude Include="InnerDevice.h">
-      <Filter>02.Device\Inner</Filter>
-    </ClInclude>
     <ClInclude Include="struct.h">
       <Filter>01.ExportData</Filter>
     </ClInclude>
@@ -48,19 +42,28 @@
     <ClInclude Include="pch.h">
       <Filter>00.Defualt</Filter>
     </ClInclude>
+    <ClInclude Include="CDevice.h">
+      <Filter>02.Device\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="DxDevice.h">
+      <Filter>02.Device\Inner</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>00.Defualt</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CDxDevice.cpp">
-      <Filter>02.Device\Export</Filter>
-    </ClCompile>
-    <ClCompile Include="InnerDevice.cpp">
-      <Filter>02.Device\Inner</Filter>
-    </ClCompile>
     <ClCompile Include="external.cpp">
       <Filter>01.ExportData</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>00.Defualt</Filter>
+    </ClCompile>
+    <ClCompile Include="CDevice.cpp">
+      <Filter>02.Device\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="DxDevice.cpp">
+      <Filter>02.Device\Inner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

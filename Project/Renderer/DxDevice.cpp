@@ -1,6 +1,5 @@
 #include "pch.h"
-#include "CDxDevice.h"
-#include "InnerDevice.h"
+#include "DxDevice.h"
 #include  <Engine/RKEngine.h>
 namespace Renderer
 {
@@ -9,14 +8,13 @@ namespace Renderer
 	Microsoft::WRL::ComPtr<ID3D11PixelShader> g_PS;
 	Microsoft::WRL::ComPtr<ID3D11Buffer> g_VB;
 	Microsoft::WRL::ComPtr<ID3D11Buffer> g_IB;
-	CDxDevice::CDxDevice() :
-		mEngine(nullptr),
-		mDevice(new CInnerDevice())
+
+	CDxDevice::CDxDevice()
 	{
+
 	}
 	CDxDevice::~CDxDevice()
 	{
-		delete mDevice;
 	}
 	HRESULT CDxDevice::InitDevice(PEngine _engine)
 	{
@@ -41,9 +39,9 @@ namespace Renderer
 			nullptr, createDeviceFlags,
 			nullptr, 0,
 			D3D11_SDK_VERSION,
-			mDevice->mDevice.GetAddressOf(),
+			mDevice.GetAddressOf(),
 			&featureLevel,
-			mDevice->mContext.GetAddressOf()
+			mContext.GetAddressOf()
 		);
 
 		if (FAILED(hr))
@@ -58,61 +56,6 @@ namespace Renderer
 
 		if (FAILED(hr))
 			return hr;
-
-		return hr;
-	}
-	HRESULT CDxDevice::CreateSwapChain(HWND _hwnd, Vec2 _resolution)
-	{
-		DXGI_SWAP_CHAIN_DESC SwapDesc;
-		ZeroMemory(&SwapDesc, sizeof(SwapDesc));
-		SwapDesc.BufferCount = 1;
-		SwapDesc.BufferDesc.Width = _resolution.x;
-		SwapDesc.BufferDesc.Height = _resolution.y;
-		SwapDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-		SwapDesc.BufferDesc.RefreshRate.Numerator = 60;
-		SwapDesc.BufferDesc.RefreshRate.Denominator = 1;
-		SwapDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-		SwapDesc.OutputWindow = _hwnd;
-		SwapDesc.SampleDesc.Count = 1;
-		SwapDesc.SampleDesc.Quality = 0;
-		SwapDesc.Windowed = TRUE;
-		SwapDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-		SwapDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER::DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-		SwapDesc.Flags = 0;
-		SwapDesc.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_DISCARD;
-
-		ComPtr<IDXGIDevice> pDevice;
-		ComPtr<IDXGIAdapter> pAdapter;
-		ComPtr<IDXGIFactory> pFactory;
-		HRESULT hr = mDevice->mDevice->QueryInterface(__uuidof(IDXGIDevice), (void**)pDevice.GetAddressOf());
-		hr = pDevice->GetParent(__uuidof(IDXGIAdapter), (void**)pAdapter.GetAddressOf());
-		hr = pAdapter->GetParent(__uuidof(IDXGIFactory), (void**)pFactory.GetAddressOf());
-		hr = pFactory->CreateSwapChain(mDevice->mDevice.Get(), &SwapDesc, mDevice->mSwapChain.GetAddressOf());
-
-		return hr;
-	}
-	HRESULT CDxDevice::CreateRenderTargetView(Vec2 _resolution)
-	{
-		ID3D11Texture2D* pBackBuffer = NULL;
-		HRESULT hr = mDevice->mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
-		if (FAILED(hr))
-			return hr;
-		hr = mDevice->mDevice->CreateRenderTargetView(pBackBuffer, NULL, mDevice->mRenderTargetView.GetAddressOf());
-		pBackBuffer->Release();
-
-		if (FAILED(hr))
-			return hr;
-
-		mDevice->mContext->OMSetRenderTargets(1, mDevice->mRenderTargetView.GetAddressOf(), NULL);
-
-		D3D11_VIEWPORT vp;
-		vp.Width = (FLOAT)_resolution.x;
-		vp.Height = (FLOAT)_resolution.y;
-		vp.MinDepth = 0.0f;
-		vp.MaxDepth = 1.0f;
-		vp.TopLeftX = 0;
-		vp.TopLeftY = 0;
-		mDevice->mContext->RSSetViewports(1, &vp);
 
 		return hr;
 	}
@@ -134,9 +77,9 @@ namespace Renderer
 			return;
 		}
 
-	
+
 		// Create the vertex shader
-		hr = mDevice->mDevice->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), NULL, g_VS.GetAddressOf());
+		hr = mDevice->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), NULL, g_VS.GetAddressOf());
 		if (FAILED(hr))
 		{
 			pVSBlob->Release();
@@ -166,16 +109,16 @@ namespace Renderer
 
 		UINT numElements = ARRAYSIZE(layout);
 
-	
+
 		// Create the input layout
-		hr = mDevice->mDevice->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(),
+		hr =mDevice->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(),
 			pVSBlob->GetBufferSize(), g_pVertexLayout.GetAddressOf());
 		pVSBlob->Release();
 		if (FAILED(hr))
 			return;
 
 		// Set the input layout
-		mDevice->mContext->IASetInputLayout(g_pVertexLayout.Get());
+		mContext->IASetInputLayout(g_pVertexLayout.Get());
 
 		// Compile the pixel shader
 		ID3DBlob* pPSBlob = NULL;
@@ -187,9 +130,9 @@ namespace Renderer
 				L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
 			return;
 		}
-	
+
 		// Create the pixel shader
-		hr = mDevice->mDevice->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), NULL, g_PS.GetAddressOf());
+		hr = mDevice->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), NULL, g_PS.GetAddressOf());
 		pPSBlob->Release();
 		if (FAILED(hr))
 			return;
@@ -223,28 +166,82 @@ namespace Renderer
 		D3D11_SUBRESOURCE_DATA InitData;
 		ZeroMemory(&InitData, sizeof(InitData));
 		InitData.pSysMem = vertices;
-		
-		hr = mDevice->mDevice->CreateBuffer(&bd, &InitData, g_VB.GetAddressOf());
+
+		hr = mDevice->CreateBuffer(&bd, &InitData, g_VB.GetAddressOf());
 		if (FAILED(hr))
 			return;
-		
+
 		// Set vertex buffer
 		UINT stride = sizeof(SimpleVertex);
 		UINT offset = 0;
-		mDevice->mContext->IASetVertexBuffers(0, 1, g_VB.GetAddressOf(), &stride, &offset);
-	//	mDevice->mContext->IASetIndexBuffer(g_IB.Get(), &stride, &offset);
-		// Set primitive topology
-		mDevice->mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		mContext->IASetVertexBuffers(0, 1, g_VB.GetAddressOf(), &stride, &offset);
+		//	mDevice->mContext->IASetIndexBuffer(g_IB.Get(), &stride, &offset);
+			// Set primitive topology
+		mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 		float ClearColor[4] = { 0.5f, 0.5f, 0.5f, 1.f };
-		
 
-		mDevice->mContext->VSSetShader(g_VS.Get(), NULL, 0);
-		mDevice->mContext->PSSetShader(g_PS.Get(), NULL, 0);
-		mDevice->mContext->ClearRenderTargetView(mDevice->mRenderTargetView.Get(), ClearColor);
-		mDevice->mContext->Draw(3,0);
 
-		mDevice->mSwapChain->Present(0, 0);
+		mContext->VSSetShader(g_VS.Get(), NULL, 0);
+		mContext->PSSetShader(g_PS.Get(), NULL, 0);
+		mContext->ClearRenderTargetView(mRenderTargetView.Get(), ClearColor);
+		mContext->Draw(3, 0);
+
+		mSwapChain->Present(0, 0);
+	}
+	HRESULT CDxDevice::CreateSwapChain(HWND _hwnd, Vec2 _resolution)
+	{
+		DXGI_SWAP_CHAIN_DESC SwapDesc;
+		ZeroMemory(&SwapDesc, sizeof(SwapDesc));
+		SwapDesc.BufferCount = 1;
+		SwapDesc.BufferDesc.Width = _resolution.x;
+		SwapDesc.BufferDesc.Height = _resolution.y;
+		SwapDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		SwapDesc.BufferDesc.RefreshRate.Numerator = 60;
+		SwapDesc.BufferDesc.RefreshRate.Denominator = 1;
+		SwapDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+		SwapDesc.OutputWindow = _hwnd;
+		SwapDesc.SampleDesc.Count = 1;
+		SwapDesc.SampleDesc.Quality = 0;
+		SwapDesc.Windowed = TRUE;
+		SwapDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
+		SwapDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER::DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
+		SwapDesc.Flags = 0;
+		SwapDesc.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_DISCARD;
+
+		ComPtr<IDXGIDevice> pDevice;
+		ComPtr<IDXGIAdapter> pAdapter;
+		ComPtr<IDXGIFactory> pFactory;
+		HRESULT hr = mDevice->QueryInterface(__uuidof(IDXGIDevice), (void**)pDevice.GetAddressOf());
+		hr = pDevice->GetParent(__uuidof(IDXGIAdapter), (void**)pAdapter.GetAddressOf());
+		hr = pAdapter->GetParent(__uuidof(IDXGIFactory), (void**)pFactory.GetAddressOf());
+		hr = pFactory->CreateSwapChain(mDevice.Get(), &SwapDesc, mSwapChain.GetAddressOf());
+
+		return hr;
+	}
+	HRESULT CDxDevice::CreateRenderTargetView(Vec2 _resolution)
+	{
+		ID3D11Texture2D* pBackBuffer = NULL;
+		HRESULT hr = mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
+		if (FAILED(hr))
+			return hr;
+		hr = mDevice->CreateRenderTargetView(pBackBuffer, NULL,mRenderTargetView.GetAddressOf());
+		pBackBuffer->Release();
+
+		if (FAILED(hr))
+			return hr;
+
+		mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), NULL);
+
+		D3D11_VIEWPORT vp;
+		vp.Width = (FLOAT)_resolution.x;
+		vp.Height = (FLOAT)_resolution.y;
+		vp.MinDepth = 0.0f;
+		vp.MaxDepth = 1.0f;
+		vp.TopLeftX = 0;
+		vp.TopLeftY = 0;
+		mContext->RSSetViewports(1, &vp);
+
+		return hr;
 	}
 }
-

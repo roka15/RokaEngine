@@ -1,19 +1,36 @@
 #include "pch.h"
 #include "external.h"
-#include "CDxDevice.h"
+#include "DxDevice.h"
 
 
-DLL_DECLSPEC void CreateDXDevice()
+static Renderer::EDeviceType g_s_DeviceType = Renderer::EDeviceType::None;
+DLL_DECLSPEC void CreateDevice(Renderer::EDeviceType _type)
 {
-	Renderer::CDxDevice::Create();
+	g_s_DeviceType = Renderer::EDeviceType::Dx11Device;
+	switch (g_s_DeviceType)
+	{
+	case Renderer::EDeviceType::Dx11Device:
+		Renderer::CDxDevice::Create();
+		break;
+	}
 	return;
 }
-DLL_DECLSPEC void DestroyDXDevice()
+DLL_DECLSPEC void DestroyDevice()
 {
-	Renderer::CDxDevice::Destroy();
+	switch(g_s_DeviceType)
+	{
+	case Renderer::EDeviceType::Dx11Device:
+		Renderer::CDxDevice::Destroy();
+		break;
+	}
 	return;
 }
-DLL_DECLSPEC Renderer::CDxDevice* const& GetDXDevice()
+DLL_DECLSPEC Renderer::CDevice* const& GetDevice()
 {
-	return Renderer::CDxDevice::GetInstance();
+	switch (g_s_DeviceType)
+	{
+	case Renderer::EDeviceType::Dx11Device:
+		return Renderer::CDxDevice::GetInstance();
+	}
+	return nullptr;
 }

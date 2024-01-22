@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "RKEngine.h"
 #include "ScriptReLoad.h"
-#include <Renderer/CDxDevice.h>
+#include <Renderer/CDevice.h>
 
 
 namespace RKEngine

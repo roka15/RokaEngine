@@ -3,7 +3,7 @@
 #include <Renderer/external.h>
 #include <Script/ScriptManager.h>
 #include <Script/CTestScript.h>
-#include <Renderer/CDxDevice.h>
+#include <Renderer/CDevice.h>
 
 
 
@@ -22,7 +22,7 @@ int main()
 			 renderCreate();
 
 			 RENDERER_INST_FUNC renderInst = (RENDERER_INST_FUNC)GetProcAddress(RenderDll, "GetDXDevice");
-			 Renderer::CDxDevice* Device = renderInst();
+			 Renderer::CDevice* Device = renderInst();
 			 Device->InitDevice(engine);
 
 
@@ -69,11 +69,11 @@ int main()
 	rokaStl::CDllLoader* inst = rokaStl::CDllLoader::GetInstance();
 	LM_DLL->LoadDll(EDllType::RENDER);
 	HMODULE render_dll = LM_DLL->GetDLL(EDllType::RENDER);
-	RENDERER_LIFE_FUNC renderCreate = (RENDERER_LIFE_FUNC)GetProcAddress(render_dll, "CreateDXDevice");
+	RENDERER_CREATE_FUNC renderCreate = (RENDERER_CREATE_FUNC)GetProcAddress(render_dll, "CreateDevice");
 	DWORD error = GetLastError();
-	renderCreate();
-	RENDERER_INST_FUNC renderInst = (RENDERER_INST_FUNC)GetProcAddress(render_dll, "GetDXDevice");
-	Renderer::CDxDevice* Device = (Renderer::CDxDevice*)renderInst();
+	renderCreate(Renderer::EDeviceType::Dx11Device);
+	RENDERER_INST_FUNC renderInst = (RENDERER_INST_FUNC)GetProcAddress(render_dll, "GetDevice");
+	Renderer::CDevice* Device = (Renderer::CDevice*)renderInst();
 
 	LM_DLL->LoadDll(EDllType::ENGINE);
 
@@ -98,7 +98,7 @@ int main()
 	engine = nullptr;
 	LM_DLL->FreeDll(EDllType::ENGINE);
 
-	RENDERER_LIFE_FUNC renderDestroy = (RENDERER_LIFE_FUNC)GetProcAddress(render_dll, "DestroyDXDevice");
+	RENDERER_DESTROY_FUNC renderDestroy = (RENDERER_DESTROY_FUNC)GetProcAddress(render_dll, "DestroyDevice");
 	renderDestroy();
 	LM_DLL->FreeDll(EDllType::RENDER);
 

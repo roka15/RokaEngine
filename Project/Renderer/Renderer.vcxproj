@@ -161,17 +161,18 @@ call RendererCopy.bat</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CDxDevice.h" />
+    <ClInclude Include="CDevice.h" />
+    <ClInclude Include="define.h" />
+    <ClInclude Include="DxDevice.h" />
     <ClInclude Include="external.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="InnerDevice.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="struct.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CDxDevice.cpp" />
+    <ClCompile Include="CDevice.cpp" />
+    <ClCompile Include="DxDevice.cpp" />
     <ClCompile Include="external.cpp" />
-    <ClCompile Include="InnerDevice.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

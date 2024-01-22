@@ -8,7 +8,7 @@
 
 namespace Renderer
 {
-	class CDxDevice;
+	class CDevice;
 	struct t_RendererData;
 }
 namespace Script
@@ -40,13 +40,13 @@ namespace RKEngine
 		//////////////////////////
 		//    Renderer Data     //
 		//////////////////////////
-		Renderer::CDxDevice* mDevice;
+		Renderer::CDevice* mDevice;
 		Renderer::t_RendererData*const mtRendererData;
 	public:
 		virtual void SetHWND(HWND _hWnd, EHwndType _eType) { m_hWnds[TYPETOINT(_eType)] = _hWnd; }
 		virtual void SetLMDll(PCR_DllLoad _pcr_dllload) { m_DllLoader = _pcr_dllload; }
 		virtual void SetFileManager(PCR_FileManager _pcr_file_manager) { m_M_File = _pcr_file_manager; }
-		virtual void SetRenderDevice(Renderer::CDxDevice* _device) { mDevice = _device; }
+		virtual void SetRenderDevice(Renderer::CDevice* _device) { mDevice = _device; }
 		virtual HWND GetHWND(EHwndType _type) { return m_hWnds[TYPETOINT(_type)]; }
 		virtual rokaStl::FileManager* GetFileManager() { return m_M_File; }
 		virtual const Vec2& GetResolution(); 

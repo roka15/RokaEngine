@@ -2,14 +2,14 @@
 
 namespace Renderer
 {
-	class CDxDevice;
-	class CInnerDevice 
+	class CDevice;
+	class CDxDevice 
 	{
 	private:
-		CInnerDevice();
-		~CInnerDevice();
+		CDxDevice();
+		~CDxDevice();
 
-		friend class CDxDevice;
+		friend class CDevice;
 		Microsoft::WRL::ComPtr<ID3D11Device> mDevice;
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> mContext;
 		Microsoft::WRL::ComPtr<IDXGISwapChain> mSwapChain;
