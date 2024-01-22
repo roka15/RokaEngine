@@ -2,12 +2,14 @@ struct VS_IN
 {
 	float3 vPos : POSITION;
 	float4 vColor : COLOR;
+	float2 UV : TEXCOORD;
 };
 
 struct VS_OUT
 {
 	float4 vPos : SV_Position;
 	float4 vColor : COLOR;
+	float2 UV : TEXCOORD;
 };
 
 VS_OUT VS_Main(VS_IN _inData) 

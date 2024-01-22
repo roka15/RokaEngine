@@ -28,3 +28,18 @@ std::shared_ptr<TCHAR> AddTCHAR(const TCHAR* _origin, const TCHAR* _addstr)
 	_tcscat(result.get(), _addstr);
 	return result;
 }
+std::shared_ptr<wchar_t> ConvertC2WC(char* _str)
+{
+	int strSize = MultiByteToWideChar(CP_ACP, 0, _str, -1, NULL, NULL);
+	std::shared_ptr<wchar_t> pStr(new wchar_t[strSize]);
+	MultiByteToWideChar(CP_ACP, 0, _str, strlen(_str)+1, pStr.get(), strSize);
+	return pStr;
+}
+std::shared_ptr<char> ConvertWC2C(wchar_t* _str)
+{
+	int strSize = WideCharToMultiByte(CP_ACP, 0, _str, -1, NULL, 0, NULL, NULL);
+	std::shared_ptr<char> pStr(new char[strSize]);
+	WideCharToMultiByte(CP_ACP, 0, _str, -1, pStr.get(), strSize, 0, 0); 
+	return pStr;
+
+}

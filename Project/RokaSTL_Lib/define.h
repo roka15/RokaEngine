@@ -14,6 +14,7 @@
 #define Assert(expression,message) assert(expression && message)
 
 #define CLASS_COPY(type) public: virtual type* Copy(){return new type(*this);} 
+#define CLASS_NOCOPY(type) public: virtual type* Copy(){return nullptr;Assert(nullptr,TEXT("Copy가 지원되지 않는 Class 입니다."));}
 #define PROPERTY(_get,_set) _declspec(property(get=_get,put=_set))
 #define SET_PROPERTY(_set) _declspec(property(put=_set))
 #define GET_PROPERTY(_get) _declspec(property(get=_get))

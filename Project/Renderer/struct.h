@@ -14,4 +14,11 @@ namespace Renderer
 	{
 		Vec2 Resolution;
 	};
+
+	struct DLL_DECLSPEC t_VertexData
+	{
+		Vec3 Position;
+		Vec4 Color;
+		Vec2 UV;
+	};
 }

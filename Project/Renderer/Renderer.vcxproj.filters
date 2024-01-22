@@ -28,11 +28,23 @@
     <Filter Include="04.ShaderCode\Render\3D">
       <UniqueIdentifier>{2023cb68-6294-49d9-84b5-01ce8fe8dd0c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Resource\Mesh">
-      <UniqueIdentifier>{471a95f1-9b16-4121-9a9d-32057b99d267}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.Defualt\Entity">
       <UniqueIdentifier>{f2dda4b1-0ee3-4198-83f9-eb0d0485b0ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Defualt\Ptr">
+      <UniqueIdentifier>{8bf2f3a1-f781-43e5-9811-0a3af583c87f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Resource\00.Mesh">
+      <UniqueIdentifier>{471a95f1-9b16-4121-9a9d-32057b99d267}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Resource\01.Shader">
+      <UniqueIdentifier>{b73e22aa-17a1-4258-8836-849815105892}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Resource\02.Material">
+      <UniqueIdentifier>{1de4a116-6b8d-48bf-9ae9-7c347445df32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Resource\01.Shader\GraphicsShader">
+      <UniqueIdentifier>{a0989b1c-e8c1-47e5-a507-db9d7ddd693d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -61,10 +73,22 @@
       <Filter>03.Resource</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>03.Resource\Mesh</Filter>
+      <Filter>03.Resource\00.Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>00.Defualt\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="SPtr.h">
+      <Filter>00.Defualt\Ptr</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>00.Defualt</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>03.Resource\01.Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="CGraphicsShader.h">
+      <Filter>03.Resource\01.Shader\GraphicsShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -84,10 +108,19 @@
       <Filter>03.Resource</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>03.Resource\Mesh</Filter>
+      <Filter>03.Resource\00.Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>00.Defualt\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="SPtr.cpp">
+      <Filter>00.Defualt\Ptr</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>03.Resource\01.Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="CGraphicsShader.cpp">
+      <Filter>03.Resource\01.Shader\GraphicsShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

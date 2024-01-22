@@ -9,17 +9,24 @@
 namespace RKEngine
 {
 	class CRKEngine;
+	typedef CRKEngine* PEngine;
 }
 namespace Renderer
 {
-	typedef RKEngine::CRKEngine* PEngine;
 	class DLL_DECLSPEC CDevice 
 	{
 	public:
-		virtual HRESULT InitDevice(PEngine _engine) = 0;
-		virtual void Render() = 0;	
+		virtual HRESULT InitDevice(RKEngine::PEngine _engine) = 0;
+		virtual void Render() = 0;
+		
+		virtual void* GetDevicePtr() = 0;
+		virtual void** GetDevicePPtr() = 0;
+		virtual void* GetContextPtr() = 0;
+		virtual void** GetContextPPtr() = 0;
+
+		RKEngine::PEngine GetEngine();
 	protected:
-		PEngine mEngine;
+		RKEngine::PEngine mEngine;
 	};
 }
 
