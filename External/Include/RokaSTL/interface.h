@@ -5,6 +5,7 @@ namespace rokaStl
 {
 	class IManager
 	{
+	public:
 		virtual void Initialize() = 0;
 		virtual void Release() = 0;
 	};

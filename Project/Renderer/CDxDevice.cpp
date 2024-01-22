@@ -123,9 +123,9 @@ namespace Renderer
 		ID3DBlob* pVSBlob = NULL;
 		ID3DBlob* pErrorBlob = NULL;
 		const TCHAR* path = mEngine->M_File->GetShaderCodePath();
-		TCHAR* fileName = AddTCHAR(path, TEXT("\\std3D.fx"));
+		std::shared_ptr<TCHAR> fileName = AddTCHAR(path, TEXT("\\std3D.fx"));
 
-		hr = D3DCompileFromFile(fileName, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+		hr = D3DCompileFromFile(fileName.get(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
 			, "VS_Main", "vs_5_0", 0, 0, &pVSBlob, &pErrorBlob);
 		if (FAILED(hr))
 		{
@@ -179,7 +179,7 @@ namespace Renderer
 
 		// Compile the pixel shader
 		ID3DBlob* pPSBlob = NULL;
-		hr = D3DCompileFromFile(fileName, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+		hr = D3DCompileFromFile(fileName.get(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
 			, "PS_Main", "ps_5_0", 0, 0, &pPSBlob, &pErrorBlob);
 		if (FAILED(hr))
 		{
