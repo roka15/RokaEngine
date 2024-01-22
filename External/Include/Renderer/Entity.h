@@ -1,6 +1,14 @@
 #pragma once
+
+#ifdef RENDERER_EXPORTS
+#define DLL_DECLSPEC __declspec(dllexport)
+#else
+#define DLL_DECLSPEC __declspec(dllimport)
+#endif // CREATEDLL_EXPORTS
+
+
 #include "pch.h"
-class CEntity
+class DLL_DECLSPEC CEntity
 {
 private:
 	static unsigned int g_NextID;

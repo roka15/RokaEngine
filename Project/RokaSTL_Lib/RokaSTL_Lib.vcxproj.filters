@@ -46,6 +46,9 @@
     <Filter Include="Manager\File">
       <UniqueIdentifier>{82483c55-71f1-44a5-8a23-4a5b937cc996}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common\Func">
+      <UniqueIdentifier>{e374d8aa-70c6-4d4f-92a3-d44c05517306}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LRU_Queue.h">
@@ -90,14 +93,14 @@
     <ClInclude Include="operators.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="func.h">
-      <Filter>Common</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectPoolManager.h">
       <Filter>Manager\ObjectPool</Filter>
     </ClInclude>
     <ClInclude Include="FileManager.h">
       <Filter>Manager\File</Filter>
+    </ClInclude>
+    <ClInclude Include="func.h">
+      <Filter>Common\Func</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -119,14 +122,14 @@
     <ClCompile Include="DllLoader.cpp">
       <Filter>Loader</Filter>
     </ClCompile>
-    <ClCompile Include="func.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectPoolManager.cpp">
       <Filter>Manager\ObjectPool</Filter>
     </ClCompile>
     <ClCompile Include="FileManager.cpp">
       <Filter>Manager\File</Filter>
+    </ClCompile>
+    <ClCompile Include="func.cpp">
+      <Filter>Common\Func</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

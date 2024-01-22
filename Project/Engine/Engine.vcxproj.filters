@@ -25,6 +25,12 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{5c9ffb7e-8328-46f1-a803-654c20434e00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Component\3.RenderComponent">
+      <UniqueIdentifier>{7784428b-7c86-425c-9e13-6711ce49bd26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\3.RenderComponent\MeshRenderer">
+      <UniqueIdentifier>{b1d0cda1-a864-46fb-a128-a16e24c9294c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -37,9 +43,6 @@
       <Filter>00.Header</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
-      <Filter>00.Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
       <Filter>00.Header</Filter>
     </ClInclude>
     <ClInclude Include="define.h">
@@ -63,6 +66,12 @@
     <ClInclude Include="RKEngine.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>02.Component\3.RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="CMeshRenderer.h">
+      <Filter>02.Component\3.RenderComponent\MeshRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component.cpp">
@@ -72,9 +81,6 @@
       <Filter>02.Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
-      <Filter>00.Header</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
       <Filter>00.Header</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
@@ -91,6 +97,12 @@
     </ClCompile>
     <ClCompile Include="RKEngine.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>02.Component\3.RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="CMeshRenderer.cpp">
+      <Filter>02.Component\3.RenderComponent\MeshRenderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

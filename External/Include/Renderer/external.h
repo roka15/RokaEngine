@@ -8,6 +8,7 @@
 
 #include <Renderer/struct.h>
 #include "define.h"
+#include "Entity.h"
 
 namespace Renderer 
 {

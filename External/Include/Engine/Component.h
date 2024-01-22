@@ -1,5 +1,4 @@
 #pragma once
-#include "Entity.h"
 #include "GameObject.h"
 #ifdef CREATEDLL_EXPORTS
 #define DLL_DECLSPEC __declspec(dllexport)
@@ -9,6 +8,7 @@
 
 #define GetOwnerComponentFunc(type) C##type* type(){return m_Owner->type();}
 enum class EComponentType;
+
 class DLL_DECLSPEC CComponent : public CEntity
 {
 private:

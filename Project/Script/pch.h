@@ -29,12 +29,14 @@
 #pragma comment(lib,"RokaSTL\\RokaSTL_Lib.lib")
 #endif
 
-//engine.dll
-#include <Engine/define.h>
-//renderer.dll
-#include <Renderer/RendererInclude.h>
-
 //roka stl.lib
 #include <RokaSTL/CommonInclude.h>
 #include <RokaSTL/interface.h>
 #endif //PCH_H
+
+//engine.dll
+#include <Engine/define.h>
+//renderer.dll
+#include <Renderer/external.h>
+
+
