@@ -1,14 +1,10 @@
 #include "pch.h"
 #include "DxDevice.h"
 #include  <Engine/RKEngine.h>
+#include "Mesh.h"
+#include "CGraphicsShader.h"
 namespace Renderer
 {
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> g_VS;
-	Microsoft::WRL::ComPtr<ID3D11InputLayout> g_pVertexLayout = NULL;
-	Microsoft::WRL::ComPtr<ID3D11PixelShader> g_PS;
-	Microsoft::WRL::ComPtr<ID3D11Buffer> g_VB;
-	Microsoft::WRL::ComPtr<ID3D11Buffer> g_IB;
-
 	CDxDevice::CDxDevice()
 	{
 
@@ -56,6 +52,7 @@ namespace Renderer
 
 		if (FAILED(hr))
 			return hr;
+
 		struct SimpleVertex
 		{
 			XMFLOAT3 Pos;
@@ -65,128 +62,27 @@ namespace Renderer
 		vertices.push_back(t_VertexData{ Vec3(0.0f, 0.5f, 0.5f), Vec4(1.0f, 1.0f, 0.0f, 1.0f), Vec2(0.f, 0.f) });
 		vertices.push_back(t_VertexData{ Vec3(0.5f, -0.5f, 0.5f), Vec4(1.0f,1.0f,0.0f,1.0f), Vec2(0.f, 0.f) });
 		vertices.push_back(t_VertexData{ Vec3(-0.5f, -0.5f, 0.5f), Vec4(1.0f,1.0f,0.0f,1.0f), Vec2(0.f, 0.f) });
-		
-		int indexs[]
+
+		const int indexCnt = 3;
+		int indexs[indexCnt] =
 		{
 			0,1,2
 		};
-		
+		ID3D11DeviceContext* context = DX11_PCONTEXT;
+		mMesh = new CMesh(true);
+		mMesh->Create(vertices.data(), vertices.size(), indexs, indexCnt);
+		mShader = new CGraphicsShader();
+		mShader->CreateVertexShader(TEXT("//std3D.fx"), "VS_Main", "vs_5_0");
+		mShader->CreatePixelShader(TEXT("//std3D.fx"), "PS_Main", "ps_5_0");
 
 		return hr;
 	}
 	void CDxDevice::Render()
 	{
-		HRESULT hr = S_OK;
-		//// Compile the vertex shader
-		//ID3DBlob* pVSBlob = NULL;
-		//ID3DBlob* pErrorBlob = NULL;
-		//const TCHAR* path = mEngine->M_File->GetShaderCodePath();
-		//std::shared_ptr<TCHAR> fileName = AddTCHAR(path, TEXT("\\std3D.fx"));
-
-		//hr = D3DCompileFromFile(fileName.get(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
-		//	, "VS_Main", "vs_5_0", 0, 0, &pVSBlob, &pErrorBlob);
-		//if (FAILED(hr))
-		//{
-		//	MessageBox(NULL,
-		//		L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
-		//	return;
-		//}
-
-
-		//// Create the vertex shader
-		//hr = mDevice->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), NULL, g_VS.GetAddressOf());
-		//if (FAILED(hr))
-		//{
-		//	pVSBlob->Release();
-		//	return;
-		//}
-
-		//// Define the input layout
-		//D3D11_INPUT_ELEMENT_DESC layout[2] =
-		//{
-		//};
-		//layout[0].SemanticName = "POSITION";
-		//layout[0].SemanticIndex = 0;
-		//layout[0].InputSlot = 0;
-		//layout[0].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-		//layout[0].InstanceDataStepRate = 0;
-		//layout[0].AlignedByteOffset = 0;
-		//layout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
-
-
-		//layout[1].SemanticName = "COLOR";
-		//layout[1].SemanticIndex = 0;
-		//layout[1].InputSlot = 0;
-		//layout[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-		//layout[1].InstanceDataStepRate = 0;
-		//layout[1].AlignedByteOffset = 12;
-		//layout[1].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-
-		//UINT numElements = ARRAYSIZE(layout);
-
-
-		//// Create the input layout
-		//hr =mDevice->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(),
-		//	pVSBlob->GetBufferSize(), g_pVertexLayout.GetAddressOf());
-		//pVSBlob->Release();
-		//if (FAILED(hr))
-		//	return;
-
-		//// Set the input layout
-		//mContext->IASetInputLayout(g_pVertexLayout.Get());
-
-		//// Compile the pixel shader
-		//ID3DBlob* pPSBlob = NULL;
-		//hr = D3DCompileFromFile(fileName.get(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
-		//	, "PS_Main", "ps_5_0", 0, 0, &pPSBlob, &pErrorBlob);
-		//if (FAILED(hr))
-		//{
-		//	MessageBox(NULL,
-		//		L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
-		//	return;
-		//}
-
-		//// Create the pixel shader
-		//hr = mDevice->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), NULL, g_PS.GetAddressOf());
-		//pPSBlob->Release();
-		//if (FAILED(hr))
-		//	return;
-		//
-		//// Create vertex buffer
-		//
-		//D3D11_BUFFER_DESC bd;
-		//ZeroMemory(&bd, sizeof(bd));
-		//bd.Usage = D3D11_USAGE_DEFAULT;
-		//bd.ByteWidth = sizeof(SimpleVertex) * 3;
-		//bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-		//bd.CPUAccessFlags = 0;
-		//bd.MiscFlags = 0;
-		//bd.StructureByteStride = 0;
-
-		//D3D11_SUBRESOURCE_DATA InitData;
-		//ZeroMemory(&InitData, sizeof(InitData));
-		//InitData.pSysMem = vertices;
-
-		//hr = mDevice->CreateBuffer(&bd, &InitData, g_VB.GetAddressOf());
-		//if (FAILED(hr))
-		//	return;
-
-		//// Set vertex buffer
-		//UINT stride = sizeof(SimpleVertex);
-		//UINT offset = 0;
-		//mContext->IASetVertexBuffers(0, 1, g_VB.GetAddressOf(), &stride, &offset);
-		////	mDevice->mContext->IASetIndexBuffer(g_IB.Get(), &stride, &offset);
-		//	// Set primitive topology
-		//mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-		//float ClearColor[4] = { 0.5f, 0.5f, 0.5f, 1.f };
-
-
-		//mContext->VSSetShader(g_VS.Get(), NULL, 0);
-		//mContext->PSSetShader(g_PS.Get(), NULL, 0);
-		//mContext->ClearRenderTargetView(mRenderTargetView.Get(), ClearColor);
-		//mContext->Draw(3, 0);
-
+		float ClearColor[4] = { 0.5f, 0.5f, 0.5f, 1.f };
+		mContext->ClearRenderTargetView(mRenderTargetView.Get(), ClearColor);
+		mShader->UpdateData();
+		mMesh->Render();
 		mSwapChain->Present(0, 0);
 	}
 	void* CDxDevice::GetDevicePtr()
@@ -241,7 +137,7 @@ namespace Renderer
 		HRESULT hr = mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
 		if (FAILED(hr))
 			return hr;
-		hr = mDevice->CreateRenderTargetView(pBackBuffer, NULL,mRenderTargetView.GetAddressOf());
+		hr = mDevice->CreateRenderTargetView(pBackBuffer, NULL, mRenderTargetView.GetAddressOf());
 		pBackBuffer->Release();
 
 		if (FAILED(hr))

@@ -2,6 +2,8 @@
 #include "CDevice.h"
 namespace Renderer
 {
+	class CMesh;
+	class CGraphicsShader;
 	class CDxDevice : public CDevice , public rokaStl::Singleton<CDxDevice>
 	{
 	private:
@@ -9,6 +11,9 @@ namespace Renderer
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> mContext;
 		Microsoft::WRL::ComPtr<IDXGISwapChain> mSwapChain;
 		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> mRenderTargetView;
+		CMesh* mMesh;
+		CGraphicsShader* mShader;
+		
 
 		SINGLETON(CDxDevice)
 	public:

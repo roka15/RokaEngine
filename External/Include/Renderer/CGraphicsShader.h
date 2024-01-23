@@ -23,11 +23,11 @@ namespace Renderer
 	public:
 		CGraphicsShader();
 		~CGraphicsShader();
-	private:
+	public:
 		void CreateVertexShader(const TCHAR* _ShaderFileName, const char* _MainName, const char* _ShaderVer);
 		void CreatePixelShader(const TCHAR* _ShaderFileName, const char* _MainName, const char* _ShaderVer);
 		virtual void UpdateData();
-
+	private:
 	};
 }
 

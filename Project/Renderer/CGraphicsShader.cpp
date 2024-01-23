@@ -14,7 +14,7 @@ namespace Renderer
 	}
 	void CGraphicsShader::CreateVertexShader(const TCHAR* _ShaderFileName, const char* _MainName, const char* _ShaderVer)
 	{
-		const TCHAR* path = ENGINE->GetFileManager()->GetShaderCodePath();
+		const TCHAR* path = PENGINE->GetFileManager()->GetShaderCodePath();
 		std::shared_ptr<TCHAR> fileName = AddTCHAR(path, _ShaderFileName);
 		HRESULT hr = S_OK;
 		std::shared_ptr<wchar_t> wFileName = nullptr;
@@ -40,7 +40,7 @@ namespace Renderer
 			return;
 		}
 
-		const size_t layoutLen = 2;
+		const size_t layoutLen = 3;
 		D3D11_INPUT_ELEMENT_DESC layout[layoutLen] = {};
 		layout[0].SemanticName = "POSITION";
 		layout[0].SemanticIndex = 0;
@@ -58,6 +58,14 @@ namespace Renderer
 		layout[1].AlignedByteOffset = 12;
 		layout[1].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
 
+		layout[2].SemanticName = "TEXCOORD";
+		layout[2].SemanticIndex = 0;
+		layout[2].InputSlot = 0;
+		layout[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+		layout[2].InstanceDataStepRate = 0;
+		layout[2].AlignedByteOffset = 28;
+		layout[2].Format = DXGI_FORMAT_R32G32_FLOAT;
+
 		hr = DX11_PDEVICE->CreateInputLayout(layout, layoutLen, mVertexBlob->GetBufferPointer(),
 			mVertexBlob->GetBufferSize(), mVertexLayout.GetAddressOf());
 		mVertexBlob->Release();
@@ -68,7 +76,7 @@ namespace Renderer
 	}
 	void CGraphicsShader::CreatePixelShader(const TCHAR* _ShaderFileName, const char* _MainName, const char* _ShaderVer)
 	{
-		const TCHAR* path = ENGINE->GetFileManager()->GetShaderCodePath();
+		const TCHAR* path = PENGINE->GetFileManager()->GetShaderCodePath();
 		std::shared_ptr<TCHAR> fileName = AddTCHAR(path, _ShaderFileName);
 		HRESULT hr = S_OK;
 		std::shared_ptr<wchar_t> wFileName = nullptr;

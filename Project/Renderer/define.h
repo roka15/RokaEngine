@@ -15,7 +15,7 @@
 #define DX11_PCONTEXT reinterpret_cast<ID3D11DeviceContext*>(PCONTEXT)
 #define DX11_PPCONTEXT reinterpret_cast<ID3D11DeviceContext**> (PPCONTEXT)
 
-#define ENGINE GetDevice()->GetEngine()
+#define PENGINE GetDevice()->GetEngine()
 
 namespace Renderer
 {

@@ -18,11 +18,13 @@ namespace Renderer
 	}
 	void CMesh::Create(void* _pVtxList, UINT _uiVtxCnt, void* _pIdxList, UINT _uiIdxCnt)
 	{
+		ID3D11DeviceContext* context = DX11_PCONTEXT;
+
 		m_VertexCnt = _uiVtxCnt;
 		m_IndexCnt = _uiIdxCnt;
 
 		m_VBDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
-		m_VBDesc.ByteWidth = sizeof(t_VertexData);
+		m_VBDesc.ByteWidth = sizeof(t_VertexData)* m_VertexCnt;
 		m_VBDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
 		m_VBDesc.CPUAccessFlags = 0;
 		m_VBDesc.MiscFlags = 0;

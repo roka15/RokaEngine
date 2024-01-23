@@ -12,7 +12,7 @@ struct VS_OUT
 	float2 UV : TEXCOORD;
 };
 
-VS_OUT VS_Main(VS_IN _inData) 
+VS_OUT VS_Main(VS_IN _inData)
 {
 	VS_OUT outData;
 	outData.vPos = float4(_inData.vPos,1.0f);

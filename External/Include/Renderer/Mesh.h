@@ -17,9 +17,10 @@ namespace Renderer
 		~CMesh();
 
 		void Create(void* _pVtxList, UINT _uiVtxCnt, void* _pIdxList, UINT _uiIdxCnt);
+		void Render();
 	private:
 		virtual void UpdateData()override;
-		void Render();
+		
 	};
 }
 
