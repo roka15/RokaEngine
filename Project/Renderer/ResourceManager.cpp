@@ -29,19 +29,19 @@ namespace Renderer
 	}
 	template<> General::SPtr<CMesh> CResourceManager::FindRes(const TCHAR* _resName)
 	{
-		EResourceType eType = GetResType<CMesh>();
+		EResourceType eType = EResourceType::Mesh;
 		General::SPtr<General::CResource> Resource = mResourceMap[TYPETOINT(EResourceType::Mesh)][_resName];
 		return (CMesh*)Resource.get();
 	}
 	template<> General::SPtr<CGraphicsShader> CResourceManager::FindRes(const TCHAR* _resName)
 	{
-		EResourceType eType = GetResType<CGraphicsShader>();
+		EResourceType eType = EResourceType::GraphicsShader;
 		General::SPtr<General::CResource> Resource = mResourceMap[TYPETOINT(EResourceType::GraphicsShader)][_resName];
 		return (CGraphicsShader*)Resource.get();
 	}
 	template<> void CResourceManager::AddRes(const TCHAR* _resName, General::SPtr<CMesh> _Resource)
 	{
-		EResourceType eType = GetResType<CMesh>();
+		EResourceType eType = EResourceType::Mesh;
 		General::SPtr<CMesh> Resource = FindRes<CMesh>(_resName);
 		if (Resource.get() != nullptr)
 			Assert(nullptr, TEXT("ResourceManager AddRes Error! Resource Key 중복"));
@@ -50,7 +50,7 @@ namespace Renderer
 	}
 	template<> void CResourceManager::AddRes(const TCHAR* _resName, General::SPtr<CGraphicsShader> _Resource)
 	{
-		EResourceType eType = GetResType<CGraphicsShader>();
+		EResourceType eType = EResourceType::GraphicsShader;
 		General::SPtr<CGraphicsShader> Resource = FindRes<CGraphicsShader>(_resName);
 		if (Resource.get() != nullptr)
 			Assert(nullptr, TEXT("ResourceManager AddRes Error! Resource Key 중복"));
