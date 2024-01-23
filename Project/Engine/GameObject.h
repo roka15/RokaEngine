@@ -2,7 +2,7 @@
 class CTransform;
 #define GET_COMPONENT(type,Etype) C##type* type()const {return nullptr;}
 class CGameObject :
-    public CEntity
+	public General::CEntity
 {
 public:
 

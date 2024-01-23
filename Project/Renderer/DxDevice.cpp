@@ -3,6 +3,7 @@
 #include  <Engine/RKEngine.h>
 #include "Mesh.h"
 #include "CGraphicsShader.h"
+#include "ResourceManager.h"
 namespace Renderer
 {
 	CDxDevice::CDxDevice()
@@ -69,20 +70,29 @@ namespace Renderer
 			0,1,2
 		};
 		ID3D11DeviceContext* context = DX11_PCONTEXT;
-		mMesh = new CMesh(true);
-		mMesh->Create(vertices.data(), vertices.size(), indexs, indexCnt);
-		mShader = new CGraphicsShader();
-		mShader->CreateVertexShader(TEXT("//std3D.fx"), "VS_Main", "vs_5_0");
-		mShader->CreatePixelShader(TEXT("//std3D.fx"), "PS_Main", "ps_5_0");
+		CResourceManager::Create();
+		CResourceManager* rm = CResourceManager::GetInstance();
+		
+		
+		General::SPtr<CMesh> mesh = new CMesh(true);
+		mesh->Create(vertices.data(), vertices.size(), indexs, indexCnt);
+		CGraphicsShader* shader = new CGraphicsShader();
+		shader->CreateVertexShader(TEXT("//std3D.fx"), "VS_Main", "vs_5_0");
+		shader->CreatePixelShader(TEXT("//std3D.fx"), "PS_Main", "ps_5_0");
 
+		rm->AddRes<CMesh>(TEXT("TriangleMesh"),mesh);
+		rm->AddRes<CGraphicsShader>(TEXT("DefaultShader"), shader);
 		return hr;
 	}
 	void CDxDevice::Render()
 	{
 		float ClearColor[4] = { 0.5f, 0.5f, 0.5f, 1.f };
 		mContext->ClearRenderTargetView(mRenderTargetView.Get(), ClearColor);
-		mShader->UpdateData();
-		mMesh->Render();
+		CResourceManager* rm = CResourceManager::GetInstance();
+		General::SPtr<CMesh> mesh = rm->FindRes<CMesh>(TEXT("TriangleMesh"));
+		General::SPtr<CGraphicsShader> shader = rm->FindRes<CGraphicsShader>(TEXT("DefaultShader"));
+		shader->UpdateData();
+		mesh->Render();
 		mSwapChain->Present(0, 0);
 	}
 	void* CDxDevice::GetDevicePtr()

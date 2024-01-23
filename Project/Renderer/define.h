@@ -6,6 +6,8 @@
 #define DLL_DECLSPEC __declspec(dllimport)
 #endif // CREATEDLL_EXPORTS
 
+#define VER_DX11
+
 #define PDEVICE GetDevice()->GetDevicePtr()
 #define PPDEVICE GetDevice()->GetDevicePPtr()
 #define PCONTEXT  GetDevice()->GetContextPtr()
@@ -17,19 +19,4 @@
 
 #define PENGINE GetDevice()->GetEngine()
 
-namespace Renderer
-{
-	enum class DLL_DECLSPEC EDeviceType
-	{
-		None,
-		Dx11Device,
-	};
-	
-	enum class DLL_DECLSPEC EResourceType
-	{
-		None,
-		Mesh,
-		Material,
-		GraphicsShader,
-	};
-}
+

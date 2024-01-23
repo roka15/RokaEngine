@@ -4,70 +4,85 @@
     <Filter Include="Common">
       <UniqueIdentifier>{a1afcd29-14da-46e3-b47e-035b5f8c1618}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pool">
-      <UniqueIdentifier>{90824748-81cc-4eb8-990c-2296ce0f9cf4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pool\MemoryPool">
-      <UniqueIdentifier>{2b8c9103-e785-4606-b682-6da66e1386fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pool\ObjectPool">
-      <UniqueIdentifier>{485ea6d9-1f67-437a-bb0d-e6ed9f2342a9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DataStructure">
-      <UniqueIdentifier>{2fb7133a-2a14-4259-922a-3c9f908360d7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DataStructure\LRUQueue">
-      <UniqueIdentifier>{217ecae3-aa93-46ab-ab83-28620f5bc0bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DataStructure\Map">
-      <UniqueIdentifier>{63d3de69-22ba-43e6-a0ca-62b2b6e2a013}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DataStructure\PriorityQueue">
-      <UniqueIdentifier>{78a6c0a3-d127-4079-91c0-0cc5c6de9257}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Design Pattern">
-      <UniqueIdentifier>{65529c84-693e-40f0-90a4-651987307486}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Design Pattern\Singleton">
-      <UniqueIdentifier>{b1489c55-f8aa-4b4a-acd7-cf5b214e685b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math">
-      <UniqueIdentifier>{45ea7af9-b3fc-425a-bac8-5ad95a51d789}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Loader">
-      <UniqueIdentifier>{a0d351fa-f67d-44f8-9184-31fa442fe1cf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager">
-      <UniqueIdentifier>{1fec81c1-3588-4aca-a3cf-9452961504e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager\ObjectPool">
-      <UniqueIdentifier>{906746b2-0960-493e-9a6b-4e87c30989f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager\File">
-      <UniqueIdentifier>{82483c55-71f1-44a5-8a23-4a5b937cc996}</UniqueIdentifier>
+    <Filter Include="Class">
+      <UniqueIdentifier>{5bb7651a-b810-4962-b98f-9f1ce7959f9e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Common\Func">
       <UniqueIdentifier>{e374d8aa-70c6-4d4f-92a3-d44c05517306}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\02.SmartPtr">
+      <UniqueIdentifier>{71735584-966f-40cb-811e-ceed900bc416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\00.Entity">
+      <UniqueIdentifier>{a4bf38e3-d30f-4427-8776-c3a67b21afa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\01.Resource">
+      <UniqueIdentifier>{b78e6de2-6063-47bb-9405-594a599f6e19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\03.Manager">
+      <UniqueIdentifier>{1fec81c1-3588-4aca-a3cf-9452961504e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\03.Manager\ObjectPool">
+      <UniqueIdentifier>{906746b2-0960-493e-9a6b-4e87c30989f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\03.Manager\File">
+      <UniqueIdentifier>{82483c55-71f1-44a5-8a23-4a5b937cc996}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\03.Manager\Loader">
+      <UniqueIdentifier>{a0d351fa-f67d-44f8-9184-31fa442fe1cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STL">
+      <UniqueIdentifier>{db59e822-ea30-4111-ad0e-a3410aa291b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STL\DataStructure">
+      <UniqueIdentifier>{2fb7133a-2a14-4259-922a-3c9f908360d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STL\DataStructure\LRUQueue">
+      <UniqueIdentifier>{217ecae3-aa93-46ab-ab83-28620f5bc0bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STL\DataStructure\Map">
+      <UniqueIdentifier>{63d3de69-22ba-43e6-a0ca-62b2b6e2a013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STL\DataStructure\PriorityQueue">
+      <UniqueIdentifier>{78a6c0a3-d127-4079-91c0-0cc5c6de9257}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STL\Design Pattern">
+      <UniqueIdentifier>{65529c84-693e-40f0-90a4-651987307486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STL\Design Pattern\Singleton">
+      <UniqueIdentifier>{b1489c55-f8aa-4b4a-acd7-cf5b214e685b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STL\Math">
+      <UniqueIdentifier>{45ea7af9-b3fc-425a-bac8-5ad95a51d789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STL\Pool">
+      <UniqueIdentifier>{90824748-81cc-4eb8-990c-2296ce0f9cf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STL\Pool\MemoryPool">
+      <UniqueIdentifier>{2b8c9103-e785-4606-b682-6da66e1386fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="STL\Pool\ObjectPool">
+      <UniqueIdentifier>{485ea6d9-1f67-437a-bb0d-e6ed9f2342a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LRU_Queue.h">
-      <Filter>DataStructure\LRUQueue</Filter>
+      <Filter>STL\DataStructure\LRUQueue</Filter>
     </ClInclude>
     <ClInclude Include="MemoryPool.h">
-      <Filter>Pool\MemoryPool</Filter>
+      <Filter>STL\Pool\MemoryPool</Filter>
     </ClInclude>
     <ClInclude Include="ObjectPool.h">
-      <Filter>Pool\ObjectPool</Filter>
+      <Filter>STL\Pool\ObjectPool</Filter>
     </ClInclude>
     <ClInclude Include="PriorityQueue.h">
-      <Filter>DataStructure\PriorityQueue</Filter>
+      <Filter>STL\DataStructure\PriorityQueue</Filter>
     </ClInclude>
     <ClInclude Include="RBT.h">
-      <Filter>DataStructure\Map</Filter>
+      <Filter>STL\DataStructure\Map</Filter>
     </ClInclude>
     <ClInclude Include="SingleTon.h">
-      <Filter>Design Pattern\Singleton</Filter>
+      <Filter>STL\Design Pattern\Singleton</Filter>
     </ClInclude>
     <ClInclude Include="CommonInclude.h">
       <Filter>Common</Filter>
@@ -85,56 +100,77 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="SimpleMath.h">
-      <Filter>Math</Filter>
+      <Filter>STL\Math</Filter>
     </ClInclude>
     <ClInclude Include="DllLoader.h">
-      <Filter>Loader</Filter>
+      <Filter>Class\03.Manager\Loader</Filter>
     </ClInclude>
     <ClInclude Include="operators.h">
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="ObjectPoolManager.h">
-      <Filter>Manager\ObjectPool</Filter>
+      <Filter>Class\03.Manager\ObjectPool</Filter>
     </ClInclude>
     <ClInclude Include="FileManager.h">
-      <Filter>Manager\File</Filter>
+      <Filter>Class\03.Manager\File</Filter>
     </ClInclude>
     <ClInclude Include="func.h">
       <Filter>Common\Func</Filter>
     </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Class\00.Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Class\01.Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="enums.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SPtr.h">
+      <Filter>Class\02.SmartPtr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MemoryPool.cpp">
-      <Filter>Pool\MemoryPool</Filter>
+      <Filter>STL\Pool\MemoryPool</Filter>
     </ClCompile>
     <ClCompile Include="ObjectPool.cpp">
-      <Filter>Pool\ObjectPool</Filter>
+      <Filter>STL\Pool\ObjectPool</Filter>
     </ClCompile>
     <ClCompile Include="RBT.cpp">
-      <Filter>DataStructure\Map</Filter>
+      <Filter>STL\DataStructure\Map</Filter>
     </ClCompile>
     <ClCompile Include="SingleTon.cpp">
-      <Filter>Design Pattern\Singleton</Filter>
+      <Filter>STL\Design Pattern\Singleton</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="DllLoader.cpp">
-      <Filter>Loader</Filter>
+      <Filter>Class\03.Manager\Loader</Filter>
     </ClCompile>
     <ClCompile Include="ObjectPoolManager.cpp">
-      <Filter>Manager\ObjectPool</Filter>
+      <Filter>Class\03.Manager\ObjectPool</Filter>
     </ClCompile>
     <ClCompile Include="FileManager.cpp">
-      <Filter>Manager\File</Filter>
+      <Filter>Class\03.Manager\File</Filter>
     </ClCompile>
     <ClCompile Include="func.cpp">
       <Filter>Common\Func</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Class\00.Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>Class\01.Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="SPtr.cpp">
+      <Filter>Class\02.SmartPtr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
-      <Filter>Math</Filter>
+      <Filter>STL\Math</Filter>
     </None>
   </ItemGroup>
 </Project>

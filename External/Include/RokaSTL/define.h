@@ -20,8 +20,8 @@
 #define GET_PROPERTY(_get) _declspec(property(get=_get))
 
 
-#define LM_DLL rokaStl::CDllLoader::GetInstance()
-#define M_FILE rokaStl::FileManager::GetInstance()
+#define LM_DLL General::CDllLoader::GetInstance()
+#define M_FILE General::FileManager::GetInstance()
 
 #define MAXPATH 255
 #define MAXEXTEN 50
@@ -32,19 +32,3 @@
 #define STR_LENGTH_MULTIPLIER 1
 #endif
 
-enum class EDllType
-{
-	ENGINE,
-	SCRIPT,
-	RENDER,
-	SERVER,
-	END,
-};
-
-enum class EFilePathType
-{
-	SOLUTION,
-	INCLUDE,
-	PROJECT,
-	RESOURCE,
-};

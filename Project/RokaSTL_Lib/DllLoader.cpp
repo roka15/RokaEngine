@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "DllLoader.h"
 
-namespace rokaStl
+namespace General
 {
     CDllLoader::CDllLoader()
         :m_DllPaths{},

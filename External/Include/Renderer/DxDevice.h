@@ -11,8 +11,6 @@ namespace Renderer
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> mContext;
 		Microsoft::WRL::ComPtr<IDXGISwapChain> mSwapChain;
 		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> mRenderTargetView;
-		CMesh* mMesh;
-		CGraphicsShader* mShader;
 		
 
 		SINGLETON(CDxDevice)

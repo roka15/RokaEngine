@@ -5,7 +5,7 @@
 namespace RKEngine
 {
 	class CRKEngine;
-	typedef rokaStl::FileTimeStempMap FileTimeStempMap;
+	typedef General::FileTimeStempMap FileTimeStempMap;
 	class CScriptReLoad 
 	{
 		CScriptReLoad(CRKEngine* _engine);

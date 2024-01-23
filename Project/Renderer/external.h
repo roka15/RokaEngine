@@ -6,9 +6,8 @@
 #define DLL_DECLSPEC __declspec(dllimport)
 #endif // CREATEDLL_EXPORTS
 
-#include <Renderer/struct.h>
+#include "struct.h"
 #include "define.h"
-#include "Entity.h"
 
 namespace Renderer 
 {

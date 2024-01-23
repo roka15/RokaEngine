@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "FileManager.h"
 
-namespace rokaStl
+namespace General
 {
 	FileManager::FileManager()
 		: m_ProjectPath(),

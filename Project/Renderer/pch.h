@@ -35,8 +35,6 @@ using namespace DirectX::PackedVector;
 #pragma comment(lib, "d3d11")
 #pragma comment(lib, "d3dcompiler")
 
-#include <Engine/define.h>
-#include "define.h"
 #include "external.h"
-#include "global.h"
+
 #endif //PCH_H

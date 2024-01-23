@@ -1,8 +1,7 @@
 #pragma once
-#include "Resource.h"
 namespace Renderer
 {
-	class CMesh : public CResource
+	class CMesh : public General::CResource
 	{
 	private:
 		Microsoft::WRL::ComPtr<ID3D11Buffer> m_VB;

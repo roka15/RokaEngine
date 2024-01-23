@@ -1,5 +1,8 @@
 #pragma once
 #include "CommonInclude.h"
+#include "SPtr.h"
+#include "Resource.h"
+
 namespace rokaStl
 {
 	enum class NodeType
@@ -1100,6 +1103,7 @@ namespace rokaStl
 			}
 			else
 			{
+				return nilnode->data;
 				printf("없는 key 값으로 map 접근.");
 				//에러처리! key값을 찾지 못함!
 				int* test = nullptr;

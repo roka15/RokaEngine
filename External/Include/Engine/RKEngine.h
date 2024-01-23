@@ -19,8 +19,8 @@ namespace Script
 namespace RKEngine
 {
 	class CScriptReLoad;
-	typedef rokaStl::CDllLoader*const& PCR_DllLoad;
-	typedef rokaStl::FileManager* const& PCR_FileManager;
+	typedef General::CDllLoader*const& PCR_DllLoad;
+	typedef General::FileManager* const& PCR_FileManager;
 	class DLL_DECLSPEC CRKEngine :public rokaStl::IManagerLoop, public rokaStl::Singleton<CRKEngine>
 	{
 		SINGLETON(CRKEngine)
@@ -30,8 +30,8 @@ namespace RKEngine
 		bool m_bBeforFocus;
 		std::vector<HWND> m_hWnds;
 
-		rokaStl::CDllLoader* m_DllLoader;
-		rokaStl::FileManager* m_M_File;
+		General::CDllLoader* m_DllLoader;
+		General::FileManager* m_M_File;
 		CScriptReLoad* m_M_ScriptReLoad;
 		//////////////////////////
 		//    Script Data     //
@@ -48,13 +48,13 @@ namespace RKEngine
 		virtual void SetFileManager(PCR_FileManager _pcr_file_manager) { m_M_File = _pcr_file_manager; }
 		virtual void SetRenderDevice(Renderer::CDevice* _device) { mDevice = _device; }
 		virtual HWND GetHWND(EHwndType _type) { return m_hWnds[TYPETOINT(_type)]; }
-		virtual rokaStl::FileManager* GetFileManager() { return m_M_File; }
+		virtual General::FileManager* GetFileManager() { return m_M_File; }
 		virtual const Vec2& GetResolution(); 
 		virtual Renderer::t_RendererData GetRenderData();
 		virtual void LoadDll();
 		virtual void FreeDll();
 
-		PROPERTY(GetFileManager, SetFileManager) rokaStl::FileManager* M_File;
+		PROPERTY(GetFileManager, SetFileManager) General::FileManager* M_File;
 	private:
 		void ScriptMonitor();
 		void WindowMonitor();

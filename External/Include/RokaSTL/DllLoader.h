@@ -1,9 +1,7 @@
 #pragma once
-#include "interface.h"
-
-namespace rokaStl
+namespace General
 {
-	class CDllLoader :public IManager, public Singleton<CDllLoader>
+	class CDllLoader :public rokaStl::IManager, public rokaStl::Singleton<CDllLoader>
 	{
 		SINGLETON(CDllLoader)
 		MANAGER

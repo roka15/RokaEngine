@@ -32,6 +32,7 @@ typedef Vector2 Vec2;
 typedef Vector3 Vec3;
 typedef Vector4 Vec4;
 
+
 #ifdef _NOT_CMAKE_BUILD
 #pragma comment(lib,"openssl\\lib\\libssl.lib")
 #pragma comment(lib,"openssl\\lib\\libcrypto.lib")
@@ -48,6 +49,10 @@ typedef Vector4 Vec4;
 #include "MemoryPool.h"
 
 #include "interface.h"
+#include "enums.h"
+#include "Entity.h"
+#include "SPtr.h"
+#include "Resource.h"
 
 //manager
 #include "ObjectPoolManager.h"

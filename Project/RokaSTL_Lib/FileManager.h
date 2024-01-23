@@ -1,8 +1,7 @@
 #pragma once
-
-namespace rokaStl
+namespace General
 {
-	typedef RBT<const TCHAR*, TCHAR*, PTCharEqual, PTCharGreater, PTCharLess> FileTimeStempMap;
+	typedef rokaStl::RBT<const TCHAR*, TCHAR*, PTCharEqual, PTCharGreater, PTCharLess> FileTimeStempMap;
 
 	class FileData
 	{
@@ -36,7 +35,8 @@ namespace rokaStl
 	typedef ifstream INPUT_FILE_STREAM;
 	typedef ofstream OUTPUT_FILE_STREAM;
 #endif
-	class FileManager : public Singleton<FileManager>
+
+	class FileManager : public rokaStl::Singleton<FileManager>
 	{
 		SINGLETON(FileManager)
 	private:

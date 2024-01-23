@@ -9,7 +9,7 @@
 #define GetOwnerComponentFunc(type) C##type* type(){return m_Owner->type();}
 enum class EComponentType;
 
-class DLL_DECLSPEC CComponent : public CEntity
+class DLL_DECLSPEC CComponent : public General::CEntity
 {
 private:
 	CGameObject* m_Owner;

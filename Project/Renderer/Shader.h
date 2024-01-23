@@ -1,8 +1,7 @@
 #pragma once
-#include "Resource.h"
 namespace Renderer
 {
-	class CShader : public CResource
+	class CShader : public General::CResource
 	{
 	protected:
 		Microsoft::WRL::ComPtr<ID3DBlob> mErrorBlob;
