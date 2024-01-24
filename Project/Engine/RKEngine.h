@@ -9,8 +9,11 @@
 namespace Renderer
 {
 	class CDevice;
-	struct t_RendererData;
 	class CResourceManager;
+	namespace ConstBf
+	{
+		struct t_GlobalData;
+	}
 }
 namespace Script
 {
@@ -42,7 +45,7 @@ namespace RKEngine
 		//    Renderer Data     //
 		//////////////////////////
 		Renderer::CDevice* mMDevice;
-		Renderer::t_RendererData*const mtRendererData;
+		Renderer::ConstBf::t_GlobalData*const mtGlobalData;
 	public:
 		//Manager
 		virtual void SetLMDll(PCR_DllLoad _pcr_dllload) { mMDllLoader = _pcr_dllload; }
@@ -55,7 +58,7 @@ namespace RKEngine
 		virtual HWND GetHWND(EHwndType _type) { return m_hWnds[TYPETOINT(_type)]; }
 	
 		virtual const Vec2& GetResolution(); 
-		virtual Renderer::t_RendererData GetRenderData();
+		virtual Renderer::ConstBf::t_GlobalData GetGlobalData();
 		virtual void LoadDll();
 		virtual void FreeDll();
 		virtual HMODULE GetDll(EDllType eType);

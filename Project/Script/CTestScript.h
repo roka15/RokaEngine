@@ -1,5 +1,4 @@
 #pragma once
-#include "pch.h"
 #include <Engine/define.h>
 #include <Engine/CScript.h>
 
@@ -10,7 +9,8 @@
 #define SCRIPTDLL_DECLSPEC __declspec(dllimport)
 #endif // CREATEDLL_EXPORTS
 
-class SCRIPTDLL_DECLSPEC CTestScript : public CScript
+
+class SCRIPTDLL_DECLSPEC CTestScript : public RKEngine::CScript
 {
 public:
     CTestScript(unsigned int _type);

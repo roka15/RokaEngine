@@ -14,7 +14,7 @@
 
 #define Assert(expression,message) assert(expression && message)
 
-#define CLASS_COPY(type) public: virtual type* Copy(){return new type(*this);} 
+#define CLASS_COPY(type) public: virtual type* Copy()override{return new type(*this);} 
 #define CLASS_NOCOPY(type) public: virtual type* Copy(){return nullptr;Assert(nullptr,TEXT("Copy가 지원되지 않는 Class 입니다."));}
 #define PROPERTY(_get,_set) _declspec(property(get=_get,put=_set))
 #define SET_PROPERTY(_set) _declspec(property(put=_set))
@@ -22,6 +22,7 @@
 
 
 #define LM_DLL General::CDllLoader::GetInstance()
+#define M_FILE General::FileManager::GetInstance()
 
 #define MAXPATH 255
 #define MAXEXTEN 50

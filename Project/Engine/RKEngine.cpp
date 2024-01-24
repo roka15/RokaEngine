@@ -14,7 +14,7 @@ namespace RKEngine
 		mMFile(nullptr),
 		mMScriptReLoad(nullptr),
 		mMResource(nullptr),
-		mtRendererData(new Renderer::t_RendererData())
+		mtGlobalData(new Renderer::ConstBf::t_GlobalData())
 	{
 		UINT eType = TYPETOINT(EHwndType::END);
 		m_hWnds.resize(eType);
@@ -38,7 +38,7 @@ namespace RKEngine
 	void CRKEngine::Release()
 	{
 		delete mMScriptReLoad;
-		delete mtRendererData;
+		delete mtGlobalData;
 		
 		FreeDll();
 		mMResource->Release();
@@ -60,11 +60,11 @@ namespace RKEngine
 	}
 	const Vec2& CRKEngine::GetResolution()
 	{ 
-		return mtRendererData->Resolution;
+		return mtGlobalData->Resolution;
 	}
-	Renderer::t_RendererData CRKEngine::GetRenderData()
+	Renderer::ConstBf::t_GlobalData CRKEngine::GetGlobalData()
 	{
-		return *mtRendererData;
+		return *mtGlobalData;
 	}
 	void CRKEngine::LoadDll()
 	{
@@ -147,15 +147,15 @@ namespace RKEngine
 	}
 	bool CRKEngine::WindowSizeMonitor()
 	{
-		float beforeWidth = mtRendererData->Resolution.x;
-		float beforeHeight = mtRendererData->Resolution.y;
+		float beforeWidth = mtGlobalData->Resolution.x;
+		float beforeHeight = mtGlobalData->Resolution.y;
 		RECT clientRect = {};
 		UINT eType = TYPETOINT(EHwndType::MAIN);
 		GetClientRect(m_hWnds[eType], &clientRect);
-		mtRendererData->Resolution.x = clientRect.right - clientRect.left;
-		mtRendererData->Resolution.y = clientRect.bottom - clientRect.top;
+		mtGlobalData->Resolution.x = clientRect.right - clientRect.left;
+		mtGlobalData->Resolution.y = clientRect.bottom - clientRect.top;
 
-		if (beforeWidth == mtRendererData->Resolution.x && beforeHeight == mtRendererData->Resolution.y)
+		if (beforeWidth == mtGlobalData->Resolution.x && beforeHeight == mtGlobalData->Resolution.y)
 			return false;
 
 		return true;

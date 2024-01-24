@@ -10,10 +10,29 @@
 
 namespace Renderer
 {
-	struct DLL_DECLSPEC t_RendererData
+	namespace ConstBf
 	{
-		Vec2 Resolution;
-	};
+		struct DLL_DECLSPEC t_GlobalData
+		{
+			Vec2 Resolution;
+		};
+
+		struct DLL_DECLSPEC t_TransformData
+		{
+			Matrix MatWorld;
+			Matrix MatWorldInv;
+			
+			Matrix MatView;
+			Matrix MatViewInv;
+
+			Matrix MatProj;
+			Matrix MatProjInv;
+
+			Matrix MatWV;
+			Matrix MatWVP;
+		};
+	}
+	
 
 	struct DLL_DECLSPEC t_VertexData
 	{

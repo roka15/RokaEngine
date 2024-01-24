@@ -17,23 +17,6 @@ enum class EFilePathType
 };
 
 
-namespace Renderer
-{
-	enum class EDeviceType
-	{
-		None,
-		Dx11Device,
-	};
-
-	enum class EResourceType
-	{
-		Mesh,
-		Material,
-		GraphicsShader,
-		MAX
-	};
-}
-
 enum class EComponentType
 {
 	//update

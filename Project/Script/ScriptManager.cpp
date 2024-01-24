@@ -19,7 +19,7 @@ namespace Script
 	{
 		_vec.push_back(TEXT("CTestScript"));
 	}
-	CScript* ScriptManager::GetScript(unsigned int _ScriptType)
+	RKEngine::CScript* ScriptManager::GetScript(unsigned int _ScriptType)
 	{
 		EScriptType eType = (EScriptType)_ScriptType;
 		switch (eType)
@@ -30,13 +30,13 @@ namespace Script
 		}
 		return nullptr;
 	}
-	CScript* ScriptManager::GetScript(const TCHAR* _ScriptName)
+	RKEngine::CScript* ScriptManager::GetScript(const TCHAR* _ScriptName)
 	{
 		if (_tcscmp(_ScriptName, TEXT("CTestScript")) == 0)
 			return new CTestScript(TYPETOINT(EScriptType::CTestScript));
 		return nullptr;
 	}
-	const wchar_t* ScriptManager::GetScriptName(CScript* _pScript)
+	const wchar_t* ScriptManager::GetScriptName(RKEngine::CScript* _pScript)
 	{
 		EScriptType eType = (EScriptType)_pScript->GetScriptType();
 		switch (eType)

@@ -165,6 +165,7 @@ call RendererCopy.bat</Command>
     <ClInclude Include="CGraphicsShader.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="DxDevice.h" />
+    <ClInclude Include="enums.h" />
     <ClInclude Include="external.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="global.h" />
@@ -193,6 +194,10 @@ call RendererCopy.bat</Command>
     <FxCompile Include="std3D.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+    </FxCompile>
+    <FxCompile Include="global.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,12 +1,17 @@
 #pragma once
 #include <RokaSTL/SingleTon.h>
-class CScript;
+
+
 #ifdef SCRIPTDLL_EXPORTS 
 #define SCRIPTDLL_DECLSPEC __declspec(dllexport) 
 #else 
 #define SCRIPTDLL_DECLSPEC __declspec(dllimport)
 #endif // CREATEDLL_EXPORTS
 
+namespace RKEngine
+{
+	class CScript;
+}
 namespace Script
 {
 	enum class SCRIPTDLL_DECLSPEC EScriptType
@@ -22,9 +27,9 @@ namespace Script
 	private:
 	public:
 		virtual void GetScriptsInfo(std::vector<const TCHAR*>& _vec)override;
-		virtual CScript* GetScript(unsigned int _ScriptType)override;
-		virtual CScript* GetScript(const TCHAR* _ScriptName)override;
-		virtual const wchar_t* GetScriptName(CScript* _pScript)override;
+		virtual RKEngine::CScript* GetScript(unsigned int _ScriptType)override;
+		virtual RKEngine::CScript* GetScript(const TCHAR* _ScriptName)override;
+		virtual const wchar_t* GetScriptName(RKEngine::CScript* _pScript)override;
 	};
 }
 

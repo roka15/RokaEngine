@@ -8,6 +8,7 @@
 
 #include "struct.h"
 #include "define.h"
+#include "enums.h"
 
 namespace Renderer 
 {

@@ -46,6 +46,9 @@
     <Filter Include="05.Manager\ResourceManager">
       <UniqueIdentifier>{e129749a-93df-4be1-bde0-5ff17f2d7ab1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.ShaderCode\Common">
+      <UniqueIdentifier>{e4e8ad42-0c24-44a3-872e-19694034a77c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="struct.h">
@@ -84,6 +87,9 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>05.Manager\ResourceManager</Filter>
     </ClInclude>
+    <ClInclude Include="enums.h">
+      <Filter>01.ExportData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external.cpp">
@@ -114,6 +120,9 @@
   <ItemGroup>
     <FxCompile Include="std3D.fx">
       <Filter>04.ShaderCode\Render\3D</Filter>
+    </FxCompile>
+    <FxCompile Include="global.fx">
+      <Filter>04.ShaderCode\Common</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
