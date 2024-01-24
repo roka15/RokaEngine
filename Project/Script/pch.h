@@ -37,6 +37,6 @@
 //engine.dll
 #include <Engine/define.h>
 //renderer.dll
-#include <Renderer/external.h>
+//#include <Renderer/external.h>
 
 

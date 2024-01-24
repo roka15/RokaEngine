@@ -59,10 +59,13 @@ namespace RKEngine
 	}
 	void CScriptReLoad::ScriptsCompile()
 	{
+		m_Engine->FreeDll(EDllType::SCRIPT);
 		TCHAR path[255] = {};
 		GetCurrentDirectory(255, path);
 		int result = system("cd /D D:\\3DRKEngine\\Project\\Script\\build && cmake .. && cmake --build ./ && pause");
-		if (result != 0)
-			int a = 0;
+		m_Engine->LoadDll(EDllType::SCRIPT);
+		HMODULE scriptDll = m_Engine->GetDll(EDllType::SCRIPT);
+		if (scriptDll == nullptr)
+			Assert(nullptr, TEXT("Engine.dll ScriptsCompile GetDll == nullptr"));
 	}
 }

@@ -53,6 +53,9 @@ namespace RKEngine
 		virtual Renderer::t_RendererData GetRenderData();
 		virtual void LoadDll();
 		virtual void FreeDll();
+		virtual HMODULE GetDll(EDllType eType);
+		virtual void LoadDll(EDllType eType);
+		virtual void FreeDll(EDllType eType);
 
 		PROPERTY(GetFileManager, SetFileManager) General::FileManager* M_File;
 	private:

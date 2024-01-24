@@ -62,11 +62,25 @@ namespace RKEngine
 	void CRKEngine::FreeDll()
 	{
 		HMODULE scriptModule = m_DllLoader->GetDLL(EDllType::SCRIPT);
+		if (scriptModule == nullptr)
+			return;
 		M_ScriptLife_PFUNC scriptDestroy = (M_ScriptLife_PFUNC)GetProcAddress(scriptModule, "DestroyManager");
 		
 		scriptDestroy();
 	
 		m_DllLoader->FreeDll(EDllType::SCRIPT);
+	}
+	HMODULE CRKEngine::GetDll(EDllType eType)
+	{
+		return 	m_DllLoader->GetDLL(eType);
+	}
+	void CRKEngine::LoadDll(EDllType eType)
+	{
+		m_DllLoader->LoadDll(eType);
+	}
+	void CRKEngine::FreeDll(EDllType eType)
+	{
+		m_DllLoader->FreeDll(eType);
 	}
 	void CRKEngine::ScriptMonitor()
 	{
@@ -79,6 +93,10 @@ namespace RKEngine
 			//감시
 			int a = 0;
 			//imgui 연동시 loading 창 띄우기
+			// 1. Script 변경점 있는지 확인
+			//  1-1. 변경점 있으면 loading 시작.
+			//  1-2. 변경점 없으면 loading 즉시 완료.
+			//완료될때까지 block 상태
 			bool bChangeScript = m_M_ScriptReLoad->TimeStempMonitor();
 			if (bChangeScript)
 			{
@@ -86,12 +104,10 @@ namespace RKEngine
 			}
 			else
 			{
+				//나중에 거의 완성될 때 오류 완전히 없으면 이 부분 지우면 됨.
 				m_M_ScriptReLoad->ScriptsCompile();
 			}
-			// 1. Script 변경점 있는지 확인
-			//  1-1. 변경점 있으면 loading 시작.
-			//  1-2. 변경점 없으면 loading 즉시 완료.
-			//완료될때까지 block 상태
+			
 		}
 	}
 	void CRKEngine::WindowMonitor()

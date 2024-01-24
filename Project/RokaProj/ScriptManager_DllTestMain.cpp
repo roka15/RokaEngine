@@ -66,7 +66,7 @@ int main()
 	M_FILE->Create();
 	LM_DLL->Create();
 	LM_DLL->Initialize();
-	rokaStl::CDllLoader* inst = rokaStl::CDllLoader::GetInstance();
+	General::CDllLoader* inst = General::CDllLoader::GetInstance();
 	LM_DLL->LoadDll(EDllType::RENDER);
 	HMODULE render_dll = LM_DLL->GetDLL(EDllType::RENDER);
 	RENDERER_CREATE_FUNC renderCreate = (RENDERER_CREATE_FUNC)GetProcAddress(render_dll, "CreateDevice");
@@ -87,7 +87,30 @@ int main()
 	engine->SetFileManager(M_FILE);
 	engine->Initialize();
 
-	
+	HMODULE ScriptDll = LM_DLL->GetDLL(EDllType::SCRIPT);
+
+	M_ScriptLife_PFUNC MScriptCreate = (M_ScriptLife_PFUNC)GetProcAddress(ScriptDll, "CreateManager");
+	MScriptCreate();
+
+	M_ScriptGetInst_PFUNC MScriptInst = (M_ScriptGetInst_PFUNC)GetProcAddress(ScriptDll, "GetManagerInstance");
+	rokaStl::IManager* Scriptinst = MScriptInst();
+
+	//Script ReLoad Test - Engine CReLoadScript.cpp private : ScriptsCompile() 와 동일 기능.
+	{
+	LM_DLL->FreeDll(EDllType::SCRIPT);
+	TCHAR path[255] = {};
+	GetCurrentDirectory(255, path);
+	Sleep(2);
+	int result = system("rmdir /s /q D:\\3DRKEngine\\External\\Dll\\Script\\Debug");
+	result = system("cd /D D:\\3DRKEngine\\Project\\Script\\build && cmake .. && cmake --build ./");
+	if (result != 0)
+		int a = 0;
+	LM_DLL->LoadDll(EDllType::SCRIPT);
+	ScriptDll = LM_DLL->GetDLL(EDllType::SCRIPT);
+	if (ScriptDll == nullptr)
+		Assert(nullptr, TEXT("ReLoad GetDll Error!"));
+	}
+
 
 	Device->InitDevice(engine);
 	engine->SetRenderDevice(Device);

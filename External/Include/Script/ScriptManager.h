@@ -1,5 +1,4 @@
 #pragma once
-#include "pch.h" 
 #include <RokaSTL/SingleTon.h>
 class CScript;
 #ifdef SCRIPTDLL_EXPORTS 

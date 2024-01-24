@@ -1,7 +1,4 @@
 #pragma once
-#include "pch.h"
-
-
 #ifdef SCRIPTDLL_EXPORTS
 #define SCRIPTDLL_DECLSPEC __declspec(dllexport)
 #else

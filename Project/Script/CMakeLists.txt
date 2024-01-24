@@ -19,7 +19,7 @@ target_compile_definitions(Script PRIVATE
 add_definitions(-DSCRIPTDLL_EXPORTS -DUNICODE -D_UNICODE -D_LIB -D_DEBUG=1)
 
 #라이브러리 디렉토리 지정
-link_directories(${CMAKE_SOURCE_DIR}/../../External/Dll/ ${CMAKE_SOURCE_DIR}/../../External/Lib/Debug/)
+link_directories(${CMAKE_SOURCE_DIR}/../../External/Dll/ ${CMAKE_SOURCE_DIR}/../../External/Lib/Script/Debug/)
 
 # shape 의 include 경로 지정
 target_include_directories(Script PUBLIC ${CMAKE_SOURCE_DIR}/ ${CMAKE_SOURCE_DIR}/../../External/Include/ ${CMAKE_SOURCE_DIR}/../../External/Include/openssl/Debug/)
