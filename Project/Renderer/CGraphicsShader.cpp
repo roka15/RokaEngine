@@ -14,6 +14,7 @@ namespace Renderer
 	}
 	void CGraphicsShader::CreateVertexShader(const TCHAR* _ShaderFileName, const char* _MainName, const char* _ShaderVer)
 	{
+		RKEngine::CRKEngine* engine = PENGINE;
 		const TCHAR* path = PENGINE->GetFileManager()->GetShaderCodePath();
 		std::shared_ptr<TCHAR> fileName = AddTCHAR(path, _ShaderFileName);
 		HRESULT hr = S_OK;
@@ -36,7 +37,7 @@ namespace Renderer
 		hr = DX11_PDEVICE->CreateVertexShader(mVertexBlob->GetBufferPointer(), mVertexBlob->GetBufferSize(), NULL, mVertexShader.GetAddressOf());
 		if (FAILED(hr))
 		{
-			mVertexBlob->Release();
+			//mVertexBlob->Release();
 			return;
 		}
 
@@ -68,7 +69,7 @@ namespace Renderer
 
 		hr = DX11_PDEVICE->CreateInputLayout(layout, layoutLen, mVertexBlob->GetBufferPointer(),
 			mVertexBlob->GetBufferSize(), mVertexLayout.GetAddressOf());
-		mVertexBlob->Release();
+		//mVertexBlob->Release();
 
 		if (FAILED(hr))
 			return;
@@ -98,7 +99,7 @@ namespace Renderer
 
 		// Create the pixel shader
 		hr = DX11_PDEVICE->CreatePixelShader(mPixelBlob->GetBufferPointer(), mPixelBlob->GetBufferSize(), NULL, mPixelShader.GetAddressOf());
-		mPixelBlob->Release();
+		//mPixelBlob->Release();
 		if (FAILED(hr))
 			return;
 #endif

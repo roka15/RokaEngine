@@ -2,16 +2,18 @@
 #include "RKEngine.h"
 #include "ScriptReLoad.h"
 #include <Renderer/CDevice.h>
-
-
+#include <Renderer/ResourceManager.h>
+#include <Script/ScriptManager.h>
 namespace RKEngine
 {
 	CRKEngine::CRKEngine()
 		:m_bFocus(true),
 		m_bBeforFocus(true),
 		m_hWnds{},
-		m_DllLoader(nullptr),
-		m_M_File(nullptr),
+		mMDllLoader(nullptr),
+		mMFile(nullptr),
+		mMScriptReLoad(nullptr),
+		mMResource(nullptr),
 		mtRendererData(new Renderer::t_RendererData())
 	{
 		UINT eType = TYPETOINT(EHwndType::END);
@@ -24,22 +26,37 @@ namespace RKEngine
 	{
 		WindowSizeMonitor();
 		LoadDll();
-		m_M_ScriptReLoad = new CScriptReLoad(this);
+		CreateManager();
+		InitManager();
 	}
 	void CRKEngine::Loop()
 	{
 		WindowMonitor();
 		ScriptMonitor();
-		mDevice->Render();
+		mMDevice->Render();
 	}
 	void CRKEngine::Release()
 	{
-		delete m_M_ScriptReLoad;
+		delete mMScriptReLoad;
 		delete mtRendererData;
-		m_M_ScriptReLoad = nullptr;
-
+		
 		FreeDll();
-		m_DllLoader = nullptr;
+		mMResource->Release();
+
+		mMDllLoader = nullptr;
+		mMFile = nullptr;
+		mMScriptReLoad = nullptr;
+		mMScript = nullptr;
+		mMResource = nullptr;
+
+		Renderer::CResourceManager::Destroy();
+		General::FileManager::Destroy();
+	}
+	void CRKEngine::SetHWND(HWND _hWnd, EHwndType _eType)
+	{
+		 m_hWnds[TYPETOINT(_eType)] = _hWnd; 
+		 if (_eType == EHwndType::MAIN)
+			 WindowSizeMonitor();
 	}
 	const Vec2& CRKEngine::GetResolution()
 	{ 
@@ -51,36 +68,49 @@ namespace RKEngine
 	}
 	void CRKEngine::LoadDll()
 	{
-		m_DllLoader->LoadDll(EDllType::SCRIPT);
-		HMODULE scriptModule = m_DllLoader->GetDLL(EDllType::SCRIPT);
-		
-		M_ScriptLife_PFUNC scriptCreate = (M_ScriptLife_PFUNC)GetProcAddress(scriptModule, "CreateManager");
-		scriptCreate();
-		M_ScriptGetInst_PFUNC scriptInst = (M_ScriptGetInst_PFUNC)GetProcAddress(scriptModule, "GetManagerInstance");
-		mScriptMgr = (Script::ScriptManager*)scriptInst();
+		mMDllLoader->LoadDll(EDllType::SCRIPT);
 	}
 	void CRKEngine::FreeDll()
 	{
-		HMODULE scriptModule = m_DllLoader->GetDLL(EDllType::SCRIPT);
+		HMODULE scriptModule = mMDllLoader->GetDLL(EDllType::SCRIPT);
 		if (scriptModule == nullptr)
 			return;
 		M_ScriptLife_PFUNC scriptDestroy = (M_ScriptLife_PFUNC)GetProcAddress(scriptModule, "DestroyManager");
 		
 		scriptDestroy();
 	
-		m_DllLoader->FreeDll(EDllType::SCRIPT);
+		mMDllLoader->FreeDll(EDllType::SCRIPT);
 	}
 	HMODULE CRKEngine::GetDll(EDllType eType)
 	{
-		return 	m_DllLoader->GetDLL(eType);
+		return 	mMDllLoader->GetDLL(eType);
 	}
 	void CRKEngine::LoadDll(EDllType eType)
 	{
-		m_DllLoader->LoadDll(eType);
+		mMDllLoader->LoadDll(eType);
 	}
 	void CRKEngine::FreeDll(EDllType eType)
 	{
-		m_DllLoader->FreeDll(eType);
+		mMDllLoader->FreeDll(eType);
+	}
+	void CRKEngine::CreateManager()
+	{
+		General::FileManager::Create();
+		Renderer::CResourceManager::Create();
+		mMFile = General::FileManager::GetInstance();
+		mMScriptReLoad = new CScriptReLoad(this);
+		mMResource = Renderer::CResourceManager::GetInstance();
+
+		HMODULE scriptModule = mMDllLoader->GetDLL(EDllType::SCRIPT);
+		M_ScriptLife_PFUNC scriptCreate = (M_ScriptLife_PFUNC)GetProcAddress(scriptModule, "CreateManager");
+		scriptCreate();
+		M_ScriptGetInst_PFUNC scriptInst = (M_ScriptGetInst_PFUNC)GetProcAddress(scriptModule, "GetManagerInstance");
+		mMScript = (Script::ScriptManager*)scriptInst();
+	}
+	void CRKEngine::InitManager()
+	{
+		mMScript->Initialize();
+		mMResource->Initialize();
 	}
 	void CRKEngine::ScriptMonitor()
 	{
@@ -97,15 +127,15 @@ namespace RKEngine
 			//  1-1. 변경점 있으면 loading 시작.
 			//  1-2. 변경점 없으면 loading 즉시 완료.
 			//완료될때까지 block 상태
-			bool bChangeScript = m_M_ScriptReLoad->TimeStempMonitor();
+			bool bChangeScript = mMScriptReLoad->TimeStempMonitor();
 			if (bChangeScript)
 			{
-				m_M_ScriptReLoad->ScriptsCompile();
+				mMScriptReLoad->ScriptsCompile();
 			}
 			else
 			{
 				//나중에 거의 완성될 때 오류 완전히 없으면 이 부분 지우면 됨.
-				m_M_ScriptReLoad->ScriptsCompile();
+				mMScriptReLoad->ScriptsCompile();
 			}
 			
 		}

@@ -5,8 +5,8 @@
 
 MainManager::MainManager()
 {
-	M_FILE->Create();
-	LM_DLL->Create();
+	General::CDllLoader::Create();
+	
 	LM_DLL->Initialize();
 	LM_DLL->LoadDll(EDllType::RENDER);
 	LM_DLL->LoadDll(EDllType::ENGINE);
@@ -22,8 +22,6 @@ MainManager::MainManager()
 	engine_create();
 	m_Engine = reinterpret_cast<RKEngine::CRKEngine*const>(engine_inst());
 	m_Engine->SetLMDll(LM_DLL);
-	m_Engine->SetFileManager(M_FILE);
-	
 }
 MainManager::~MainManager()
 {
@@ -47,13 +45,12 @@ MainManager::~MainManager()
 	renderDestroy();
 	LM_DLL->FreeDll(EDllType::RENDER);
 	LM_DLL->Release();
-	LM_DLL->Destroy();
-	M_FILE->Destroy();
+
+	General::CDllLoader::Destroy();
 }
 void MainManager::Initialize(HWND _hwnd)
 {
 	m_Engine->SetHWND(_hwnd,EHwndType::MAIN);
-	m_Engine->Initialize();
 
 	HMODULE& render_dll = LM_DLL->GetDLL(EDllType::RENDER);
 	RENDERER_CREATE_FUNC renderCreate = (RENDERER_CREATE_FUNC)GetProcAddress(render_dll, "CreateDevice");
@@ -63,6 +60,7 @@ void MainManager::Initialize(HWND _hwnd)
 
 	Device->InitDevice(m_Engine);
 	m_Engine->SetRenderDevice(Device);
+	m_Engine->Initialize();
 }
 void MainManager::Release()
 {

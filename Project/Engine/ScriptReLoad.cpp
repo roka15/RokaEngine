@@ -9,14 +9,15 @@ namespace RKEngine
 		mScriptPath{},
 		mvecExtensions{}
 	{	
-		_tcscpy(mScriptPath, m_Engine->M_File->GetProjectPath());
+		General::FileManager* MFile = m_Engine->GetFileManager();
+		_tcscpy(mScriptPath, MFile->GetProjectPath());
 		_tcscat(mScriptPath, TEXT("\\Script"));
 
 		mvecExtensions.push_back(TEXT(".cpp"));
 		mvecExtensions.push_back(TEXT(".h"));
 
 		mScriptMap.innerClear();
-		m_Engine->M_File->ReadFileTimeStemp(mScriptMap, mScriptPath, mvecExtensions);
+		MFile->ReadFileTimeStemp(mScriptMap, mScriptPath, mvecExtensions);
 	}
 	CScriptReLoad::~CScriptReLoad()
 	{
@@ -24,9 +25,10 @@ namespace RKEngine
 	}
 	bool CScriptReLoad::TimeStempMonitor()
 	{
+		General::FileManager* MFile = m_Engine->GetFileManager();
 		FileTimeStempMap ReTimeStemp;
 		ReTimeStemp.innerClear();
-		m_Engine->M_File->ReadFileTimeStemp(ReTimeStemp, mScriptPath, mvecExtensions);
+		MFile->ReadFileTimeStemp(ReTimeStemp, mScriptPath, mvecExtensions);
 
 		size_t originSize = mScriptMap.size();
 		size_t ReLoadSize = ReTimeStemp.size();

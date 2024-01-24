@@ -10,6 +10,7 @@ namespace Renderer
 {
 	class CDevice;
 	struct t_RendererData;
+	class CResourceManager;
 }
 namespace Script
 {
@@ -29,26 +30,30 @@ namespace RKEngine
 		bool m_bFocus;
 		bool m_bBeforFocus;
 		std::vector<HWND> m_hWnds;
-
-		General::CDllLoader* m_DllLoader;
-		General::FileManager* m_M_File;
-		CScriptReLoad* m_M_ScriptReLoad;
 		//////////////////////////
-		//    Script Data     //
+		//   Manager            //
 		//////////////////////////
-		Script::ScriptManager* mScriptMgr;
+		General::CDllLoader* mMDllLoader;
+		General::FileManager* mMFile;
+		CScriptReLoad* mMScriptReLoad;
+		Script::ScriptManager* mMScript;
+		Renderer::CResourceManager* mMResource;
 		//////////////////////////
 		//    Renderer Data     //
 		//////////////////////////
-		Renderer::CDevice* mDevice;
+		Renderer::CDevice* mMDevice;
 		Renderer::t_RendererData*const mtRendererData;
 	public:
-		virtual void SetHWND(HWND _hWnd, EHwndType _eType) { m_hWnds[TYPETOINT(_eType)] = _hWnd; }
-		virtual void SetLMDll(PCR_DllLoad _pcr_dllload) { m_DllLoader = _pcr_dllload; }
-		virtual void SetFileManager(PCR_FileManager _pcr_file_manager) { m_M_File = _pcr_file_manager; }
-		virtual void SetRenderDevice(Renderer::CDevice* _device) { mDevice = _device; }
+		//Manager
+		virtual void SetLMDll(PCR_DllLoad _pcr_dllload) { mMDllLoader = _pcr_dllload; }
+		virtual void SetRenderDevice(Renderer::CDevice* _device) { mMDevice = _device; }
+		virtual General::FileManager* GetFileManager() { return mMFile; }
+		virtual Script::ScriptManager* GetScriptManager() { return mMScript; }
+		virtual Renderer::CResourceManager* GetResourceManager() { return mMResource; }
+	public:
+		virtual void SetHWND(HWND _hWnd, EHwndType _eType);
 		virtual HWND GetHWND(EHwndType _type) { return m_hWnds[TYPETOINT(_type)]; }
-		virtual General::FileManager* GetFileManager() { return m_M_File; }
+	
 		virtual const Vec2& GetResolution(); 
 		virtual Renderer::t_RendererData GetRenderData();
 		virtual void LoadDll();
@@ -56,9 +61,9 @@ namespace RKEngine
 		virtual HMODULE GetDll(EDllType eType);
 		virtual void LoadDll(EDllType eType);
 		virtual void FreeDll(EDllType eType);
-
-		PROPERTY(GetFileManager, SetFileManager) General::FileManager* M_File;
 	private:
+		void CreateManager();
+		void InitManager();
 		void ScriptMonitor();
 		void WindowMonitor();
 		bool WindowSizeMonitor();

@@ -26,7 +26,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ int       nCmdShow)
 {
 	MemoryLeakCheck
-	//MemoryLeakNumber(246)
+	//MemoryLeakNumber(695)
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 

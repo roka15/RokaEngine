@@ -3,19 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GenericLib", "Project\GenericLib\GenericLib.vcxproj", "{ADED2C44-FBB0-429B-8FEA-B36C6002F67E}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Network", "Project\Network\Network.vcxproj", "{CD47309D-12A3-4A33-A060-59ACF46CD204}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Renderer", "Project\Renderer\Renderer.vcxproj", "{5BB79A05-FD57-427E-BD85-472AE855CF1F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6FF61B6A-446A-47D8-B027-1986AAC73EFE} = {6FF61B6A-446A-47D8-B027-1986AAC73EFE}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RokaProj", "Project\RokaProj\RokaProj.vcxproj", "{D18BE02B-F96D-42FB-BF30-F8744C7219AF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2B8B318B-9F71-4738-A819-C18D689E42E4} = {2B8B318B-9F71-4738-A819-C18D689E42E4}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RokaSTL_Lib", "Project\RokaSTL_Lib\RokaSTL_Lib.vcxproj", "{6FF61B6A-446A-47D8-B027-1986AAC73EFE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Script", "Project\Script\Script.vcxproj", "{2B8B318B-9F71-4738-A819-C18D689E42E4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A69DDB6F-F677-4E2E-985B-7A62C36C4F40} = {A69DDB6F-F677-4E2E-985B-7A62C36C4F40}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Project\Engine\Engine.vcxproj", "{A69DDB6F-F677-4E2E-985B-7A62C36C4F40}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5BB79A05-FD57-427E-BD85-472AE855CF1F} = {5BB79A05-FD57-427E-BD85-472AE855CF1F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +35,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ADED2C44-FBB0-429B-8FEA-B36C6002F67E}.Debug|x64.ActiveCfg = Debug|x64
-		{ADED2C44-FBB0-429B-8FEA-B36C6002F67E}.Debug|x64.Build.0 = Debug|x64
-		{ADED2C44-FBB0-429B-8FEA-B36C6002F67E}.Debug|x86.ActiveCfg = Debug|Win32
-		{ADED2C44-FBB0-429B-8FEA-B36C6002F67E}.Debug|x86.Build.0 = Debug|Win32
-		{ADED2C44-FBB0-429B-8FEA-B36C6002F67E}.Release|x64.ActiveCfg = Release|x64
-		{ADED2C44-FBB0-429B-8FEA-B36C6002F67E}.Release|x64.Build.0 = Release|x64
-		{ADED2C44-FBB0-429B-8FEA-B36C6002F67E}.Release|x86.ActiveCfg = Release|Win32
-		{ADED2C44-FBB0-429B-8FEA-B36C6002F67E}.Release|x86.Build.0 = Release|Win32
 		{CD47309D-12A3-4A33-A060-59ACF46CD204}.Debug|x64.ActiveCfg = Debug|x64
 		{CD47309D-12A3-4A33-A060-59ACF46CD204}.Debug|x64.Build.0 = Debug|x64
 		{CD47309D-12A3-4A33-A060-59ACF46CD204}.Debug|x86.ActiveCfg = Debug|Win32

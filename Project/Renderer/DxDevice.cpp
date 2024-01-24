@@ -54,43 +54,15 @@ namespace Renderer
 		if (FAILED(hr))
 			return hr;
 
-		struct SimpleVertex
-		{
-			XMFLOAT3 Pos;
-			XMFLOAT4 Color;
-		};
-		std::vector<t_VertexData> vertices;
-		vertices.push_back(t_VertexData{ Vec3(0.0f, 0.5f, 0.5f), Vec4(1.0f, 1.0f, 0.0f, 1.0f), Vec2(0.f, 0.f) });
-		vertices.push_back(t_VertexData{ Vec3(0.5f, -0.5f, 0.5f), Vec4(1.0f,1.0f,0.0f,1.0f), Vec2(0.f, 0.f) });
-		vertices.push_back(t_VertexData{ Vec3(-0.5f, -0.5f, 0.5f), Vec4(1.0f,1.0f,0.0f,1.0f), Vec2(0.f, 0.f) });
-
-		const int indexCnt = 3;
-		int indexs[indexCnt] =
-		{
-			0,1,2
-		};
-		ID3D11DeviceContext* context = DX11_PCONTEXT;
-		CResourceManager::Create();
-		CResourceManager* rm = CResourceManager::GetInstance();
-		
-		
-		General::SPtr<CMesh> mesh = new CMesh(true);
-		mesh->Create(vertices.data(), vertices.size(), indexs, indexCnt);
-		CGraphicsShader* shader = new CGraphicsShader();
-		shader->CreateVertexShader(TEXT("//std3D.fx"), "VS_Main", "vs_5_0");
-		shader->CreatePixelShader(TEXT("//std3D.fx"), "PS_Main", "ps_5_0");
-
-		rm->AddRes<CMesh>(TEXT("TriangleMesh"),mesh);
-		rm->AddRes<CGraphicsShader>(TEXT("DefaultShader"), shader);
 		return hr;
 	}
 	void CDxDevice::Render()
 	{
 		float ClearColor[4] = { 0.5f, 0.5f, 0.5f, 1.f };
 		mContext->ClearRenderTargetView(mRenderTargetView.Get(), ClearColor);
-		CResourceManager* rm = CResourceManager::GetInstance();
-		General::SPtr<CMesh> mesh = rm->FindRes<CMesh>(TEXT("TriangleMesh"));
-		General::SPtr<CGraphicsShader> shader = rm->FindRes<CGraphicsShader>(TEXT("DefaultShader"));
+		CResourceManager* MResource = mEngine->GetResourceManager();
+		General::SPtr<CMesh> mesh = MResource->FindRes<CMesh>(TEXT("TriangleMesh"));
+		General::SPtr<CGraphicsShader> shader = MResource->FindRes<CGraphicsShader>(TEXT("DefaultShader"));
 		shader->UpdateData();
 		mesh->Render();
 		mSwapChain->Present(0, 0);

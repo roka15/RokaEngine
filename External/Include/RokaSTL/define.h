@@ -2,6 +2,7 @@
 
 
 #define MemoryLeakCheck _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#define MemoryLeakNumber(number) _CrtSetBreakAlloc(number);
 #define SINGLETON(type) private: type();virtual ~type();friend class rokaStl::Singleton<type>;
 #define MANAGER public: virtual void Initialize()override;virtual void Release()override;
 #define MANAGERLOOP MANAGER void Loop()override;
@@ -21,7 +22,6 @@
 
 
 #define LM_DLL General::CDllLoader::GetInstance()
-#define M_FILE General::FileManager::GetInstance()
 
 #define MAXPATH 255
 #define MAXEXTEN 50

@@ -62,8 +62,6 @@ int main()
 				 int a = 0;
 			 */
 			 //Test2
-	
-	M_FILE->Create();
 	LM_DLL->Create();
 	LM_DLL->Initialize();
 	General::CDllLoader* inst = General::CDllLoader::GetInstance();
@@ -84,7 +82,6 @@ int main()
 	ENGINE_INST_FUNC engineInst = (ENGINE_INST_FUNC)GetProcAddress(EngineDll, "GetInstEngine");
 	RKEngine::CRKEngine* engine = engineInst();
 	engine->SetLMDll(LM_DLL);
-	engine->SetFileManager(M_FILE);
 	engine->Initialize();
 
 	HMODULE ScriptDll = LM_DLL->GetDLL(EDllType::SCRIPT);
@@ -127,6 +124,4 @@ int main()
 
 	LM_DLL->Release();
 	LM_DLL->Destroy();
-	M_FILE->Destroy();
-
 }
