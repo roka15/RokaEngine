@@ -58,7 +58,7 @@ namespace Renderer
 	}
 	void CResourceManager::InitMesh()
 	{
-		General::SPtr<CMesh> mesh;
+		General::SPtr<CMesh> pMesh;
 
 		//Triangle
 		std::vector<t_VertexData> vertices;
@@ -66,15 +66,67 @@ namespace Renderer
 		vertices.push_back(t_VertexData{ Vec3(0.5f, -0.5f, 0.5f), Vec4(1.0f,1.0f,0.0f,1.0f), Vec2(0.f, 0.f) });
 		vertices.push_back(t_VertexData{ Vec3(-0.5f, -0.5f, 0.5f), Vec4(1.0f,1.0f,0.0f,1.0f), Vec2(0.f, 0.f) });
 
-		const int indexCnt = 3;
-		int indexs[indexCnt] =
-		{
-			0,1,2
-		};
+		std::vector<UINT> indices;
+		indices.push_back(0);
+		indices.push_back(1);
+		indices.push_back(2);
 
-		mesh = new CMesh(true);
-		mesh->Create(vertices.data(), vertices.size(), indexs, indexCnt);
-		AddRes<CMesh>(TEXT("TriangleMesh"), mesh);
+		pMesh = new CMesh(true);
+		pMesh->Create(vertices.data(), vertices.size(), indices.data(), indices.size());
+		AddRes<CMesh>(TEXT("TriangleMesh"), pMesh);
+
+
+		vertices.clear();
+		indices.clear();
+
+		vertices.push_back(t_VertexData{ Vec3(-0.5f, 0.5f, 0.5f), Vec4(1.0f, 1.0f, 0.0f, 1.0f), Vec2(0.f, 0.f) });
+		vertices.push_back(t_VertexData{ Vec3(0.5f, 0.5f, 0.5f), Vec4(1.0f,1.0f,0.0f,1.0f), Vec2(0.f, 0.f) });
+		vertices.push_back(t_VertexData{ Vec3(0.5f, -0.5f, 0.5f), Vec4(1.0f,1.0f,0.0f,1.0f), Vec2(0.f, 0.f) });
+		vertices.push_back(t_VertexData{ Vec3(-0.5f, -0.5f, 0.5f), Vec4(1.0f,1.0f,0.0f,1.0f), Vec2(0.f, 0.f) });
+	    
+		indices.push_back(0);
+		indices.push_back(1);
+		indices.push_back(2);
+		
+		indices.push_back(0);
+		indices.push_back(2);
+		indices.push_back(3);
+
+		pMesh = new CMesh(true);
+		pMesh->Create(vertices.data(), vertices.size(), indices.data(), indices.size());
+		AddRes<CMesh>(TEXT("RectMesh"), pMesh);
+
+
+		vertices.clear();
+		indices.clear();
+
+		float fRadius = 0.5f;
+		UINT Slice = 40;
+		float fTheta = XM_2PI / (float)Slice;
+		
+		vertices.push_back(t_VertexData{ Vec3(0.f, 0.f, 0.f), Vec4(1.f, 1.f, 1.f, 1.f), Vec2(0.5f, 0.5f) });
+
+		for (UINT i = 0; i < Slice; ++i)
+		{
+			Vec3 pos = Vec3(fRadius * cosf(fTheta * (float)i), fRadius * sinf(fTheta * (float)i), 0.f);
+			Vec2 uv = Vec2(pos.x + 0.5f, -pos.y + 0.5f);
+			vertices.push_back(t_VertexData{ pos, Vec4(1.f, 1.f, 1.f, 1.f), uv });
+		}
+
+		for (UINT i = 0; i < Slice - 1; ++i)
+		{
+			indices.push_back(0);
+			indices.push_back(i + 2);
+			indices.push_back(i + 1);
+		}
+
+		indices.push_back(0);
+		indices.push_back(1);
+		indices.push_back(Slice);
+
+		pMesh = new CMesh(true);
+		pMesh->Create(vertices.data(), vertices.size(), indices.data(), indices.size());
+		AddRes<CMesh>(TEXT("CircleMesh"), pMesh);
 	}
 	void CResourceManager::InitShader()
 	{
